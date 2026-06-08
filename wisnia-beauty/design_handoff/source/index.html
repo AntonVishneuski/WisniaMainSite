@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kosmetologia, laser i masaż | Wiśnia Beauty Studio | Centrum Warszawy</title>
+<meta name="description" content="Wiśnia Beauty Studio w centrum Warszawy: oczyszczanie, RF-lifting, IPL, depilacja laserowa Estera i masaże. Naturalne odmłodzenie bez przesady. Wykształcenie medyczne, 9 lat praktyki.">
+<meta name="theme-color" content="#FDFAF7">
+<meta property="og:title" content="Wiśnia Beauty Studio: kosmetologia, laser i masaż w centrum Warszawy">
+<meta property="og:description" content="Naturalne odmłodzenie bez przesady. Kosmetologia, depilacja laserowa Estera i masaże.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:locale:alternate" content="ru_RU">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "name": "Wiśnia Beauty Studio",
+  "description": "Studio kosmetologii, depilacji laserowej Estera i masażu w centrum Warszawy. Naturalne odmłodzenie bez przesady.",
+  "image": "assets/logo-wisnia.png",
+  "telephone": "+48453270435",
+  "currenciesAccepted": "PLN",
+  "priceRange": "120-550 zł",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "ul. Gen. W. Andersa 15",
+    "addressLocality": "Warszawa",
+    "postalCode": "00-159",
+    "addressCountry": "PL"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 52.2487, "longitude": 21.0008 },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "08:00", "closes": "20:00"
+  }],
+  "sameAs": ["https://instagram.com/wisnia_beauty_studio"]
+}
+</script>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="wrap header__inner">
+    <a class="header__logo" href="#top" aria-label="Wiśnia Beauty Studio">
+      <img src="assets/logo-wisnia.png" alt="Wiśnia Beauty Studio">
+    </a>
+    <nav class="nav" aria-label="Główna nawigacja">
+      <div class="nav-drop">
+        <button class="nav-drop__btn" aria-haspopup="true"><span data-i18n="nav.uslugi">Usługi</span><i data-lucide="chevron-down"></i></button>
+        <div class="nav-drop__menu">
+          <a href="uslugi/depilacja-laserowa-warszawa.html" data-i18n="us.laser">Depilacja laserowa</a>
+          <a href="uslugi/depilacja-laserowa-mezczyzni-warszawa.html" data-i18n="us.laserm">Depilacja dla mężczyzn</a>
+          <a href="uslugi/ipl-fotoodmladzanie-warszawa.html" data-i18n="us.ipl">IPL fotoodmładzanie</a>
+          <a href="uslugi/rf-lifting-warszawa.html" data-i18n="us.rf">RF-lifting</a>
+          <a href="uslugi/usuwanie-naczynek-warszawa.html" data-i18n="us.vessels">Usuwanie naczynek</a>
+          <a href="uslugi/oczyszczanie-twarzy-warszawa.html" data-i18n="us.clean">Oczyszczanie twarzy</a>
+          <a href="uslugi/mezoterapia-warszawa.html" data-i18n="us.mezo">Mezoterapia</a>
+        </div>
+      </div>
+      <a href="#cennik" data-i18n="nav.prices">Cennik</a>
+      <a href="#efekty" data-i18n="nav.effects">Efekty</a>
+      <a href="blog/index.html" data-i18n="nav.blog">Blog</a>
+      <a href="#o-nas" data-i18n="nav.about">O nas</a>
+      <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="header__actions">
+      <div class="lang" role="group" aria-label="Język / Language">
+        <button data-lang="pl" class="is-active">PL</button>
+        <button data-lang="ru">RU</button>
+      </div>
+      <a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="btn btn--primary btn--header" data-cta="booksy" id="cta-header-booksy" data-i18n="cta.booksyShort">Zarezerwuj w Booksy</a>
+      <button class="burger" aria-label="Menu" id="burger">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MOBILE DRAWER ============ -->
+<div class="drawer" id="drawer">
+  <div class="drawer__top">
+    <img src="assets/logo-wisnia.png" alt="Wiśnia Beauty Studio">
+    <button id="drawer-close" aria-label="Zamknij">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="#cennik" data-i18n="nav.prices">Cennik</a>
+    <a href="#efekty" data-i18n="nav.effects">Efekty</a>
+    <span class="drawer__h" data-i18n="nav.uslugi">Usługi</span>
+    <a href="uslugi/depilacja-laserowa-warszawa.html" class="drawer__sub" data-i18n="us.laser">Depilacja laserowa</a>
+    <a href="uslugi/depilacja-laserowa-mezczyzni-warszawa.html" class="drawer__sub" data-i18n="us.laserm">Depilacja dla mężczyzn</a>
+    <a href="uslugi/ipl-fotoodmladzanie-warszawa.html" class="drawer__sub" data-i18n="us.ipl">IPL fotoodmładzanie</a>
+    <a href="uslugi/rf-lifting-warszawa.html" class="drawer__sub" data-i18n="us.rf">RF-lifting</a>
+    <a href="uslugi/usuwanie-naczynek-warszawa.html" class="drawer__sub" data-i18n="us.vessels">Usuwanie naczynek</a>
+    <a href="uslugi/oczyszczanie-twarzy-warszawa.html" class="drawer__sub" data-i18n="us.clean">Oczyszczanie twarzy</a>
+    <a href="uslugi/mezoterapia-warszawa.html" class="drawer__sub" data-i18n="us.mezo">Mezoterapia</a>
+    <a href="blog/index.html" data-i18n="nav.blog">Blog</a>
+    <a href="#o-nas" data-i18n="nav.about">O nas</a>
+    <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
+  </nav>
+  <div class="drawer__cta">
+    <a href="https://wa.me/48453270435" target="_blank" rel="noopener" class="btn btn--outline btn--block" data-cta="whatsapp"><span class="ico-wa"></span><span data-i18n="cta.whatsapp">Napisz na WhatsApp</span></a>
+    <a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="btn btn--primary btn--block" data-cta="booksy"><i data-lucide="calendar-check"></i><span data-i18n="cta.booksy">Zarezerwuj w Booksy</span></a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero wrap">
+  <div class="hero__grid">
+    <div class="hero__copy reveal">
+      <h1><span data-i18n="hero.h1a">Kosmetologia, laser i masaż</span> <span class="accent" data-i18n="hero.h1b">w centrum Warszawy</span></h1>
+      <p class="hero__sub" data-i18n="hero.sub">Naturalne odmłodzenie bez przesady. Kosmetologia aparaturowa: oczyszczanie, RF-lifting, IPL (fotoodmładzanie) i mezoterapia, a do tego depilacja laserowa Estera i masaże. Indywidualny protokół dla Twojej skóry.</p>
+      <div class="cta-cluster" style="margin-top:8px">
+        <a href="https://wa.me/48453270435" target="_blank" rel="noopener" class="btn btn--primary btn--lg" data-cta="whatsapp" id="cta-hero-whatsapp"><span class="ico-wa"></span><span data-i18n="cta.whatsapp">Napisz na WhatsApp</span></a>
+        <a href="tel:+48453270435" class="btn btn--outline btn--lg" data-cta="phone" id="cta-hero-phone"><i data-lucide="phone"></i><span data-i18n="cta.call">Zadzwoń</span></a>
+        <a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="btn btn--ghost btn--lg" data-cta="booksy" id="cta-hero-booksy"><i data-lucide="calendar-check"></i>Booksy</a>
+      </div>
+      <div class="trust-line">
+        <a href="https://www.google.com/maps?q=Wi%C5%9Bnia+Beauty+Studio,+ul.+Gen.+W.+Andersa+15,+Warszawa" target="_blank" rel="noopener" class="hero-rating">
+          <span class="stars" aria-hidden="true"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></span>
+          <span class="hero-rating__txt"><b>5,0</b> <span data-i18n="hero.ratingSrc">w Google</span></span>
+        </a>
+        <span><i data-lucide="award"></i><span data-i18n="hero.trust1">9 lat doświadczenia klinicznego</span></span>
+        <span><i data-lucide="stethoscope"></i><span data-i18n="hero.trust2">Wykształcenie medyczne</span></span>
+        <span><i data-lucide="user-check"></i><span data-i18n="hero.trust3">Indywidualny protokół</span></span>
+      </div>
+    </div>
+    <div class="hero__media reveal">
+      <img src="assets/hero-olga.jpg" alt="Olga Vishneuskaya przy pracy" loading="eager">
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAIN / EMPATHY ============ -->
+<section class="section section--blush">
+  <div class="wrap">
+    <div class="center reveal" style="margin-bottom:48px">
+      <p class="eyebrow" data-i18n="pain.eyebrow">Rozumiemy Twoje obawy</p>
+      <h2 class="section-title" data-i18n="pain.title">Bez przesady. Bez igieł. Bez długiej rekonwalescencji.</h2>
+    </div>
+    <div class="cards-3">
+      <div class="card reveal">
+        <div class="card__icon"><i data-lucide="smile"></i></div>
+        <h3 data-i18n="pain.c1t">Boisz się wyglądać „przerobiona"?</h3>
+        <p data-i18n="pain.c1p">Pracujemy delikatnie i etapami. Efekt to wypoczęta, naturalna skóra, nikt nie powie, że „coś sobie zrobiłaś".</p>
+      </div>
+      <div class="card reveal">
+        <div class="card__icon"><i data-lucide="clock"></i></div>
+        <h3 data-i18n="pain.c2t">Nie masz czasu na długą rekonwalescencję?</h3>
+        <p data-i18n="pain.c2p">Większość zabiegów nie wymaga przerwy. Wracasz do pracy tego samego dnia, ze zdrowym blaskiem.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card__icon"><i data-lucide="leaf"></i></div>
+        <h3 data-i18n="pain.c3t">Chcesz efektu, ale bez igieł?</h3>
+        <p data-i18n="pain.c3p">Stawiamy na metody nieinwazyjne: RF, LED, pielęgnacja aparaturowa. Skuteczność bez nakłuwania.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NASZE KIERUNKI ============ -->
+<section class="section" id="zabiegi">
+  <div class="wrap">
+    <div class="center reveal" style="margin-bottom:48px">
+      <p class="eyebrow" data-i18n="kier.eyebrow">Nasze kierunki</p>
+      <h2 class="section-title" data-i18n="kier.title">Cztery kierunki pielęgnacji</h2>
+      <p class="section-lead" data-i18n="kier.lead">Nowoczesna aparatura kosmetologiczna, depilacja laserowa Estera i masaże. Wszystko w jednym miejscu, w centrum Warszawy.</p>
+    </div>
+    <div class="kierunki">
+      <a class="kier reveal" href="#cennik" data-goto="twarz">
+        <div class="kier__ic"><i data-lucide="gem"></i></div>
+        <b data-i18n="kier.faceT">Kosmetologia i odmłodzenie</b>
+        <span data-i18n="kier.faceS">Oczyszczanie, RF twarzy i ciała, IPL (fotoodmładzanie), mezoterapia</span>
+        <span class="kier__go"><span data-i18n="kier.go">Zobacz cennik</span><i data-lucide="arrow-right"></i></span>
+      </a>
+      <a class="kier reveal" href="#cennik" data-goto="laser">
+        <div class="kier__ic"><i data-lucide="zap"></i></div>
+        <b data-i18n="kier.laserT">Laser</b>
+        <span data-i18n="kier.laserS">Depilacja laserowa Estera dla kobiet i mężczyzn</span>
+        <span class="kier__go"><span data-i18n="kier.go">Zobacz cennik</span><i data-lucide="arrow-right"></i></span>
+      </a>
+      <a class="kier reveal" href="#cennik" data-goto="cialo">
+        <div class="kier__ic"><i data-lucide="flower-2"></i></div>
+        <b data-i18n="kier.bodyT">Ciało</b>
+        <span data-i18n="kier.bodyS">Masaże, Kobido Premium i usuwanie zmian skórnych</span>
+        <span class="kier__go"><span data-i18n="kier.go">Zobacz cennik</span><i data-lucide="arrow-right"></i></span>
+      </a>
+      <a class="kier reveal" href="#cennik" data-goto="pakiety">
+        <div class="kier__ic"><i data-lucide="badge-percent"></i></div>
+        <b data-i18n="kier.pkgT">Pakiety</b>
+        <span data-i18n="kier.pkgS">Combo i kursy -15%</span>
+        <span class="kier__go"><span data-i18n="kier.go">Zobacz cennik</span><i data-lucide="arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES & PRICES ============ -->
+<section class="section section--blush" id="cennik">
+  <div class="wrap">
+    <div class="center reveal" style="margin-bottom:40px">
+      <p class="eyebrow" data-i18n="srv.eyebrow">Cennik</p>
+      <h2 class="section-title" data-i18n="srv.title">Zabiegi i ceny</h2>
+    </div>
+    <div class="center"><div class="tabs reveal" role="tablist">
+      <button class="tab is-active" data-tab="twarz" data-i18n="srv.tabFace">Kosmetologia</button>
+      <button class="tab" data-tab="laser" data-i18n="srv.tabLaser">Laser</button>
+      <button class="tab" data-tab="cialo" data-i18n="srv.tabBody">Ciało</button>
+      <button class="tab" data-tab="pakiety"><span data-i18n="srv.tabPkg">Pakiety</span><span class="tab-badge">-15%</span></button>
+    </div></div>
+
+    <div class="price-panel reveal" data-panel="twarz">
+      <div class="price-cat"><h3 data-i18n="p1">Oczyszczanie twarzy</h3></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p2">Wodorowe oczyszczanie</b></div><div class="price-row__price">250 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p3">Oczyszczanie kombinowane</b></div><div class="price-row__price">350 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p4">Oczyszczanie + peeling</b></div><div class="price-row__price">450 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p5">Protokół Anti-Acne</b></div><div class="price-row__price">450 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p6">Oczyszczanie ultradźwiękowe + LED</b></div><div class="price-row__price">250 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-cat"><h3 data-i18n="p7">Peelingi</h3><span data-i18n="p8">wszystkie po 300 zł</span></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p9">Peelingi medyczne</b><span data-i18n="p10">migdałowy · azelainowy · ferulowy · glikolowy · Jessnera · PRX-T33 · BioRePeel</span></div><div class="price-row__price">300 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-cat"><h3 data-i18n="p11">RF-lifting twarzy i ciała</h3></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p12">Twarz + podbródek</b></div><div class="price-row__price">800 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p13">Twarz + szyja</b></div><div class="price-row__price">900 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p14">Twarz + szyja + dekolt</b></div><div class="price-row__price">1000 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="gift-pill"><i data-lucide="gift"></i><span data-i18n="p15">RF-lifting dłoni w prezencie</span></div>
+      <div class="price-cat"><h3 data-i18n="p16">IPL-fotoodmładzanie</h3><span data-i18n="p17">naczynka · pigmentacja · post-acne</span></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p18">Twarz</b></div><div class="price-row__price">550 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p19">Twarz + szyja</b></div><div class="price-row__price">750 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p20">Twarz + szyja + dekolt</b></div><div class="price-row__price">900 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p21">Forever Young Protocol</b></div><div class="price-row__price">1000 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="gift-pill"><i data-lucide="gift"></i><span data-i18n="p22">RF-lifting dłoni w prezencie</span></div>
+      <div class="price-cat"><h3 data-i18n="p23">Mezoterapia</h3></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p24">Okolice oczu</b></div><div class="price-row__price">390 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p25">Biorewitalizacja</b></div><div class="price-row__price" data-i18n="p26">od 650 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p27">Biorewitalizacja ust</b></div><div class="price-row__price">650 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p28">Polinukleotydy</b></div><div class="price-row__price">750 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p29">Egzosomy</b></div><div class="price-row__price">750 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p30">Dermapen</b></div><div class="price-row__price">450 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p31">Mezoterapia skóry głowy</b></div><div class="price-row__price">500 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-cat"><h3 data-i18n="p32">Usuwanie naczynek</h3><span data-i18n="p33">kuperoza · zaczerwienienia</span></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p34">Nos</b></div><div class="price-row__price">300 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p35">Policzki</b></div><div class="price-row__price">350 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p36">Cała twarz</b></div><div class="price-row__price">450 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p37">Nogi</b></div><div class="price-row__price">450 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+    </div>
+    <div class="price-panel reveal" data-panel="laser" hidden>
+      <div class="price-cat"><h3 data-i18n="p42">Depilacja laserowa dla kobiet</h3><span data-i18n="p43">system Estera</span></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p44">Bikini głębokie</b></div><div class="price-row__price">260 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p45">Bikini extra</b></div><div class="price-row__price">320 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p46">Bikini klasyczne</b></div><div class="price-row__price">160 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p47">Pachy</b></div><div class="price-row__price">110 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p48">Ręce całe (+ palce)</b></div><div class="price-row__price">260 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p49">Palce rąk i nóg</b></div><div class="price-row__price">110 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p50">Ręce do/od łokcia</b></div><div class="price-row__price">220 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p51">Nogi całe</b></div><div class="price-row__price">450 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p52">Nogi do/od kolan (+ kolana)</b></div><div class="price-row__price">300 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p53">Plecy całe</b></div><div class="price-row__price">450 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p54">Plecy (część)</b></div><div class="price-row__price">220-260 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-cat"><h3 data-i18n="p55">Depilacja laserowa dla mężczyzn</h3><span data-i18n="p56">nowość</span></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p57">Plecy całe</b></div><div class="price-row__price">550 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p58">Klatka + brzuch</b></div><div class="price-row__price">500 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p59">Kontur brody</b></div><div class="price-row__price">220 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p60">Pachy</b></div><div class="price-row__price">160 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p61">Szyja</b></div><div class="price-row__price">150 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <p class="price-note"><span data-i18n="p62">Pełna lista stref dla mężczyzn: zapytaj na</span> <a href="https://wa.me/48453270435" target="_blank" rel="noopener" data-cta="whatsapp">WhatsApp</a></p>
+      <div class="price-cat"><h3 data-i18n="p63">Wybielanie okolic intymnych</h3></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p64">Pachy</b></div><div class="price-row__price">250 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p65">Bikini</b></div><div class="price-row__price">350 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+    </div>
+    <div class="price-panel reveal" data-panel="cialo" hidden>
+      <div class="price-cat"><h3 data-i18n="p66">Masaże</h3></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p67">Masaż ciała 60 min</b></div><div class="price-row__price">200 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p68">Masaż ciała 90 min</b></div><div class="price-row__price">250 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p69">Kobido Premium</b></div><div class="price-row__price">240 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p70">Ciało + twarz</b></div><div class="price-row__price">280 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-cat"><h3 data-i18n="p38">Usuwanie zmian skórnych</h3><span data-i18n="p38s">brodawki · papilloma · keratozy · naczyniaki · prosaki (milia)</span></div>
+      <div class="gift-pill"><i data-lucide="microscope"></i><span data-i18n="p38d">Pracuję z dermatoskopem: każdą zmianę oceniam przed zabiegiem</span></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p39">1-5 elementów</b></div><div class="price-row__price">150 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p40">6-10 elementów</b></div><div class="price-row__price">250 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+      <div class="price-row"><div class="price-row__name"><b data-i18n="p41">11-25 elementów</b></div><div class="price-row__price">350 zł</div><a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="price-row__book" data-cta="booksy"><span data-i18n="cta.bookShort">Umów</span><i data-lucide="arrow-right"></i></a></div>
+    </div>
+    <div class="price-panel reveal" data-panel="pakiety" hidden>
+      <div class="price-cat"><h3 data-i18n="p71">Combo depilacji</h3><span data-i18n="p72">za wizytę · -15%</span></div>
+      <div class="packages">
+      <div class="pkg"><div class="pkg__info"><span class="pkg__badge">-15%</span><b data-i18n="p73">Bikini głębokie + pachy</b></div><div class="pkg__price"><div class="now">330 zł</div><div class="was" data-i18n="p74">zamiast 370 zł</div></div></div>
+      <div class="pkg"><div class="pkg__info"><span class="pkg__badge">-15%</span><b data-i18n="p75">Bikini głębokie + pachy + nogi całe</b></div><div class="pkg__price"><div class="now">690 zł</div><div class="was" data-i18n="p76">zamiast 820 zł</div></div></div>
+      <div class="pkg"><div class="pkg__info"><span class="pkg__badge">-15%</span><b data-i18n="p77">«Całe ciało»</b><span data-i18n="p78">bikini extra + pachy + nogi + ręce</span></div><div class="pkg__price"><div class="now">950 zł</div><div class="was" data-i18n="p79">zamiast 1140 zł</div></div></div>
+      </div>
+      <div class="price-cat"><h3 data-i18n="p80">Kursy</h3><span data-i18n="p81">płatność z góry · -15%</span></div>
+      <div class="packages">
+      <div class="pkg"><div class="pkg__info"><span class="pkg__badge">-15%</span><b data-i18n="p82">Kurs 6 zabiegów depilacji</b><span data-i18n="p83">dowolna strefa lub combo</span></div><div class="pkg__price"><div class="now">-15%</div></div></div>
+      <div class="pkg"><div class="pkg__info"><span class="pkg__badge">-15%</span><b data-i18n="p84">5× masaż ciała 60 min</b></div><div class="pkg__price"><div class="now">850 zł</div><div class="was" data-i18n="p85">zamiast 1000 zł</div></div></div>
+      <div class="pkg"><div class="pkg__info"><span class="pkg__badge">-15%</span><b data-i18n="p86">5× Kobido Premium</b></div><div class="pkg__price"><div class="now">1020 zł</div><div class="was" data-i18n="p87">zamiast 1200 zł</div></div></div>
+      <div class="pkg"><div class="pkg__info"><span class="pkg__badge">-15%</span><b data-i18n="p88">4× peeling</b></div><div class="pkg__price"><div class="now">1020 zł</div><div class="was" data-i18n="p89">zamiast 1200 zł</div></div></div>
+      <div class="pkg"><div class="pkg__info"><span class="pkg__badge">-15%</span><b data-i18n="p90">4× protokół Anti-Acne</b></div><div class="pkg__price"><div class="now">1530 zł</div><div class="was" data-i18n="p91">zamiast 1800 zł</div></div></div>
+      <div class="pkg"><div class="pkg__info"><span class="pkg__badge">-15%</span><b data-i18n="p92">3× IPL twarz</b></div><div class="pkg__price"><div class="now">1400 zł</div><div class="was" data-i18n="p93">zamiast 1650 zł</div></div></div>
+      <div class="pkg"><div class="pkg__info"><span class="pkg__badge">-15%</span><b data-i18n="p94">6× RF-lifting twarz + szyja</b></div><div class="pkg__price"><div class="now">4590 zł</div><div class="was" data-i18n="p95">zamiast 5400 zł</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEFORE / AFTER ============ -->
+<section class="section gallery" id="efekty">
+  <div class="wrap">
+    <div class="center reveal" style="margin-bottom:40px">
+      <p class="eyebrow" data-i18n="ba.eyebrow">Efekty</p>
+      <h2 class="section-title"><span data-i18n="ba.titlea">Prawdziwe rezultaty,</span> <span class="accent" data-i18n="ba.titleb">bez filtrów</span></h2>
+    </div>
+    <div class="ba-grid reveal">
+      <figure class="ba-card">
+        <div class="ba-pair">
+          <div class="ba-shot"><img src="assets/ba1-before.jpg" alt="Przed"><span class="ba-tag" data-i18n="ba.before">Przed</span></div>
+          <div class="ba-shot"><img src="assets/ba1-after.jpg" alt="Po"><span class="ba-tag ba-tag--after" data-i18n="ba.after">Po</span></div>
+        </div>
+        <figcaption class="ba-caption" data-i18n="ba.cap1">Redukcja zaczerwienień i ujednolicenie kolorytu skóry</figcaption>
+      </figure>
+      <figure class="ba-card">
+        <div class="ba-pair">
+          <div class="ba-shot"><img src="assets/ba2-before.jpg" alt="Przed"><span class="ba-tag" data-i18n="ba.before">Przed</span></div>
+          <div class="ba-shot"><img src="assets/ba2-after.jpg" alt="Po"><span class="ba-tag ba-tag--after" data-i18n="ba.after">Po</span></div>
+        </div>
+        <figcaption class="ba-caption" data-i18n="ba.cap2">IPL (fotoodmładzanie): redukcja przebarwień i odświeżenie skóry twarzy</figcaption>
+      </figure>
+      <figure class="ba-card">
+        <div class="ba-pair">
+          <div class="ba-shot"><img src="assets/ba3-before.jpg" alt="Przed"><span class="ba-tag" data-i18n="ba.before">Przed</span></div>
+          <div class="ba-shot"><img src="assets/ba3-after.jpg" alt="Po"><span class="ba-tag ba-tag--after" data-i18n="ba.after">Po</span></div>
+        </div>
+        <figcaption class="ba-caption" data-i18n="ba.cap3">Usuwanie naczynek na nosie (kuperoza)</figcaption>
+      </figure>
+      <figure class="ba-card">
+        <div class="ba-pair">
+          <div class="ba-shot"><img src="assets/ba4-before.jpg" alt="Przed"><span class="ba-tag" data-i18n="ba.before">Przed</span></div>
+          <div class="ba-shot"><img src="assets/ba4-after.jpg" alt="Po"><span class="ba-tag ba-tag--after" data-i18n="ba.after">Po</span></div>
+        </div>
+        <figcaption class="ba-caption" data-i18n="ba.cap4">IPL (fotoodmładzanie): rozjaśnienie skóry i wyrównanie kolorytu</figcaption>
+      </figure>
+      <figure class="ba-card">
+        <div class="ba-pair">
+          <div class="ba-shot"><img src="assets/ba5-before.jpg" alt="Przed"><span class="ba-tag" data-i18n="ba.before">Przed</span></div>
+          <div class="ba-shot"><img src="assets/ba5-after.jpg" alt="Po"><span class="ba-tag ba-tag--after" data-i18n="ba.after">Po</span></div>
+        </div>
+        <figcaption class="ba-caption" data-i18n="ba.cap5">Redukcja zaczerwienień i poprawa kondycji skóry</figcaption>
+      </figure>
+      <figure class="ba-card">
+        <div class="ba-pair">
+          <div class="ba-shot"><img src="assets/ba6-before.jpg" alt="Przed"><span class="ba-tag" data-i18n="ba.before">Przed</span></div>
+          <div class="ba-shot"><img src="assets/ba6-after.jpg" alt="Po"><span class="ba-tag ba-tag--after" data-i18n="ba.after">Po</span></div>
+        </div>
+        <figcaption class="ba-caption" data-i18n="ba.cap6">Redukcja naczynek na nosie (zbliżenie)</figcaption>
+      </figure>
+    </div>
+    <p class="disclaimer" data-i18n="ba.disclaimer">* Prawdziwe zdjęcia naszych klientek, publikowane za zgodą. Efekty są indywidualne i zależą od stanu skóry, wieku oraz regularności zabiegów.</p>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section section--blush" id="o-nas">
+  <div class="wrap">
+    <div class="center reveal" style="margin-bottom:48px">
+      <p class="eyebrow" data-i18n="about.eyebrow">O nas</p>
+      <h2 class="section-title" data-i18n="about.title">Poznaj nasz zespół</h2>
+      <p class="section-lead" data-i18n="about.lead">Dwie specjalistki, jeden standard: wykształcenie medyczne, doświadczenie i indywidualne podejście do każdej skóry.</p>
+    </div>
+    <div class="team">
+      <div class="member reveal">
+        <div class="member__media"><img src="assets/portrait-olga.jpg" alt="Olga Vishneuskaya" loading="lazy"></div>
+        <div class="member__body">
+          <b data-i18n="about.olgaName">Olga Vishneuskaya</b>
+          <span class="member__role" data-i18n="about.olgaRole">Kosmetolog · właścicielka</span>
+          <p data-i18n="about.p1">Wykształcenie medyczne, dyplomowana kosmetolożka i 9 lat praktyki klinicznej. Olga szkoli też innych kosmetologów. Każdy protokół układa indywidualnie: pod Twoją skórę, tempo i oczekiwania.</p>
+        </div>
+      </div>
+      <div class="member reveal">
+        <div class="member__media"><img src="assets/portrait-katia.jpg" alt="Katia" loading="lazy"></div>
+        <div class="member__body">
+          <b data-i18n="about.katiaName">Katia</b>
+          <span class="member__role" data-i18n="about.katiaRole">Masaż · Kobido · depilacja laserowa</span>
+          <p data-i18n="about.katiaBio">Specjalistka masażu Kobido (japoński lifting twarzy), limfodrenażu oraz depilacji laserowej. U Kati relaks łączy się z realnym efektem: ujędrnioną skórą i odprężonymi mięśniami.</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-quote reveal">
+      <blockquote data-i18n="about.quote">„Mój cel: żebyś wyglądała na wypoczętą, nie 'zrobioną'."</blockquote>
+      <cite data-i18n="about.quoteCite">Olga, właścicielka</cite>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="center reveal" style="margin-bottom:48px">
+      <p class="eyebrow" data-i18n="how.eyebrow">Jak to działa</p>
+      <h2 class="section-title" data-i18n="how.title">Pierwsza wizyta w trzech krokach</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="step__num">01</div><h3 data-i18n="how.s1t">Napisz lub zadzwoń</h3><p data-i18n="how.s1p">WhatsApp, telefon albo Booksy, wybierz co wygodniejsze. Odpowiadamy szybko.</p></div>
+      <div class="step reveal"><div class="step__num">02</div><h3 data-i18n="how.s2t">Bezpłatna konsultacja</h3><p data-i18n="how.s2p">Analizujemy stan skóry i dobieramy protokół dopasowany do Twoich potrzeb.</p></div>
+      <div class="step reveal"><div class="step__num">03</div><h3 data-i18n="how.s3t">Zabieg i plan pielęgnacji</h3><p data-i18n="how.s3p">Wykonujemy zabieg i dajemy jasny plan pielęgnacji domowej oraz dalszych wizyt.</p></div>
+    </div>
+    <div class="lowrisk reveal">
+      <span data-i18n="how.lowrisk1">Pierwszy raz u kosmetologa? Zacznij od </span><b data-i18n="how.lowrisk2">wodorowego oczyszczania za 250 zł</b><span data-i18n="how.lowrisk3">. To spokojny, niezobowiązujący sposób, żeby nas poznać.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="section section--blush">
+  <div class="wrap">
+    <div class="center reveal" style="margin-bottom:40px">
+      <p class="eyebrow" data-i18n="rev.eyebrow">Opinie</p>
+      <h2 class="section-title" data-i18n="rev.title">Co mówią klientki</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review reveal">
+        <div class="stars" aria-label="5/5"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+        <p data-i18n="rev.q1">„Robiłam depilację laserową w różnych salonach, ale najlepsze efekty osiągnęłam w Wiśnia Beauty. Już po pierwszym zabiegu włosów prawie nie zostało. Mają jeden z najlepszych laserów w Warszawie, różnica w rezultatach jest ogromna."</p>
+        <div class="review__who"><div class="review__av" style="background:#6E4B3A">K</div><div><b data-i18n="rev.n1">Kitnormal Kit</b><span><span class="review__g">Google</span> · <span data-i18n="rev.t1">miesiąc temu</span></span></div></div>
+      </div>
+      <div class="review reveal">
+        <div class="stars" aria-label="5/5"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+        <p data-i18n="rev.q2">„Ogromne podziękowania dla masażystki studia. Przyszłam z częstymi migrenami, a po pierwszym zabiegu ból zniknął. Profesjonalizm czuć w każdym ruchu, a atmosfera to troska i ciepło."</p>
+        <div class="review__who"><div class="review__av" style="background:#8B1A3A">D</div><div><b data-i18n="rev.n2">Darya Ascheulova</b><span><span class="review__g">Google</span> · <span data-i18n="rev.t2">9 miesięcy temu</span></span></div></div>
+      </div>
+      <div class="review reveal">
+        <div class="stars" aria-label="5/5"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+        <p data-i18n="rev.q3">„Byłam na depilacji laserowej u Pani Olgi, zabieg przeszedł zupełnie bezboleśnie i komfortowo. Miło było porozmawiać przy pysznej herbacie. Bardzo polecam!"</p>
+        <div class="review__who"><div class="review__av" style="background:#C9956C">O</div><div><b data-i18n="rev.n3">Oksana Nadieieva</b><span><span class="review__g">Google</span> · <span data-i18n="rev.t3">8 miesięcy temu</span></span></div></div>
+      </div>
+      <div class="review reveal">
+        <div class="stars" aria-label="5/5"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+        <p data-i18n="rev.q4">„Od kilku lat regularnie korzystam z usług Pani Olgi i zawsze wychodzę w pełni zadowolona. Efekt wygląda naturalnie i utrzymuje się długo. Atmosfera jest przyjemna, a Pani Olga miła i pomocna. Miejsce, które szczerze polecam każdemu."</p>
+        <div class="review__who"><div class="review__av" style="background:#A8324F">S</div><div><b data-i18n="rev.n4">Sylwia Kanciała</b><span><span class="review__g">Google</span> · <span data-i18n="rev.t4">9 miesięcy temu</span></span></div></div>
+      </div>
+      <div class="review reveal">
+        <div class="stars" aria-label="5/5"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+        <p data-i18n="rev.q5">„Jestem bardzo zadowolona z usuwania pajączków na nosie, zabieg przebiegł świetnie. Na pewno wrócę, żeby usunąć naczynka także na innych partiach ciała."</p>
+        <div class="review__who"><div class="review__av" style="background:#6E122C">K</div><div><b data-i18n="rev.n5">Katy</b><span><span class="review__g">Booksy</span> · <span data-i18n="rev.t5">styczeń 2026</span></span></div></div>
+      </div>
+      <div class="review reveal">
+        <div class="stars" aria-label="5/5"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+        <p data-i18n="rev.q6">„Właścicielka Olga jest bardzo sympatyczna i dużo wie o tym, jak najlepiej pomóc Twojej skórze. Była dokładna, bardzo się cieszę z wizyty. Serdecznie polecam!"</p>
+        <div class="review__who"><div class="review__av" style="background:#B07E55">D</div><div><b data-i18n="rev.n6">Dominika</b><span><span class="review__g">Booksy</span> · <span data-i18n="rev.t6">maj 2023</span></span></div></div>
+      </div>
+    </div>
+    <div class="rating-badges reveal">
+      <div class="rating-badge"><b>5,0</b><div><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span>Google</span></div></div>
+      <div class="rating-badge"><b>4,9</b><div><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div><span>Booksy</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="center reveal" style="margin-bottom:40px">
+      <p class="eyebrow" data-i18n="faq.eyebrow">FAQ</p>
+      <h2 class="section-title" data-i18n="faq.title">Najczęstsze pytania</h2>
+    </div>
+    <div class="faq reveal">
+      <div class="faq-item"><button class="faq-q"><span data-i18n="faq.q1">Czy zabieg boli?</span><i data-lucide="plus"></i></button><div class="faq-a"><p data-i18n="faq.a1">Nie. Większość zabiegów jest komfortowa i odczuwana jako przyjemne ciepło lub delikatny masaż. Przed startem zawsze wyjaśniamy, co poczujesz.</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="faq.q2">Ile zabiegów potrzeba?</span><i data-lucide="plus"></i></button><div class="faq-a"><p data-i18n="faq.a2">To zależy od zabiegu. Część daje efekt już po jednej wizycie, a inne, jak depilacja laserowa czy kursy RF i peelingów, wymagają serii. Czy w Twoim przypadku wystarczy pojedyncza wizyta, czy lepszy będzie kurs, dobieramy indywidualnie na bezpłatnej konsultacji.</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="faq.q3">Czy są przeciwwskazania?</span><i data-lucide="plus"></i></button><div class="faq-a"><p data-i18n="faq.a3">Tak. Do najważniejszych należą: rozrusznik serca, padaczka, choroby onkologiczne (remisja krótsza niż 5 lat) oraz ciąża. Metalowe implanty nie są przeciwwskazaniem. Dlatego zawsze zaczynamy od wywiadu i analizy skóry.</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="faq.q4">Jak się przygotować?</span><i data-lucide="plus"></i></button><div class="faq-a"><p data-i18n="faq.a4">Wystarczy przyjść z oczyszczoną skórą, bez mocnego makijażu. Przed depilacją laserową ogol okolicę na dobę przed wizytą. Resztą zajmiemy się na miejscu, a szczegóły wyślemy po umówieniu wizyty.</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="faq.q5">Czy mogę przyjść w przerwie w pracy?</span><i data-lucide="plus"></i></button><div class="faq-a"><p data-i18n="faq.a5">Tak. Wiele zabiegów (np. pielęgnacja oczu, krótkie oczyszczanie) mieści się w przerwie i nie zostawia śladów, wracasz do biura ze zdrowym blaskiem.</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="faq.q6">W jakich językach obsługujecie?</span><i data-lucide="plus"></i></button><div class="faq-a"><p data-i18n="faq.a6">Obsługujemy po polsku, ukraińsku i rosyjsku. Pisz lub dzwoń w wygodnym dla Ciebie języku.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section section--blush" id="kontakt">
+  <div class="wrap">
+    <div class="center reveal" style="margin-bottom:48px">
+      <p class="eyebrow" data-i18n="con.eyebrow">Kontakt</p>
+      <h2 class="section-title" data-i18n="con.title">Zapraszamy do centrum Warszawy</h2>
+    </div>
+    <div class="contact__grid">
+      <div class="contact__info reveal">
+        <div class="contact-row"><div class="contact-row__ic"><i data-lucide="map-pin"></i></div><div><b data-i18n="con.addrT">Adres</b><p>ul. Gen. W. Andersa 15, Warszawa<br><span class="addr-note" data-i18n="con.addrNote">obok LuxMed</span></p></div></div>
+        <div class="contact-row"><div class="contact-row__ic"><i data-lucide="phone"></i></div><div><b data-i18n="con.phoneT">Telefon</b><a href="tel:+48453270435" data-cta="phone" id="cta-contact-phone">+48 453 270 435</a></div></div>
+        <div class="contact-row"><div class="contact-row__ic"><span class="ico-wa"></span></div><div><b>WhatsApp</b><a href="https://wa.me/48453270435" target="_blank" rel="noopener" data-cta="whatsapp" id="cta-contact-whatsapp" data-i18n="con.waLink">Napisz do nas</a></div></div>
+        <div class="contact-row"><div class="contact-row__ic"><i data-lucide="instagram"></i></div><div><b>Instagram</b><a href="https://instagram.com/wisnia_beauty_studio" target="_blank" rel="noopener">@wisnia_beauty_studio</a></div></div>
+        <div class="contact-row"><div class="contact-row__ic"><i data-lucide="clock"></i></div><div><b data-i18n="con.hoursT">Godziny otwarcia</b><p data-i18n="con.hours">Pon-Sob: 8:00-20:00</p></div></div>
+        <div class="cta-cluster" style="margin-top:8px">
+          <a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="btn btn--primary" data-cta="booksy" id="cta-contact-booksy"><i data-lucide="calendar-check"></i><span data-i18n="cta.booksy">Zarezerwuj w Booksy</span></a>
+          <a href="https://wa.me/48453270435" target="_blank" rel="noopener" class="btn btn--outline" data-cta="whatsapp"><span class="ico-wa"></span>WhatsApp</a>
+        </div>
+      </div>
+      <div class="map reveal">
+        <iframe title="Mapa Wiśnia Beauty Studio" width="100%" height="100%" style="border:0;min-height:380px" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Wi%C5%9Bnia+Beauty+Studio,+ul.+Gen.+W.+Andersa+15,+Warszawa&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo"><img src="assets/logo-wisnia.png" alt="Wiśnia Beauty Studio"></div>
+        <p style="font-size:15px;max-width:300px" data-i18n="foot.tag">Kosmetologia i masaż w centrum Warszawy. Naturalne odmłodzenie bez przesady.</p>
+        <div class="footer__social">
+          <a href="https://instagram.com/wisnia_beauty_studio" target="_blank" rel="noopener" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="https://wa.me/48453270435" target="_blank" rel="noopener" aria-label="WhatsApp"><span class="ico-wa"></span></a>
+          <a href="tel:+48453270435" aria-label="Telefon"><i data-lucide="phone"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 data-i18n="foot.navT">Nawigacja</h4>
+        <a href="#zabiegi" data-i18n="nav.services">Zabiegi</a>
+        <a href="#efekty" data-i18n="nav.effects">Efekty</a>
+        <a href="#cennik" data-i18n="nav.prices">Cennik</a>
+        <a href="#o-nas" data-i18n="nav.about">O nas</a>
+        <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
+        <a href="blog/index.html" data-i18n="foot.blog">Blog</a>
+      </div>
+      <div>
+        <h4 data-i18n="foot.uslugiT">Usługi</h4>
+        <a href="uslugi/depilacja-laserowa-warszawa.html" data-i18n="us.laser">Depilacja laserowa</a>
+        <a href="uslugi/depilacja-laserowa-mezczyzni-warszawa.html" data-i18n="us.laserm">Depilacja dla mężczyzn</a>
+        <a href="uslugi/ipl-fotoodmladzanie-warszawa.html" data-i18n="us.ipl">IPL fotoodmładzanie</a>
+        <a href="uslugi/rf-lifting-warszawa.html" data-i18n="us.rf">RF-lifting</a>
+        <a href="uslugi/usuwanie-naczynek-warszawa.html" data-i18n="us.vessels">Usuwanie naczynek</a>
+        <a href="uslugi/oczyszczanie-twarzy-warszawa.html" data-i18n="us.clean">Oczyszczanie twarzy</a>
+        <a href="uslugi/mezoterapia-warszawa.html" data-i18n="us.mezo">Mezoterapia</a>
+      </div>
+      <div>
+        <h4 data-i18n="foot.contactT">Kontakt</h4>
+        <a href="tel:+48453270435">+48 453 270 435</a>
+        <a href="https://wa.me/48453270435" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://instagram.com/wisnia_beauty_studio" target="_blank" rel="noopener">@wisnia_beauty_studio</a>
+        <p style="font-size:15px;padding:6px 0">ul. Gen. W. Andersa 15, Warszawa<br><span class="addr-note" data-i18n="con.addrNote">obok LuxMed</span></p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Wiśnia Beauty Studio</span>
+      <a href="privacy.html" data-i18n="foot.privacy">Polityka prywatności</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ STICKY MOBILE CTA ============ -->
+<div class="sticky-cta">
+  <a href="https://wisniabeauty.booksy.com/a" target="_blank" rel="noopener" class="btn btn--primary" data-cta="booksy" id="cta-sticky-booksy"><i data-lucide="calendar-check"></i><span data-i18n="cta.book">Umów wizytę</span></a>
+  <a href="https://wa.me/48453270435" target="_blank" rel="noopener" class="sticky-cta__icon" aria-label="WhatsApp" data-cta="whatsapp" id="cta-sticky-whatsapp"><span class="ico-wa"></span></a>
+  <a href="tel:+48453270435" class="sticky-cta__icon" aria-label="Zadzwoń" data-cta="phone" id="cta-sticky-phone"><i data-lucide="phone"></i></a>
+</div>
+
+<script src="i18n.js"></script>
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

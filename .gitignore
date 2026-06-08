@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js / build
+.next/
+out/
+dist/
+build/
+
+# Env & secrets
+.env
+.env*.local
+.env.local
+
+# Payload generated
+src/payload-types.ts
+payload-types.ts
+
+# Vercel
+.vercel/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Large design archive (the extracted handoff is kept as reference)
+*.zip

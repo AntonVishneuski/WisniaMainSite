@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Zastąp https://TWOJA-DOMENA.pl prawdziwą domeną. / Замените домен на рабочий. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://TWOJA-DOMENA.pl/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/uslugi/depilacja-laserowa-warszawa.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/uslugi/depilacja-laserowa-mezczyzni-warszawa.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/uslugi/ipl-fotoodmladzanie-warszawa.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/uslugi/rf-lifting-warszawa.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/uslugi/usuwanie-naczynek-warszawa.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/uslugi/oczyszczanie-twarzy-warszawa.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/uslugi/mezoterapia-warszawa.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/blog/index.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/blog/ipl-czy-rf-lifting.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/blog/depilacja-laserowa-latem.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/blog/jak-usunac-naczynka-na-twarzy.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/blog/dlaczego-pojawiaja-sie-przebarwienia.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://TWOJA-DOMENA.pl/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>

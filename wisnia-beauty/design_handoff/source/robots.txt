@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Zastąp domeną produkcyjną / Замените на рабочий домен
+Sitemap: https://TWOJA-DOMENA.pl/sitemap.xml

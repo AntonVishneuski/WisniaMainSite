@@ -31,5 +31,8 @@ pnpm-debug.log*
 .idea/
 .vscode/
 
+# Claude Code local (personal) settings
+.claude/settings.local.json
+
 # Large design archive (the extracted handoff is kept as reference)
 *.zip

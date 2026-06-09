@@ -1,38 +1,67 @@
-# Dependencies
-node_modules/
-.pnpm-store/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Next.js / build
-.next/
-out/
-dist/
-build/
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
 
-# Env & secrets
-.env
+/.idea/*
+!/.idea/runConfigurations
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
 .env*.local
-.env.local
 
-# Payload generated
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+.env
+
+/media
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Additional entries from project setup
+.pnpm-store/
+dist/
+*.zip
+
+# Payload generated types
 src/payload-types.ts
 payload-types.ts
 
-# Vercel
-.vercel/
-
-# Logs
-*.log
-npm-debug.log*
-pnpm-debug.log*
-
-# OS / editor
-.DS_Store
+# Editor / OS
 *.swp
 .idea/
 .vscode/
 
 # Claude Code local (personal) settings
 .claude/settings.local.json
-
-# Large design archive (the extracted handoff is kept as reference)
-*.zip

@@ -68,6 +68,54 @@
     "faqEyebrow": "FAQ",
     "faqTitle": "Najczęstsze pytania"
   },
+  "ba": {
+    "disclaimer": "* Prawdziwe zdjęcia naszych klientek, publikowane za zgodą. Efekty są indywidualne i zależą od stanu skóry, wieku oraz regularności zabiegów."
+  },
+  "team": {
+    "eyebrow": "O nas",
+    "title": "Poznaj nasz zespół",
+    "lead": "Dwie specjalistki, jeden standard: wykształcenie medyczne, doświadczenie i indywidualne podejście do każdej skóry.",
+    "m1Name": "Olga Vishneuskaya",
+    "m1Role": "Kosmetolog · właścicielka",
+    "m1Bio": "Wykształcenie medyczne, dyplomowana kosmetolożka i 9 lat praktyki klinicznej. Olga szkoli też innych kosmetologów. Każdy protokół układa indywidualnie: pod Twoją skórę, tempo i oczekiwania.",
+    "m2Name": "Katia",
+    "m2Role": "Masaż · Kobido · depilacja laserowa",
+    "m2Bio": "Specjalistka masażu Kobido (japoński lifting twarzy), limfodrenażu oraz depilacji laserowej. U Kati relaks łączy się z realnym efektem: ujędrnioną skórą i odprężonymi mięśniami.",
+    "quote": "„Mój cel: żebyś wyglądała na wypoczętą, nie ‘zrobioną’.“",
+    "quoteAuthor": "Olga, właścicielka"
+  },
+  "how": {
+    "eyebrow": "Jak to działa",
+    "title": "Pierwsza wizyta w trzech krokach",
+    "s1t": "Napisz lub zadzwoń",
+    "s1p": "WhatsApp, telefon albo Booksy, wybierz co wygodniejsze. Odpowiadamy szybko.",
+    "s2t": "Bezpłatna konsultacja",
+    "s2p": "Analizujemy stan skóry i dobieramy protokół dopasowany do Twoich potrzeb.",
+    "s3t": "Zabieg i plan pielęgnacji",
+    "s3p": "Wykonujemy zabieg i dajemy jasny plan pielęgnacji domowej oraz dalszych wizyt.",
+    "highlight": "Pierwszy raz u kosmetologa? Zacznij od wodorowego oczyszczania za 250 zł. To spokojny, niezobowiązujący sposób, żeby nas poznać."
+  },
+  "faq": {
+    "q1": "Czy zabieg boli?",
+    "a1": "Nie. Większość zabiegów jest komfortowa i odczuwana jako przyjemne ciepło lub delikatny masaż. Przed startem zawsze wyjaśniamy, co poczujesz.",
+    "q2": "Ile zabiegów potrzeba?",
+    "a2": "To zależy od zabiegu. Część daje efekt już po jednej wizycie, a inne, jak depilacja laserowa czy kursy RF i peelingów, wymagają serii. Czy w Twoim przypadku wystarczy pojedyncza wizyta, czy lepszy będzie kurs, dobieramy indywidualnie na bezpłatnej konsultacji.",
+    "q3": "Czy są przeciwwskazania?",
+    "a3": "Tak. Do najważniejszych należą: rozrusznik serca, padaczka, choroby onkologiczne (remisja krótsza niż 5 lat) oraz ciąża. Metalowe implanty nie są przeciwwskazaniem. Dlatego zawsze zaczynamy od wywiadu i analizy skóry.",
+    "q4": "Jak się przygotować?",
+    "a4": "Wystarczy przyjść z oczyszczoną skórą, bez mocnego makijażu. Przed depilacją laserową ogol okolicę na dobę przed wizytą. Resztą zajmiemy się na miejscu, a szczegóły wyślemy po umówieniu wizyty.",
+    "q5": "Czy mogę przyjść w przerwie w pracy?",
+    "a5": "Tak. Wiele zabiegów (np. pielęgnacja oczu, krótkie oczyszczanie) mieści się w przerwie i nie zostawia śladów, wracasz do biura ze zdrowym blaskiem.",
+    "q6": "W jakich językach obsługujecie?",
+    "a6": "Obsługujemy po polsku, ukraińsku i rosyjsku. Pisz lub dzwoń w wygodnym dla Ciebie języku."
+  },
+  "contact": {
+    "addressLabel": "Adres",
+    "phoneLabel": "Telefon",
+    "hoursLabel": "Godziny otwarcia",
+    "waLink": "Napisz do nas",
+    "hours": "Pon-Sob: 8:00-20:00"
+  },
   "footer": {
     "tagline": "Kosmetologia i masaż w centrum Warszawy. Naturalne odmłodzenie bez przesady.",
     "navT": "Nawigacja",

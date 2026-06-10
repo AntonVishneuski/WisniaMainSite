@@ -125,6 +125,12 @@
     "contactT": "Kontakt",
     "privacy": "Polityka prywatności"
   },
+  "consent": {
+    "text": "Używamy plików cookie do analizy ruchu. Możesz zaakceptować lub korzystać tylko z niezbędnych.",
+    "accept": "Akceptuję",
+    "reject": "Tylko niezbędne",
+    "privacy": "Polityka prywatności"
+  },
   "privacy": {
     "title": "Polityka prywatności",
     "updated": "Ostatnia aktualizacja: czerwiec 2026",

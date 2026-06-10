@@ -6,6 +6,8 @@ import { notFound } from 'next/navigation'
 import { locales, type Locale } from '../../../lib/i18n'
 import { getPayloadClient } from '../../../lib/getPayload'
 import { Gtm, GtmNoScript } from '../../../components/analytics/Gtm'
+import { ConsentInit } from '../../../components/analytics/ConsentInit'
+import { ConsentBanner } from '../../../components/analytics/ConsentBanner'
 import { UtmCapture } from '../../../components/analytics/UtmCapture'
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin', 'latin-ext'], weight: ['600'], variable: '--font-cormorant', display: 'swap' })
@@ -26,11 +28,13 @@ export default async function LocaleLayout({ children, params }: { children: Rea
     <html lang={locale} className={`${cormorant.variable} ${jost.variable}`}>
       <head>{settings?.searchConsoleToken ? <meta name="google-site-verification" content={settings.searchConsoleToken} /> : null}</head>
       <body>
+        <ConsentInit />
         <Gtm gtmId={settings?.gtmId} />
         <GtmNoScript gtmId={settings?.gtmId} />
         <NextIntlClientProvider messages={messages} locale={locale}>
           <UtmCapture />
           {children}
+          <ConsentBanner />
         </NextIntlClientProvider>
       </body>
     </html>

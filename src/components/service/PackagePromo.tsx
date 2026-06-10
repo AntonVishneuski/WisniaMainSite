@@ -14,6 +14,9 @@ export type PackagePromoData = {
 export function PackagePromo({ promo }: { promo?: PackagePromoData | null }) {
   if (!promo?.enabled) return null
 
+  const raw = (promo.link ?? '').trim()
+  const safeHref = /^(#|\/|https?:|tel:|mailto:)/i.test(raw) ? raw : '#'
+
   return (
     <div className="mt-[18px] p-4 border border-[var(--line-warm)] rounded-[var(--radius-md)] bg-gradient-to-br from-[rgba(201,149,108,0.14)] to-[rgba(201,149,108,0.04)]">
       {promo.badge && (
@@ -43,7 +46,7 @@ export function PackagePromo({ promo }: { promo?: PackagePromoData | null }) {
       )}
       {promo.link && (
         <a
-          href={promo.link}
+          href={safeHref}
           className="inline-block mt-[9px] text-[13px] text-cherry border-b border-[var(--line-warm)] hover:border-cherry transition-colors"
         >
           {promo.linkLabel ?? promo.link}

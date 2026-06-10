@@ -34,8 +34,9 @@ export function ServiceHero({
         <div className="min-w-0">
           <h1
             className="font-serif text-[clamp(32px,5vw,54px)] font-semibold text-graphite leading-[1.1] tracking-[-0.01em] text-balance mb-4"
-            dangerouslySetInnerHTML={{ __html: heading }}
-          />
+          >
+            {heading}
+          </h1>
           {intro && (
             <p className="text-[19px] text-gray max-w-[60ch] mb-6 leading-[1.65]">{intro}</p>
           )}

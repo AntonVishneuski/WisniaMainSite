@@ -3,7 +3,9 @@ import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidat
 
 export const ServicePages: CollectionConfig = {
   slug: 'servicePages',
-  access: { read: () => true },
+  access: {
+    read: ({ req }) => (req.user ? true : { status: { equals: 'published' } }),
+  },
   admin: { group: 'Treść', useAsTitle: 'title', defaultColumns: ['title', 'slug', 'status', 'order'] },
   hooks: { afterChange: [revalidateAfterChange], afterDelete: [revalidateAfterDelete] },
   fields: [
@@ -41,7 +43,13 @@ export const ServicePages: CollectionConfig = {
       { name: 'desc', type: 'text', localized: true },
       { name: 'nowPrice', type: 'text', localized: true },
       { name: 'wasPrice', type: 'text', localized: true },
-      { name: 'link', type: 'text', defaultValue: '#pakiety' },
+      { name: 'link', type: 'text', defaultValue: '#pakiety',
+        validate: (value: string | null | undefined) => {
+          if (!value || value.trim() === '') return true
+          if (/^(#|\/|https?:|tel:|mailto:)/i.test(value.trim())) return true
+          return 'Link must start with #, /, https://, http://, tel:, or mailto:'
+        },
+      },
     ] },
     { name: 'reviews', type: 'array', fields: [
       { name: 'quote', type: 'textarea', localized: true, required: true },

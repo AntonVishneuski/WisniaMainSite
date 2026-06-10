@@ -1,4 +1,4 @@
-import { setRequestLocale } from 'next-intl/server'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import type { Locale } from '@/lib/i18n'
@@ -29,12 +29,16 @@ export async function generateMetadata({
   const { locale, slug } = await params
   const page: any = await getServicePage(slug, locale as Locale)
   if (!page) return {}
-  const base = locale === 'ru' ? `${SITE}/ru` : SITE
+  const isRu = locale === 'ru'
+  const base = isRu ? `${SITE}/ru` : SITE
   const url = `${base}/uslugi/${slug}`
+  const title = page.metaTitle || page.title
+  const description = page.metaDescription || page.intro || undefined
+  const imageUrl = page.ogImage?.url ?? page.heroImage?.url ?? '/assets/hero-olga.jpg'
   return {
     metadataBase: new URL(SITE),
-    title: page.metaTitle || page.title,
-    description: page.metaDescription || page.intro || undefined,
+    title,
+    description,
     alternates: {
       canonical: url,
       languages: {
@@ -45,12 +49,14 @@ export async function generateMetadata({
     openGraph: {
       type: 'website',
       url,
-      title: page.metaTitle || page.title,
-      images:
-        page.ogImage?.url
-          ? [page.ogImage.url]
-          : ['/assets/hero-olga.jpg'],
+      title,
+      description,
+      siteName: 'Wiśnia Beauty Studio',
+      locale: isRu ? 'ru_RU' : 'pl_PL',
+      alternateLocale: isRu ? 'pl_PL' : 'ru_RU',
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
     },
+    twitter: { card: 'summary_large_image', title, description, images: [imageUrl] },
   }
 }
 
@@ -64,6 +70,8 @@ export default async function Page({
 
   const page: any = await getServicePage(slug, locale as Locale)
   if (!page) notFound()
+
+  const t = await getTranslations({ locale })
 
   const payload = await getPayloadClient()
   const settings: any = await payload
@@ -79,6 +87,8 @@ export default async function Page({
 
   const base = locale === 'ru' ? `${SITE}/ru` : SITE
   const url = `${base}/uslugi/${slug}`
+  const uslugiLabel = t('nav.uslugi')
+  const imageUrl = page.ogImage?.url ?? page.heroImage?.url ?? `${SITE}/assets/hero-olga.jpg`
 
   return (
     <>
@@ -89,12 +99,13 @@ export default async function Page({
           url,
           providerName: 'Wiśnia Beauty Studio',
           providerUrl: SITE,
+          image: imageUrl,
         })}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: 'Home', url: base },
-          { name: 'Usługi', url: `${base}/uslugi` },
+          { name: 'Wiśnia', url: base },
+          { name: uslugiLabel, url: `${base}/uslugi` },
           { name: page.title, url },
         ])}
       />
@@ -105,6 +116,7 @@ export default async function Page({
           settings={settings}
           locale={locale}
           crossLinks={crossLinks}
+          uslugiLabel={uslugiLabel}
         />
       </main>
       <Footer locale={locale} settings={settings} services={services} />

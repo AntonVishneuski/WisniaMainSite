@@ -17,15 +17,17 @@ type Props = {
   settings: any
   locale: string
   crossLinks: ServiceLinkRef[]
+  uslugiLabel?: string
 }
 
-export function ServicePage({ page, settings, locale, crossLinks }: Props) {
+export function ServicePage({ page, settings, locale, crossLinks, uslugiLabel = 'Usługi' }: Props) {
   const homeHref = locale === 'ru' ? '/ru' : '/'
+  const uslugiHref = locale === 'ru' ? '/ru/uslugi' : '/uslugi'
   const { booksyHref } = contactLinks(settings)
 
   const breadcrumbItems = [
     { label: 'Wiśnia', href: homeHref },
-    { label: 'Usługi' },
+    { label: uslugiLabel, href: uslugiHref },
     { label: page.title },
   ]
 

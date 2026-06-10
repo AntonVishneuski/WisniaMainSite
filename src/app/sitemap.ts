@@ -3,7 +3,7 @@ import { getServicePageParams } from '@/lib/queries'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-  const staticPaths = ['', '/polityka-prywatnosci']
+  const staticPaths = ['', '/polityka-prywatnosci', '/uslugi']
   let slugs: string[] = []
   try { slugs = await getServicePageParams() } catch { slugs = [] }
   const servicePaths = slugs.map((s) => `/uslugi/${s}`)

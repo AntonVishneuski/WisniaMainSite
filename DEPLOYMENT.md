@@ -25,9 +25,21 @@ Local build is verified (`pnpm build` passes; SSG for `/[locale]` with ISR, dyna
 | `NEXT_PUBLIC_SITE_URL` | your production URL, e.g. `https://wisniabeauty.pl` |
 
 ## 3. Build settings
-- Framework preset: **Next.js**. Build command `pnpm build`, install `pnpm install`.
+- Framework preset: **Next.js**. Build command: leave as default (Vercel will auto-detect and
+  use the `vercel-build` script instead of `build`). Install command: `pnpm install`.
 - Node version: 20.x or 22.x (the app supports `>=20.9`).
 - No special overrides needed (config is in `next.config.ts`).
+
+### Database migrations
+Payload DB migrations are committed in `src/migrations/`. The `vercel-build` script runs
+`payload migrate` **before** `next build`, so the production schema is created (or updated)
+automatically on every deploy — no manual schema step needed.
+
+The `build` script (used locally) runs plain `next build` without the migration step; run
+`pnpm payload migrate` separately in local dev if you add new migrations.
+
+> If you customise Vercel's Build Command in the dashboard, use:
+> `pnpm run vercel-build`
 
 ## 4. First deploy
 - Import the repo in Vercel (or `git push` to the production branch). Vercel runs `next build`.
@@ -35,8 +47,9 @@ Local build is verified (`pnpm build` passes; SSG for `/[locale]` with ISR, dyna
   (email + password). This is the owner login.
 
 ## 5. Seed production content (one-off)
-The production DB starts empty. Seed it with the design content (62 prices, 6 reviews,
-6 before/after, settings):
+After the first deploy the schema already exists (migrations ran during `vercel-build`), but
+the **content tables are empty**. Seed the design content (62 prices, 6 reviews, 6 before/after,
+settings) as a separate one-off step:
 
 Option A — from your machine against the prod DB:
 ```bash
@@ -46,7 +59,8 @@ Option A — from your machine against the prod DB:
 #   PAYLOAD_SECRET=<prod secret>
 pnpm seed
 ```
-The seed is **idempotent** (it wipes prices/reviews/beforeAfter/media first), so it's safe to rerun.
+The seed **inserts content only** — the schema is already created by the migration. It is
+**idempotent** (it wipes prices/reviews/beforeAfter/media first), so it's safe to rerun.
 Before/after images are uploaded from `wisnia-beauty/design_handoff/source/assets/` into Blob.
 
 Option B — edit everything by hand in `/admin` instead of seeding.

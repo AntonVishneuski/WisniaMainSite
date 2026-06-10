@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "services": "Zabiegi",
+    "uslugi": "Usługi",
+    "prices": "Cennik",
+    "effects": "Efekty",
+    "blog": "Blog",
+    "about": "O nas",
+    "contact": "Kontakt"
+  },
+  "cta": {
+    "whatsapp": "Napisz na WhatsApp",
+    "call": "Zadzwoń",
+    "booksy": "Zarezerwuj w Booksy",
+    "booksyShort": "Zarezerwuj w Booksy",
+    "book": "Umów wizytę",
+    "bookShort": "Umów"
+  },
+  "hero": {
+    "h1a": "Kosmetologia, laser i masaż",
+    "h1b": "w centrum Warszawy",
+    "sub": "Naturalne odmłodzenie bez przesady. Kosmetologia aparaturowa: oczyszczanie, RF-lifting, IPL (fotoodmładzanie) i mezoterapia, a do tego depilacja laserowa Estera i masaże. Indywidualny protokół dla Twojej skóry.",
+    "ratingSrc": "w Google",
+    "trust1": "9 lat doświadczenia klinicznego",
+    "trust2": "Wykształcenie medyczne",
+    "trust3": "Indywidualny protokół"
+  },
+  "sections": {
+    "pricesEyebrow": "Cennik",
+    "pricesTitle": "Zabiegi i ceny",
+    "tabFace": "Kosmetologia",
+    "tabLaser": "Laser",
+    "tabBody": "Ciało",
+    "tabPkg": "Pakiety",
+    "effectsEyebrow": "Efekty",
+    "effectsTitleA": "Prawdziwe rezultaty,",
+    "effectsTitleB": "bez filtrów",
+    "before": "Przed",
+    "after": "Po",
+    "reviewsEyebrow": "Opinie",
+    "reviewsTitle": "Co mówią klientki",
+    "contactEyebrow": "Kontakt",
+    "contactTitle": "Zapraszamy do centrum Warszawy",
+    "faqEyebrow": "FAQ",
+    "faqTitle": "Najczęstsze pytania"
+  },
+  "footer": {
+    "tagline": "Kosmetologia i masaż w centrum Warszawy. Naturalne odmłodzenie bez przesady.",
+    "navT": "Nawigacja",
+    "nav": "Nawigacja",
+    "blog": "Blog",
+    "uslugiT": "Usługi",
+    "contactT": "Kontakt",
+    "privacy": "Polityka prywatności"
+  }
+}

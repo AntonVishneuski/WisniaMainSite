@@ -123,6 +123,9 @@
     "reject": "Tylko niezbędne",
     "privacy": "Polityka prywatności"
   },
+  "service": {
+    "photoSoon": "Zdjęcie wkrótce"
+  },
   "privacy": {
     "title": "Polityka prywatności",
     "updated": "Ostatnia aktualizacja: czerwiec 2026",

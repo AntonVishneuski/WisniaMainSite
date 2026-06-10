@@ -63,5 +63,5 @@ payload-types.ts
 .idea/
 .vscode/
 
-# Claude Code local (personal) settings
-.claude/settings.local.json
+# Claude Code local (personal) dir (settings, worktrees, launch.json)
+.claude/

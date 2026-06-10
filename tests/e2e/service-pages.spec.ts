@@ -3,7 +3,8 @@ import { test, expect } from '@playwright/test'
 test('laser service page renders with price aside + h1', async ({ page }) => {
   await page.goto('/uslugi/depilacja-laserowa-warszawa')
   await expect(page.locator('h1')).toBeVisible({ timeout: 30000 })
-  await expect(page.locator('main')).toContainText('zł')
+  // Assert a SPECIFIC seeded price label is visible (proves priceItems relationship renders)
+  await expect(page.locator('main')).toContainText('Bikini głębokie')
 })
 
 test('ru service page loads with lang ru', async ({ page }) => {
@@ -38,4 +39,18 @@ test('header Usługi dropdown navigates to a service page', async ({ page }) => 
 test('unknown service slug 404s', async ({ page }) => {
   const res = await page.goto('/uslugi/nie-istnieje')
   expect(res?.status()).toBe(404)
+})
+
+test('placeholder-hero page renders "Zdjęcie wkrótce" for no-image service', async ({ page }) => {
+  await page.goto('/uslugi/ipl-fotoodmladzanie-warszawa')
+  await expect(page.locator('h1')).toBeVisible({ timeout: 30000 })
+  // The ServiceHero placeholder branch renders this text when heroFile is null
+  await expect(page.locator('main')).toContainText('Zdjęcie wkrótce')
+})
+
+test('/uslugi index page renders h1 and links to service pages', async ({ page }) => {
+  await page.goto('/uslugi')
+  await expect(page.locator('h1')).toBeVisible({ timeout: 30000 })
+  // At least one link pointing into /uslugi/ should be present
+  await expect(page.locator('a[href*="/uslugi/"]').first()).toBeVisible()
 })

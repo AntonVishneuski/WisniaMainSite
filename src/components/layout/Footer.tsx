@@ -94,7 +94,7 @@ export function Footer({ locale, settings }: Props) {
 
           {/* Contact column */}
           <div>
-            <h4 className="font-serif text-[21px] text-graphite mb-[14px]">Kontakt</h4>
+            <h4 className="font-serif text-[21px] text-graphite mb-[14px]">{t('footer.contactT')}</h4>
             <div className="flex flex-col">
               {settings?.phone && (
                 <a

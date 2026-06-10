@@ -7,7 +7,8 @@ export function LangToggle({ locale }: { locale: string }) {
 
   function to(l: 'pl' | 'ru') {
     const stripped = pathname.replace(/^\/(pl|ru)(?=\/|$)/, '') || '/'
-    router.push(l === 'pl' ? stripped : `/ru${stripped === '/' ? '' : stripped}`)
+    const hash = typeof window !== 'undefined' ? window.location.hash : ''
+    router.push((l === 'pl' ? stripped : `/ru${stripped === '/' ? '' : stripped}`) + hash)
   }
 
   return (

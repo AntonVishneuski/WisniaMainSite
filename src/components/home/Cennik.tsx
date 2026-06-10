@@ -221,7 +221,7 @@ export function Cennik({
                     // Special: gift pill (microscope variant handled as gift)
                     if (row.isGift) {
                       const isMicroscope = row.name.toLowerCase().includes('dermatoskop') ||
-                        row.name.toLowerCase().includes('dерматоскоп')
+                        row.name.toLowerCase().includes('дерматоскоп')
                       return (
                         <div
                           key={row.id}

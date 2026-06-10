@@ -1,10 +1,7 @@
 {
   "nav": {
-    "services": "Zabiegi",
-    "uslugi": "Usługi",
     "prices": "Cennik",
     "effects": "Efekty",
-    "blog": "Blog",
     "about": "O nas",
     "contact": "Kontakt"
   },
@@ -12,8 +9,6 @@
     "whatsapp": "Napisz na WhatsApp",
     "call": "Zadzwoń",
     "booksy": "Zarezerwuj w Booksy",
-    "booksyShort": "Zarezerwuj w Booksy",
-    "book": "Umów wizytę",
     "bookShort": "Umów"
   },
   "hero": {
@@ -118,10 +113,7 @@
   },
   "footer": {
     "tagline": "Kosmetologia i masaż w centrum Warszawy. Naturalne odmłodzenie bez przesady.",
-    "navT": "Nawigacja",
     "nav": "Nawigacja",
-    "blog": "Blog",
-    "uslugiT": "Usługi",
     "contactT": "Kontakt",
     "privacy": "Polityka prywatności"
   },

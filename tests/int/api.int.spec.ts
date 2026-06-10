@@ -1,20 +1,24 @@
-import { getPayload, Payload } from 'payload'
-import config from '@/payload.config'
-
+// @vitest-environment node
+// Minimal smoke-test: Payload local API initialises and can query the DB.
+import 'dotenv/config'
 import { describe, it, beforeAll, expect } from 'vitest'
+import { getPayload, type Payload } from 'payload'
+import config from '../../src/payload.config'
 
 let payload: Payload
 
-describe('API', () => {
+describe('API (local Payload smoke)', () => {
   beforeAll(async () => {
-    const payloadConfig = await config
-    payload = await getPayload({ config: payloadConfig })
+    payload = await getPayload({ config })
+  }, 60000)
+
+  it('payload initialises without error', () => {
+    expect(payload).toBeDefined()
   })
 
-  it('fetches users', async () => {
-    const users = await payload.find({
-      collection: 'users',
-    })
-    expect(users).toBeDefined()
+  it('collections are reachable', async () => {
+    const result = await payload.find({ collection: 'prices', limit: 1 })
+    expect(result).toBeDefined()
+    expect(Array.isArray(result.docs)).toBe(true)
   })
 })

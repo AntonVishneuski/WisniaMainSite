@@ -55,14 +55,24 @@ function textToLexical(str?: string | null) {
 }
 
 async function run() {
+  const seedOnly = process.env.SEED_ONLY // e.g. 'servicePages'
+  const fullSeed = !seedOnly
+
   const payload = await getPayload({ config })
 
-  // idempotent wipe (servicePages added)
-  for (const c of ['servicePages', 'prices', 'reviews', 'beforeAfter', 'media'] as const) {
+  // Always wipe servicePages (idempotent re-seed). Only wipe the rest on full seed.
+  for (const c of ['servicePages'] as const) {
     const all = await payload.find({ collection: c, limit: 1000, depth: 0 })
     for (const d of all.docs) await payload.delete({ collection: c, id: d.id })
   }
+  if (fullSeed) {
+    for (const c of ['prices', 'reviews', 'beforeAfter', 'media'] as const) {
+      const all = await payload.find({ collection: c, limit: 1000, depth: 0 })
+      for (const d of all.docs) await payload.delete({ collection: c, id: d.id })
+    }
+  }
 
+  if (fullSeed) {
   // prices (pl then ru)
   let pOrder = 0
   for (const p of prices) {
@@ -156,6 +166,7 @@ async function run() {
   // settings global
   await payload.updateGlobal({ slug: 'settings', locale: 'pl', data: settings.pl })
   await payload.updateGlobal({ slug: 'settings', locale: 'ru', data: settings.ru })
+  } // end fullSeed block
 
   // ─── Service pages ────────────────────────────────────────────────────────
 

@@ -34,7 +34,7 @@ export async function generateMetadata({
   return {
     metadataBase: new URL(SITE),
     title: page.metaTitle || page.title,
-    description: page.metaDescription || page.hero?.intro || undefined,
+    description: page.metaDescription || page.intro || undefined,
     alternates: {
       canonical: url,
       languages: {
@@ -84,7 +84,7 @@ export default async function Page({
       <JsonLd
         data={serviceLd({
           name: page.serviceName || page.title,
-          description: page.serviceDescription || page.hero?.intro,
+          description: page.serviceDescription || page.intro,
           url,
           providerName: 'Wiśnia Beauty Studio',
           providerUrl: SITE,

@@ -64,7 +64,7 @@ export function Efekty({ items }: { items: EffectsItem[] }) {
                     ) : (
                       <div className="w-full h-full bg-[rgba(201,149,108,0.08)]" />
                     )}
-                    <span className="absolute top-2 right-2 px-2.5 py-1 rounded-full bg-[#C9956C] text-cream text-[11px] font-semibold uppercase tracking-[0.06em]">
+                    <span className="absolute top-2 right-2 px-2.5 py-1 rounded-full bg-[#C9956C] text-graphite text-[11px] font-semibold uppercase tracking-[0.06em]">
                       {t('sections.after')}
                     </span>
                   </div>

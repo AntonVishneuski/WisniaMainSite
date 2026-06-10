@@ -42,7 +42,12 @@ export function Opinie({
         </Reveal>
 
         {/* Horizontal scroll reviews */}
-        <div className="flex overflow-x-auto gap-5 pb-4 snap-x snap-mandatory scrollbar-none -mx-2 px-2">
+        <div
+          className="flex overflow-x-auto gap-5 pb-4 snap-x snap-mandatory scrollbar-none -mx-2 px-2"
+          role="region"
+          aria-label={t('sections.reviewsTitle')}
+          tabIndex={0}
+        >
           {reviews.map((review) => {
             const stars = review.rating ?? 5
             return (

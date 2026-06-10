@@ -5,6 +5,7 @@ export function Reveal({ children, className = '' }: { children: React.ReactNode
   const ref = useRef<HTMLDivElement>(null)
   const [vis, setVis] = useState(false)
   useEffect(() => {
+    if (typeof IntersectionObserver === 'undefined') { setVis(true); return }
     const el = ref.current
     if (!el) return
     const io = new IntersectionObserver(

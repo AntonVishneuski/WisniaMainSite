@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { LangToggle } from './LangToggle'
@@ -16,6 +16,43 @@ export function Header({ locale, settings }: Props) {
 
   const { booksyHref, waHref } = contactLinks(settings)
   const homeHref = locale === 'ru' ? '/ru' : '/'
+
+  const burgerRef = useRef<HTMLButtonElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const drawerRef = useRef<HTMLDivElement>(null)
+
+  // Move focus into / restore focus from drawer
+  useEffect(() => {
+    if (drawerOpen) {
+      closeButtonRef.current?.focus()
+    } else {
+      burgerRef.current?.focus()
+    }
+  }, [drawerOpen])
+
+  // Focus trap within drawer while open
+  function handleDrawerKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.key !== 'Tab') return
+    const drawer = drawerRef.current
+    if (!drawer) return
+    const focusable = drawer.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    )
+    if (focusable.length === 0) return
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+  }
 
   useEffect(() => {
     function onScroll() {
@@ -113,10 +150,12 @@ export function Header({ locale, settings }: Props) {
 
             {/* Burger — visible on mobile */}
             <button
+              ref={burgerRef}
               type="button"
               className="min-[960px]:hidden border-0 bg-transparent text-graphite p-1.5 rounded-[8px]"
               aria-label="Menu"
               aria-expanded={drawerOpen}
+              aria-controls="mobile-drawer"
               onClick={() => setDrawerOpen(true)}
             >
               <svg
@@ -144,6 +183,8 @@ export function Header({ locale, settings }: Props) {
 
       {/* Mobile Drawer */}
       <div
+        ref={drawerRef}
+        id="mobile-drawer"
         className={[
           'fixed inset-0 z-[200] bg-cream flex flex-col p-6',
           'transition-transform duration-[350ms] cubic-bezier-[.4,0,.2,1]',
@@ -153,6 +194,9 @@ export function Header({ locale, settings }: Props) {
         aria-modal="true"
         role="dialog"
         aria-label="Menu nawigacyjne"
+        aria-hidden={!drawerOpen}
+        inert={!drawerOpen ? true : undefined}
+        onKeyDown={drawerOpen ? handleDrawerKeyDown : undefined}
       >
         {/* Drawer top */}
         <div className="flex items-center justify-between mb-8">
@@ -162,6 +206,7 @@ export function Header({ locale, settings }: Props) {
             className="h-[38px]"
           />
           <button
+            ref={closeButtonRef}
             type="button"
             className="border-0 bg-transparent text-graphite"
             aria-label="Zamknij"

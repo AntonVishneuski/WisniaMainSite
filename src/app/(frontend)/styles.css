@@ -11,7 +11,7 @@
   --color-cream: #FDFAF7;
   --color-graphite: #1A1A1A;
   --color-gray: #5A5A5A;
-  --color-gray-soft: #8A8079;
+  --color-gray-soft: #6B6259;
   --font-serif: var(--font-cormorant), Georgia, serif;
   --font-sans: var(--font-jost), "Helvetica Neue", Arial, sans-serif;
   --radius-sm: 10px;
@@ -27,9 +27,10 @@
 
 :root { --header-h: 78px; --line: rgba(26,26,26,.10); --line-warm: rgba(201,149,108,.35); }
 html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body { background: var(--color-cream); color: var(--color-gray); font-family: var(--font-sans); font-size: 17px; line-height: 1.65; }
 h1,h2,h3,h4 { font-family: var(--font-serif); font-weight: 600; color: var(--color-graphite); line-height: 1.12; letter-spacing: -0.01em; text-wrap: balance; }
-.eyebrow { font-size: 13px; text-transform: uppercase; letter-spacing: .28em; color: var(--color-rose-gold-dk); }
+.eyebrow { font-size: 13px; text-transform: uppercase; letter-spacing: .28em; color: #7C5230; }
 .accent { font-style: italic; color: var(--color-cherry); }
 @media (prefers-reduced-motion: no-preference) {
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }

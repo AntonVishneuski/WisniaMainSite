@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ArrowRight, Gift, Microscope } from 'lucide-react'
 import { CtaLink } from '@/components/ui/CtaButtons'
@@ -50,7 +50,7 @@ const TABS: { id: TabId; labelKey: string; badge?: string }[] = [
 
 function GiftRow({ row }: { row: PriceRow }) {
   return (
-    <div className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-[rgba(201,149,108,0.12)] border border-[rgba(201,149,108,0.3)] text-[14px] text-rose-gold-dk font-medium w-fit my-2">
+    <div className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-[rgba(201,149,108,0.12)] border border-[rgba(201,149,108,0.3)] text-[14px] text-cherry font-medium w-fit my-2">
       <Gift className="w-4 h-4 shrink-0 text-rose-gold" aria-hidden="true" />
       <span>{row.name}</span>
     </div>
@@ -140,10 +140,32 @@ export function Cennik({
 }) {
   const t = useTranslations()
   const [activeTab, setActiveTab] = useState<TabId>('kosmetologia')
+  const tabRefs = useRef<Map<TabId, HTMLButtonElement>>(new Map())
 
   const grouped = groupPrices(prices)
   const { booksyHref } = contactLinks(settings)
   const bookShortLabel = t('cta.bookShort')
+
+  function handleTabKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    const ids = TABS.map((t) => t.id)
+    const currentIndex = ids.indexOf(activeTab)
+    let nextIndex: number | null = null
+    if (e.key === 'ArrowRight') {
+      nextIndex = (currentIndex + 1) % ids.length
+    } else if (e.key === 'ArrowLeft') {
+      nextIndex = (currentIndex - 1 + ids.length) % ids.length
+    } else if (e.key === 'Home') {
+      nextIndex = 0
+    } else if (e.key === 'End') {
+      nextIndex = ids.length - 1
+    }
+    if (nextIndex !== null) {
+      e.preventDefault()
+      const nextId = ids[nextIndex]
+      setActiveTab(nextId)
+      tabRefs.current.get(nextId)?.focus()
+    }
+  }
 
   return (
     <section id="cennik" className="bg-blush w-full py-[clamp(56px,9vw,112px)]">
@@ -161,13 +183,19 @@ export function Cennik({
         <div className="flex justify-center mb-8">
           <div
             role="tablist"
+            aria-label={t('sections.pricesEyebrow')}
             className="flex flex-wrap justify-center gap-2 p-1.5 rounded-full bg-blush-deep border border-[rgba(201,149,108,0.25)]"
+            onKeyDown={handleTabKeyDown}
           >
             {TABS.map(({ id, labelKey, badge }) => (
               <button
                 key={id}
+                ref={(el) => { if (el) tabRefs.current.set(id, el); else tabRefs.current.delete(id) }}
+                id={`tab-${id}`}
                 role="tab"
                 aria-selected={activeTab === id}
+                aria-controls={`panel-${id}`}
+                tabIndex={activeTab === id ? 0 : -1}
                 onClick={() => setActiveTab(id)}
                 className={[
                   'inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-[14.5px] font-medium transition-all duration-200',
@@ -195,7 +223,12 @@ export function Cennik({
         </div>
 
         {/* Price panel */}
-        <div className="bg-cream rounded-[var(--radius-xl)] p-6 min-[640px]:p-10 shadow-[0_12px_32px_rgba(110,18,44,0.08)]">
+        <div
+          id={`panel-${activeTab}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${activeTab}`}
+          className="bg-cream rounded-[var(--radius-xl)] p-6 min-[640px]:p-10 shadow-[0_12px_32px_rgba(110,18,44,0.08)]"
+        >
           {grouped[activeTab].length === 0 ? (
             <p className="text-center text-gray-soft py-8 text-[15px]">—</p>
           ) : (
@@ -225,7 +258,7 @@ export function Cennik({
                       return (
                         <div
                           key={row.id}
-                          className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-[rgba(201,149,108,0.12)] border border-[rgba(201,149,108,0.3)] text-[14px] text-rose-gold-dk font-medium w-fit my-2"
+                          className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-[rgba(201,149,108,0.12)] border border-[rgba(201,149,108,0.3)] text-[14px] text-cherry font-medium w-fit my-2"
                         >
                           {isMicroscope
                             ? <Microscope className="w-4 h-4 shrink-0 text-rose-gold" aria-hidden="true" />

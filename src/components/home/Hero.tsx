@@ -80,6 +80,7 @@ export function Hero({ settings }: { settings: HeroSettings }) {
               href="https://www.google.com/maps?q=Wiśnia+Beauty+Studio,+ul.+Gen.+W.+Andersa+15,+Warszawa"
               target="_blank"
               rel="noopener"
+              aria-label="5,0 / 5 — Google"
               className="flex items-center gap-1.5 text-gray transition-colors hover:text-cherry"
             >
               <span className="flex gap-0.5 text-rose-gold" aria-hidden="true">

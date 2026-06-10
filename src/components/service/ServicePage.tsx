@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { Reveal } from '@/components/ui/Reveal'
 import { Breadcrumb } from './Breadcrumb'
@@ -20,7 +21,8 @@ type Props = {
   uslugiLabel?: string
 }
 
-export function ServicePage({ page, settings, locale, crossLinks, uslugiLabel = 'Usługi' }: Props) {
+export async function ServicePage({ page, settings, locale, crossLinks, uslugiLabel = 'Usługi' }: Props) {
+  const t = await getTranslations()
   const homeHref = locale === 'ru' ? '/ru' : '/'
   const uslugiHref = locale === 'ru' ? '/ru/uslugi' : '/uslugi'
   const { booksyHref } = contactLinks(settings)
@@ -73,7 +75,7 @@ export function ServicePage({ page, settings, locale, crossLinks, uslugiLabel = 
           {/* Steps */}
           {page.steps && page.steps.length > 0 && (
             <Reveal>
-              <ServiceSteps steps={page.steps} />
+              <ServiceSteps steps={page.steps} heading={t('service.stepsHeading')} />
             </Reveal>
           )}
 
@@ -95,7 +97,10 @@ export function ServicePage({ page, settings, locale, crossLinks, uslugiLabel = 
               rows={(page.priceItems ?? []) as PriceRow[]}
               booksyHref={booksyHref}
             />
-            <PackagePromo promo={page.packagePromo ?? undefined} />
+            <PackagePromo
+              promo={page.packagePromo ?? undefined}
+              ctaLabel={t('service.packageCta')}
+            />
           </Reveal>
         </div>
       </div>
@@ -104,6 +109,9 @@ export function ServicePage({ page, settings, locale, crossLinks, uslugiLabel = 
       {page.beforeAfter && page.beforeAfter.length > 0 && (
         <Reveal>
           <div className="max-w-[1200px] mx-auto px-6 pb-[clamp(32px,5vw,56px)]">
+            <h2 className="text-2xl font-serif text-graphite mb-5">
+              {t('service.effectsHeading')}
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 min-[960px]:grid-cols-3 gap-5">
               {(page.beforeAfter as any[]).map((ba: any, i: number) => (
                 <BeforeAfterCard key={i} item={ba} />
@@ -117,7 +125,15 @@ export function ServicePage({ page, settings, locale, crossLinks, uslugiLabel = 
       {page.reviews && page.reviews.length > 0 && (
         <Reveal>
           <div className="max-w-[1200px] mx-auto px-6 pb-[clamp(32px,5vw,56px)]">
-            <div className="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-2">
+            <h2 className="text-2xl font-serif text-graphite mb-5">
+              {t('service.reviewsHeading')}
+            </h2>
+            <div
+              role="region"
+              aria-label={t('service.reviewsHeading')}
+              tabIndex={0}
+              className="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-2"
+            >
               {(page.reviews as any[]).map((r: any, i: number) => (
                 <ReviewCard key={i} review={r} />
               ))}

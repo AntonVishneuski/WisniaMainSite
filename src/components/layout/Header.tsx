@@ -180,23 +180,25 @@ export function Header({ locale, settings, services = [] }: Props) {
 
                 {/* Dropdown panel */}
                 {servicesOpen && (
-                  <div
+                  <nav
                     id="services-dropdown"
-                    role="menu"
+                    aria-label="Usługi"
                     className="absolute left-0 top-[calc(100%+10px)] min-w-[200px] bg-[rgba(253,250,247,0.98)] backdrop-blur-[14px] border border-[rgba(201,149,108,0.35)] rounded-[12px] shadow-[0_8px_24px_rgba(110,18,44,0.10)] py-2 z-[110]"
                   >
-                    {services.map((svc) => (
-                      <Link
-                        key={svc.slug}
-                        href={`${serviceBase}/${svc.slug}`}
-                        role="menuitem"
-                        onClick={() => setServicesOpen(false)}
-                        className="block px-4 py-[8px] text-[14.5px] text-graphite transition-colors duration-200 hover:text-cherry hover:bg-[rgba(201,149,108,0.08)]"
-                      >
-                        {svc.title}
-                      </Link>
-                    ))}
-                  </div>
+                    <ul className="list-none m-0 p-0">
+                      {services.map((svc) => (
+                        <li key={svc.slug}>
+                          <Link
+                            href={`${serviceBase}/${svc.slug}`}
+                            onClick={() => setServicesOpen(false)}
+                            className="block px-4 py-[8px] text-[14.5px] text-graphite transition-colors duration-200 hover:text-cherry hover:bg-[rgba(201,149,108,0.08)]"
+                          >
+                            {svc.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
                 )}
               </div>
             )}

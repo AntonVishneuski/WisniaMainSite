@@ -126,7 +126,11 @@
   },
   "service": {
     "photoSoon": "Zdjęcie wkrótce",
-    "indexLead": "Wszystkie zabiegi i ceny — wybierz usługę."
+    "indexLead": "Wszystkie zabiegi i ceny — wybierz usługę.",
+    "stepsHeading": "Jak przebiega",
+    "effectsHeading": "Efekty",
+    "reviewsHeading": "Opinie",
+    "packageCta": "Zobacz pakiety"
   },
   "privacy": {
     "title": "Polityka prywatności",

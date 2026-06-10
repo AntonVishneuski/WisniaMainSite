@@ -15,7 +15,7 @@ export function PriceAside({
   return (
     <aside className="sticky top-[100px] bg-white border border-[var(--line)] rounded-[var(--radius-lg)] shadow-md p-7">
       {heading && (
-        <h3 className="font-serif text-[22px] font-semibold text-graphite mb-5">{heading}</h3>
+        <h2 className="font-serif text-[22px] font-semibold text-graphite mb-5">{heading}</h2>
       )}
       <PriceRowList rows={rows} booksyHref={booksyHref} />
     </aside>

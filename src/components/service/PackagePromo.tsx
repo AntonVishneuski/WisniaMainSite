@@ -7,11 +7,15 @@ export type PackagePromoData = {
   wasPrice?: string | null
   /** href for the promo link button */
   link?: string | null
-  /** visible label for the promo link (falls back to link href if not provided) */
-  linkLabel?: string | null
 }
 
-export function PackagePromo({ promo }: { promo?: PackagePromoData | null }) {
+export function PackagePromo({
+  promo,
+  ctaLabel,
+}: {
+  promo?: PackagePromoData | null
+  ctaLabel?: string
+}) {
   if (!promo?.enabled) return null
 
   const raw = (promo.link ?? '').trim()
@@ -49,7 +53,7 @@ export function PackagePromo({ promo }: { promo?: PackagePromoData | null }) {
           href={safeHref}
           className="inline-block mt-[9px] text-[13px] text-cherry border-b border-[var(--line-warm)] hover:border-cherry transition-colors"
         >
-          {promo.linkLabel ?? promo.link}
+          {ctaLabel ?? raw}
         </a>
       )}
     </div>

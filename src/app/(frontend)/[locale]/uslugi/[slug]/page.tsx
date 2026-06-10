@@ -71,6 +71,7 @@ export default async function Page({
     .catch(() => null)
 
   const published: any[] = await getPublishedServicePages(locale as Locale)
+  const services = published.map((p) => ({ slug: p.slug as string, title: p.title as string }))
   const crossLinks = resolveCrossLinks(
     page,
     published.map((p) => ({ id: p.id, slug: p.slug, title: p.title })),
@@ -97,7 +98,7 @@ export default async function Page({
           { name: page.title, url },
         ])}
       />
-      <Header locale={locale} settings={settings} />
+      <Header locale={locale} settings={settings} services={services} />
       <main>
         <ServicePage
           page={page}
@@ -106,7 +107,7 @@ export default async function Page({
           crossLinks={crossLinks}
         />
       </main>
-      <Footer locale={locale} settings={settings} />
+      <Footer locale={locale} settings={settings} services={services} />
       <StickyCta locale={locale} settings={settings} />
     </>
   )

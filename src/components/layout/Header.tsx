@@ -7,19 +7,24 @@ import { CtaLink } from '@/components/ui/CtaButtons'
 import type { SiteSettings } from './types'
 import { contactLinks } from '@/lib/contact-links'
 
-type Props = { locale: string; settings: SiteSettings }
+type ServiceItem = { slug: string; title: string }
+type Props = { locale: string; settings: SiteSettings; services?: ServiceItem[] }
 
-export function Header({ locale, settings }: Props) {
+export function Header({ locale, settings, services = [] }: Props) {
   const t = useTranslations()
   const [scrolled, setScrolled] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
 
   const { booksyHref, waHref } = contactLinks(settings)
   const homeHref = locale === 'ru' ? '/ru' : '/'
+  const serviceBase = locale === 'ru' ? '/ru/uslugi' : '/uslugi'
 
   const burgerRef = useRef<HTMLButtonElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const drawerRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  const dropdownTriggerRef = useRef<HTMLButtonElement>(null)
 
   // Move focus into / restore focus from drawer
   useEffect(() => {
@@ -72,6 +77,31 @@ export function Header({ locale, settings }: Props) {
     return () => window.removeEventListener('keydown', onKey)
   }, [drawerOpen])
 
+  // Close services dropdown on Escape or click outside
+  useEffect(() => {
+    if (!servicesOpen) return
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setServicesOpen(false)
+        dropdownTriggerRef.current?.focus()
+      }
+    }
+    function onClickOutside(e: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setServicesOpen(false)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    document.addEventListener('mousedown', onClickOutside)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.removeEventListener('mousedown', onClickOutside)
+    }
+  }, [servicesOpen])
+
   // Prevent body scroll when drawer is open
   useEffect(() => {
     if (drawerOpen) {
@@ -119,6 +149,58 @@ export function Header({ locale, settings }: Props) {
             aria-label="Główna nawigacja"
             className="hidden min-[960px]:flex items-center gap-[30px]"
           >
+            {/* Usługi dropdown — only shown when services are available */}
+            {services.length > 0 && (
+              <div ref={dropdownRef} className="relative">
+                <button
+                  ref={dropdownTriggerRef}
+                  type="button"
+                  aria-expanded={servicesOpen}
+                  aria-controls="services-dropdown"
+                  onClick={() => setServicesOpen((v) => !v)}
+                  className="relative flex items-center gap-1 text-[15px] text-graphite py-1 transition-colors duration-200 hover:text-cherry
+                    after:absolute after:left-0 after:bottom-[-2px] after:h-[1.5px] after:w-0 after:bg-cherry
+                    after:transition-[width] after:duration-[250ms] hover:after:w-full border-0 bg-transparent cursor-pointer"
+                >
+                  {t('nav.uslugi')}
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    className={[
+                      'w-[14px] h-[14px] transition-transform duration-200',
+                      servicesOpen ? 'rotate-180' : '',
+                    ].join(' ')}
+                    aria-hidden="true"
+                  >
+                    <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+
+                {/* Dropdown panel */}
+                {servicesOpen && (
+                  <div
+                    id="services-dropdown"
+                    role="menu"
+                    className="absolute left-0 top-[calc(100%+10px)] min-w-[200px] bg-[rgba(253,250,247,0.98)] backdrop-blur-[14px] border border-[rgba(201,149,108,0.35)] rounded-[12px] shadow-[0_8px_24px_rgba(110,18,44,0.10)] py-2 z-[110]"
+                  >
+                    {services.map((svc) => (
+                      <Link
+                        key={svc.slug}
+                        href={`${serviceBase}/${svc.slug}`}
+                        role="menuitem"
+                        onClick={() => setServicesOpen(false)}
+                        className="block px-4 py-[8px] text-[14.5px] text-graphite transition-colors duration-200 hover:text-cherry hover:bg-[rgba(201,149,108,0.08)]"
+                      >
+                        {svc.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
             {navLinks.map(({ href, label }) => (
               <a
                 key={href}
@@ -225,7 +307,28 @@ export function Header({ locale, settings }: Props) {
         </div>
 
         {/* Drawer nav */}
-        <nav className="flex flex-col gap-1">
+        <nav className="flex flex-col gap-1 overflow-y-auto">
+          {/* Usługi sub-section in mobile drawer */}
+          {services.length > 0 && (
+            <div>
+              <span className="font-serif text-[30px] text-graphite py-2.5 border-b border-[rgba(26,26,26,0.10)] block">
+                {t('nav.uslugi')}
+              </span>
+              <div className="flex flex-col pl-4 mb-1">
+                {services.map((svc) => (
+                  <Link
+                    key={svc.slug}
+                    href={`${serviceBase}/${svc.slug}`}
+                    onClick={() => setDrawerOpen(false)}
+                    className="text-[20px] text-graphite py-2 border-b border-[rgba(26,26,26,0.05)] transition-colors duration-200 hover:text-cherry"
+                  >
+                    {svc.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           {navLinks.map(({ href, label }) => (
             <a
               key={href}

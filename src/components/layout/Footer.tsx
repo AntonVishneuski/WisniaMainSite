@@ -3,14 +3,16 @@ import { useTranslations } from 'next-intl'
 import type { SiteSettings } from './types'
 import { contactLinks } from '@/lib/contact-links'
 
-type Props = { locale: string; settings: SiteSettings }
+type ServiceItem = { slug: string; title: string }
+type Props = { locale: string; settings: SiteSettings; services?: ServiceItem[] }
 
-export function Footer({ locale, settings }: Props) {
+export function Footer({ locale, settings, services = [] }: Props) {
   const t = useTranslations()
   const year = new Date().getFullYear()
 
   const { instagramHref, instagramHandle, waHref, phoneHref } = contactLinks(settings)
   const privacyHref = locale === 'ru' ? '/ru/polityka-prywatnosci' : '/polityka-prywatnosci'
+  const serviceBase = locale === 'ru' ? '/ru/uslugi' : '/uslugi'
 
   const navLinks = [
     { href: '#cennik', label: t('nav.prices') },
@@ -22,8 +24,13 @@ export function Footer({ locale, settings }: Props) {
   return (
     <footer className="bg-blush text-gray pt-[72px] pb-8 border-t border-[rgba(201,149,108,0.35)]">
       <div className="w-full max-w-[1200px] mx-auto px-6">
-        {/* Footer grid: brand | nav | contact */}
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 min-[960px]:grid-cols-[1.5fr_1fr_1.1fr]">
+        {/* Footer grid: brand | nav | [services] | contact */}
+        <div className={[
+          'grid grid-cols-1 gap-10 sm:grid-cols-2',
+          services.length > 0
+            ? 'min-[960px]:grid-cols-[1.5fr_1fr_1fr_1.1fr]'
+            : 'min-[960px]:grid-cols-[1.5fr_1fr_1.1fr]',
+        ].join(' ')}>
           {/* Brand column */}
           <div>
             <div className="mb-5">
@@ -91,6 +98,26 @@ export function Footer({ locale, settings }: Props) {
               ))}
             </div>
           </div>
+
+          {/* Services column — only shown when services are available */}
+          {services.length > 0 && (
+            <div>
+              <h4 className="font-serif text-[21px] text-graphite mb-[14px]">
+                {t('nav.uslugi')}
+              </h4>
+              <div className="flex flex-col">
+                {services.map((svc) => (
+                  <Link
+                    key={svc.slug}
+                    href={`${serviceBase}/${svc.slug}`}
+                    className="block py-[6px] text-[15px] text-gray transition-colors duration-200 hover:text-cherry"
+                  >
+                    {svc.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Contact column */}
           <div>

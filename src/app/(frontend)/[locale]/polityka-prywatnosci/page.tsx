@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { getPayloadClient } from '@/lib/getPayload'
 import { locales, type Locale } from '@/lib/i18n'
+import { getPublishedServicePages } from '@/lib/queries'
 
 export const revalidate = 3600
 
@@ -46,6 +47,9 @@ export default async function PrivacyPage({
   const payload = await getPayloadClient()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const settings = (await payload.findGlobal({ slug: 'settings', locale: locale as Locale }).catch(() => null)) as any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const serviceDocs = (await getPublishedServicePages(locale as Locale).catch(() => [])) as any[]
+  const services = serviceDocs.map((d) => ({ slug: d.slug as string, title: d.title as string }))
 
   const sections = [
     { title: t('s1Title'), body: t('s1Body') },
@@ -60,7 +64,7 @@ export default async function PrivacyPage({
 
   return (
     <>
-      <Header locale={locale} settings={settings} />
+      <Header locale={locale} settings={settings} services={services} />
       <main>
         <div className="max-w-[760px] mx-auto px-6 py-16">
           <h1 className="font-serif text-[38px] md:text-[48px] text-graphite mb-3">
@@ -81,7 +85,7 @@ export default async function PrivacyPage({
           ))}
         </div>
       </main>
-      <Footer locale={locale} settings={settings} />
+      <Footer locale={locale} settings={settings} services={services} />
     </>
   )
 }

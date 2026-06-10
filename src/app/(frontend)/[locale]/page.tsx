@@ -1,6 +1,6 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
-import { getHomeData } from '@/lib/queries'
+import { getHomeData, getPublishedServicePages } from '@/lib/queries'
 import type { Locale } from '@/lib/i18n'
 import type { PriceRow } from '@/lib/price-groups'
 import { localBusinessLd, aggregateRatingLd, faqLd, JsonLd } from '@/lib/jsonld'
@@ -50,7 +50,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale)
-  const { prices, reviews, beforeAfter, settings } = await getHomeData(locale as Locale)
+  const [{ prices, reviews, beforeAfter, settings }, serviceDocs] = await Promise.all([
+    getHomeData(locale as Locale),
+    getPublishedServicePages(locale as Locale),
+  ])
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const services = (serviceDocs as any[]).map((d) => ({ slug: d.slug as string, title: d.title as string }))
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const s = settings as any
   const rating = String(s?.googleRating || '5.0').replace(',', '.')
@@ -68,7 +73,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     <>
       <JsonLd data={businessLd} />
       <JsonLd data={faqLd(faqItems)} />
-      <Header locale={locale} settings={s} />
+      <Header locale={locale} settings={s} services={services} />
       <main>
         <Hero settings={s} />
         <PainCards />
@@ -81,7 +86,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <Faq />
         <Kontakt settings={s} />
       </main>
-      <Footer locale={locale} settings={s} />
+      <Footer locale={locale} settings={s} services={services} />
       <StickyCta locale={locale} settings={s} />
     </>
   )

@@ -27,8 +27,8 @@ test('header Usługi dropdown navigates to a service page', async ({ page }) => 
   const dropdown = page.locator('#services-dropdown')
   await expect(dropdown).toBeVisible()
 
-  // Click the first service link (menuitem inside the dropdown)
-  const link = dropdown.locator('[role="menuitem"]').first()
+  // Click the first service link (the dropdown is a disclosure of nav links)
+  const link = dropdown.locator('a[href*="/uslugi/"]').first()
   await expect(link).toBeVisible()
   await link.click()
 

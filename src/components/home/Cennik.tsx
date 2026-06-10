@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import { ArrowRight, Gift, Microscope } from 'lucide-react'
 import { CtaLink } from '@/components/ui/CtaButtons'
 import { groupPrices, type PriceRow } from '@/lib/price-groups'
+import { contactLinks } from '@/lib/contact-links'
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -141,7 +142,7 @@ export function Cennik({
   const [activeTab, setActiveTab] = useState<TabId>('kosmetologia')
 
   const grouped = groupPrices(prices)
-  const booksyHref = settings?.booksyUrl ?? 'https://wisniabeauty.booksy.com/a'
+  const { booksyHref } = contactLinks(settings)
   const bookShortLabel = t('cta.bookShort')
 
   return (

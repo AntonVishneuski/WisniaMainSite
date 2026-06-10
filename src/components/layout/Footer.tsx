@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import type { SiteSettings } from './types'
+import { contactLinks } from '@/lib/contact-links'
 
 type Props = { locale: string; settings: SiteSettings }
 
@@ -8,16 +9,7 @@ export function Footer({ locale, settings }: Props) {
   const t = useTranslations()
   const year = new Date().getFullYear()
 
-  const instagramHandle = settings?.instagram
-    ? settings.instagram.replace(/^@/, '')
-    : 'wisnia_beauty_studio'
-  const instagramHref = `https://instagram.com/${instagramHandle}`
-  const waHref = settings?.whatsapp
-    ? `https://wa.me/${settings.whatsapp}`
-    : 'https://wa.me/48453270435'
-  const phoneHref = settings?.phone
-    ? `tel:+${settings.phone.replace(/\D/g, '')}`
-    : 'tel:+48453270435'
+  const { instagramHref, instagramHandle, waHref, phoneHref } = contactLinks(settings)
   const privacyHref = locale === 'ru' ? '/ru/polityka-prywatnosci' : '/polityka-prywatnosci'
 
   const navLinks = [
@@ -128,7 +120,7 @@ export function Footer({ locale, settings }: Props) {
                 rel="noopener"
                 className="block py-[6px] text-[15px] text-gray transition-colors duration-200 hover:text-cherry"
               >
-                @{instagramHandle}
+                {instagramHandle}
               </a>
               {settings?.address && (
                 <p className="text-[15px] py-[6px] text-gray">

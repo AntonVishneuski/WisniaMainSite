@@ -2,8 +2,9 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { Award, Stethoscope, UserCheck, Star } from 'lucide-react'
 import { CtaLink } from '@/components/ui/CtaButtons'
+import { contactLinks, type ContactSettings } from '@/lib/contact-links'
 
-type HeroSettings = {
+type HeroSettings = ContactSettings & {
   whatsapp?: string | null
   phone?: string | null
   booksyUrl?: string | null
@@ -12,11 +13,8 @@ type HeroSettings = {
 export function Hero({ settings }: { settings: HeroSettings }) {
   const t = useTranslations()
 
-  const whatsappHref = settings.whatsapp
-    ? `https://wa.me/${settings.whatsapp}`
-    : 'https://wa.me/48453270435'
-  const phoneHref = settings.phone ? `tel:${settings.phone}` : 'tel:+48453270435'
-  const booksyHref = settings.booksyUrl ?? 'https://wisniabeauty.booksy.com/a'
+  const links = contactLinks(settings)
+  const { waHref: whatsappHref, phoneHref, booksyHref } = links
 
   return (
     <section className="w-full max-w-[1200px] mx-auto px-6 py-[clamp(56px,9vw,112px)]">

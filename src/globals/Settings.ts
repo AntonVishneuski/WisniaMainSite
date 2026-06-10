@@ -10,7 +10,7 @@ export const Settings: GlobalConfig = {
       { name: 'addressNote', type: 'text', localized: true },
       { name: 'phone', type: 'text' },
       { name: 'whatsapp', type: 'text', admin: { description: 'np. 48453270435' } },
-      { name: 'instagram', type: 'text' },
+      { name: 'instagram', type: 'text', admin: { description: 'Handle bez @ lub pełny URL — oba zadziałają (np. wisnia_beauty_studio)' } },
       { name: 'hours', type: 'text', localized: true },
       { name: 'mapEmbedUrl', type: 'text' },
     ] },

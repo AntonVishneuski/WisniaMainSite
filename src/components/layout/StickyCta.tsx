@@ -2,19 +2,14 @@
 import { useTranslations } from 'next-intl'
 import { CtaLink } from '@/components/ui/CtaButtons'
 import type { SiteSettings } from './types'
+import { contactLinks } from '@/lib/contact-links'
 
 type Props = { locale: string; settings: SiteSettings }
 
 export function StickyCta({ settings }: Props) {
   const t = useTranslations()
 
-  const booksyHref = settings?.booksyUrl ?? 'https://wisniabeauty.booksy.com/a'
-  const waHref = settings?.whatsapp
-    ? `https://wa.me/${settings.whatsapp}`
-    : 'https://wa.me/48453270435'
-  const phoneHref = settings?.phone
-    ? `tel:+${settings.phone.replace(/\D/g, '')}`
-    : 'tel:+48453270435'
+  const { booksyHref, waHref, phoneHref } = contactLinks(settings)
 
   return (
     <div

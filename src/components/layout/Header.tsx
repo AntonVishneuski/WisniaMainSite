@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import { LangToggle } from './LangToggle'
 import { CtaLink } from '@/components/ui/CtaButtons'
 import type { SiteSettings } from './types'
+import { contactLinks } from '@/lib/contact-links'
 
 type Props = { locale: string; settings: SiteSettings }
 
@@ -13,7 +14,7 @@ export function Header({ locale, settings }: Props) {
   const [scrolled, setScrolled] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
-  const booksyHref = settings?.booksyUrl ?? 'https://wisniabeauty.booksy.com/a'
+  const { booksyHref, waHref } = contactLinks(settings)
   const homeHref = locale === 'ru' ? '/ru' : '/'
 
   useEffect(() => {
@@ -201,7 +202,7 @@ export function Header({ locale, settings }: Props) {
         <div className="mt-auto flex flex-col gap-3">
           <CtaLink
             method="whatsapp"
-            href={`https://wa.me/${settings?.whatsapp ?? '48453270435'}`}
+            href={waHref}
             className="flex items-center justify-center gap-2 w-full py-[14px] px-[26px] rounded-full border border-cherry text-cherry bg-transparent text-[15.5px] font-medium transition-all duration-200 hover:bg-cherry hover:text-cream"
           >
             {t('cta.whatsapp')}

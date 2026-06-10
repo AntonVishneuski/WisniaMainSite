@@ -2,31 +2,19 @@ import { useTranslations } from 'next-intl'
 import { MapPin, Phone, Clock } from 'lucide-react'
 import { Reveal } from '@/components/ui/Reveal'
 import { CtaLink } from '@/components/ui/CtaButtons'
+import { contactLinks, type ContactSettings } from '@/lib/contact-links'
 
-type KontaktSettings = {
+type KontaktSettings = ContactSettings & {
   address?: string | null
   addressNote?: string | null
-  phone?: string | null
-  whatsapp?: string | null
-  instagram?: string | null
   hours?: string | null
   mapEmbedUrl?: string | null
-  booksyUrl?: string | null
 }
 
 export function Kontakt({ settings }: { settings: KontaktSettings }) {
   const t = useTranslations()
 
-  const phoneHref = settings.phone ? `tel:${settings.phone}` : 'tel:+48453270435'
-  const phoneDisplay = settings.phone ?? '+48 453 270 435'
-  const whatsappHref = settings.whatsapp
-    ? `https://wa.me/${settings.whatsapp}`
-    : 'https://wa.me/48453270435'
-  const instagramHref = settings.instagram
-    ? `https://instagram.com/${settings.instagram.replace(/^@/, '')}`
-    : 'https://instagram.com/wisnia_beauty_studio'
-  const instagramHandle = settings.instagram ?? '@wisnia_beauty_studio'
-  const booksyHref = settings.booksyUrl ?? 'https://wisniabeauty.booksy.com/a'
+  const { phoneHref, phoneDisplay, waHref: whatsappHref, instagramHref, instagramHandle, booksyHref } = contactLinks(settings)
 
   return (
     <section id="kontakt" className="bg-blush w-full py-[clamp(56px,9vw,112px)]">

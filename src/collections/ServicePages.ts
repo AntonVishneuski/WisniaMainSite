@@ -1,0 +1,63 @@
+import type { CollectionConfig } from 'payload'
+import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidate'
+
+export const ServicePages: CollectionConfig = {
+  slug: 'servicePages',
+  access: { read: () => true },
+  admin: { group: 'Treść', useAsTitle: 'title', defaultColumns: ['title', 'slug', 'status', 'order'] },
+  hooks: { afterChange: [revalidateAfterChange], afterDelete: [revalidateAfterDelete] },
+  fields: [
+    { name: 'title', type: 'text', localized: true, required: true },
+    { name: 'slug', type: 'text', required: true, unique: true, index: true,
+      admin: { description: 'Polski slug, wspólny dla obu języków, np. depilacja-laserowa-warszawa' } },
+    { name: 'status', type: 'select', defaultValue: 'draft', options: [
+      { label: 'Szkic', value: 'draft' }, { label: 'Opublikowana', value: 'published' } ] },
+    { name: 'order', type: 'number', defaultValue: 0 },
+    { type: 'collapsible', label: 'SEO', fields: [
+      { name: 'metaTitle', type: 'text', localized: true },
+      { name: 'metaDescription', type: 'textarea', localized: true },
+      { name: 'ogImage', type: 'upload', relationTo: 'media' },
+      { name: 'serviceName', type: 'text', localized: true },
+      { name: 'serviceDescription', type: 'textarea', localized: true },
+    ] },
+    { type: 'collapsible', label: 'Hero', fields: [
+      { name: 'heroImage', type: 'upload', relationTo: 'media' },
+      { name: 'heading', type: 'text', localized: true },
+      { name: 'intro', type: 'textarea', localized: true },
+    ] },
+    { name: 'about', type: 'richText', localized: true },
+    { name: 'forWhom', type: 'richText', localized: true },
+    { name: 'steps', type: 'array', labels: { singular: 'Krok', plural: 'Kroki' }, fields: [
+      { name: 'title', type: 'text', localized: true },
+      { name: 'text', type: 'textarea', localized: true },
+    ] },
+    { name: 'results', type: 'richText', localized: true },
+    { name: 'priceHeading', type: 'text', localized: true },
+    { name: 'priceItems', type: 'relationship', relationTo: 'prices', hasMany: true },
+    { type: 'group', name: 'packagePromo', fields: [
+      { name: 'enabled', type: 'checkbox', defaultValue: false },
+      { name: 'badge', type: 'text', defaultValue: '-15%' },
+      { name: 'title', type: 'text', localized: true },
+      { name: 'desc', type: 'text', localized: true },
+      { name: 'nowPrice', type: 'text', localized: true },
+      { name: 'wasPrice', type: 'text', localized: true },
+      { name: 'link', type: 'text', defaultValue: '#pakiety' },
+    ] },
+    { name: 'reviews', type: 'array', fields: [
+      { name: 'quote', type: 'textarea', localized: true, required: true },
+      { name: 'author', type: 'text', required: true },
+      { name: 'initial', type: 'text', maxLength: 1 },
+      { name: 'avatarColor', type: 'text', defaultValue: '#8B1A3A' },
+      { name: 'rating', type: 'number', min: 1, max: 5, defaultValue: 5 },
+      { name: 'source', type: 'select', defaultValue: 'Google', options: [
+        { label: 'Google', value: 'Google' }, { label: 'Booksy', value: 'Booksy' } ] },
+      { name: 'date', type: 'text', localized: true },
+    ] },
+    { name: 'beforeAfter', type: 'array', fields: [
+      { name: 'beforeImage', type: 'upload', relationTo: 'media', required: true },
+      { name: 'afterImage', type: 'upload', relationTo: 'media', required: true },
+      { name: 'caption', type: 'text', localized: true },
+    ] },
+    { name: 'crossLinks', type: 'relationship', relationTo: 'servicePages', hasMany: true },
+  ],
+}

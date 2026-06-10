@@ -19,5 +19,11 @@ export function breadcrumbLd(items: { name: string; url: string }[]) {
     itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: it.url })) }
 }
 export function JsonLd({ data }: { data: object }) {
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  const json = JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026')
+    .replace(new RegExp(' ', 'g'), '\\u2028')
+    .replace(new RegExp(' ', 'g'), '\\u2029')
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />
 }

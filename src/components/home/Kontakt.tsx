@@ -11,6 +11,15 @@ type KontaktSettings = ContactSettings & {
   mapEmbedUrl?: string | null
 }
 
+function safeMapSrc(u?: string | null): string | null {
+  if (!u) return null
+  try {
+    const url = new URL(u)
+    if (url.protocol === 'https:' && /(^|\.)google\.com$/.test(url.hostname)) return u
+  } catch {}
+  return null
+}
+
 export function Kontakt({ settings }: { settings: KontaktSettings }) {
   const t = useTranslations()
 
@@ -160,21 +169,25 @@ export function Kontakt({ settings }: { settings: KontaktSettings }) {
           {/* Map */}
           <Reveal>
             <div className="rounded-[var(--radius-xl)] overflow-hidden shadow-md aspect-[4/3] min-h-[300px] bg-[rgba(201,149,108,0.08)]">
-              {settings.mapEmbedUrl ? (
-                <iframe
-                  title="Mapa Wiśnia Beauty Studio"
-                  src={settings.mapEmbedUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, minHeight: '300px', display: 'block' }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              ) : (
-                <div className="w-full h-full min-h-[300px] flex items-center justify-center">
-                  <MapPin className="w-10 h-10 text-rose-gold opacity-40" aria-hidden="true" />
-                </div>
-              )}
+              {(() => {
+                const mapSrc = safeMapSrc(settings?.mapEmbedUrl)
+                return mapSrc ? (
+                  <iframe
+                    title="Mapa Wiśnia Beauty Studio"
+                    src={mapSrc}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, minHeight: '300px', display: 'block' }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    sandbox="allow-scripts allow-same-origin allow-popups"
+                  />
+                ) : (
+                  <div className="w-full h-full min-h-[300px] flex items-center justify-center">
+                    <MapPin className="w-10 h-10 text-rose-gold opacity-40" aria-hidden="true" />
+                  </div>
+                )
+              })()}
             </div>
           </Reveal>
 

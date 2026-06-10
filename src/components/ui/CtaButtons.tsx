@@ -11,7 +11,7 @@ export function CtaLink({ method, href, children, className }: { method: Method;
     w.dataLayer.push({ event: 'cta_click', method, ...attr })
   }
   return (
-    <a href={href} onClick={track} target={method === 'phone' ? undefined : '_blank'} rel="noopener" className={className}>
+    <a href={href} onClick={track} target={method === 'phone' ? undefined : '_blank'} rel="noopener noreferrer" className={className}>
       {children}
     </a>
   )

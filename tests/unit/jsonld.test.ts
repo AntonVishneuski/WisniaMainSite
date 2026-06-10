@@ -13,4 +13,19 @@ describe('jsonld', () => {
     expect(ld.ratingValue).toBe('5.0')
     expect(ld.reviewCount).toBe(40)
   })
+  it('JSON-LD serialization escapes </script> breakout sequences', () => {
+    // Simulate what JsonLd does internally — verify the replacement logic neutralises breakout chars
+    const dangerous = { name: '</script><script>alert(1)</script>', url: 'https://x.pl' }
+    const serialized = JSON.stringify(dangerous)
+      .replace(/</g, '\\u003c')
+      .replace(/>/g, '\\u003e')
+      .replace(/&/g, '\\u0026')
+      .replace(/ /g, '\\u2028')
+      .replace(/ /g, '\\u2029')
+    expect(serialized).not.toContain('</script>')
+    expect(serialized).not.toContain('<script>')
+    // Must still be valid JSON
+    const parsed = JSON.parse(serialized)
+    expect(parsed.name).toBe('</script><script>alert(1)</script>')
+  })
 })

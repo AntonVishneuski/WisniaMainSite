@@ -26,13 +26,13 @@ test('FAQ accordion opens an answer', async ({ page }) => {
   // FAQ accordion buttons contain question text ending with "?"
   // Use text-matching to avoid picking up the mobile nav toggle (which has aria-label="Menu")
   const firstQ = page.locator('button[type="button"]').filter({ hasText: /\?$/ }).first()
-  const count = await firstQ.count()
-  if (count > 0) {
-    await firstQ.scrollIntoViewIfNeeded()
-    await firstQ.click()
-  }
-  // soft assertion: page still healthy
-  await expect(page.locator('h1')).toBeVisible()
+  await expect(firstQ).toBeVisible({ timeout: 15000 })
+  await firstQ.scrollIntoViewIfNeeded()
+  await firstQ.click()
+  // After clicking, the button should become expanded and its answer visible
+  await expect(firstQ).toHaveAttribute('aria-expanded', 'true')
+  // The answer text for faq.a1 from messages/pl.json
+  await expect(page.locator('p').filter({ hasText: /Większość zabiegów jest komfortowa/ }).first()).toBeVisible()
 })
 
 test('CTA click pushes a cta_click dataLayer event', async ({ page }) => {

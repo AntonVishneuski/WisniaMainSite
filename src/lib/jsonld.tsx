@@ -2,9 +2,9 @@ export function localBusinessLd(o: { name: string; url: string; phone?: string; 
   return {
     '@context': 'https://schema.org', '@type': 'BeautySalon',
     name: o.name, url: o.url, telephone: o.phone, image: o.image,
+    priceRange: '$$',
     address: { '@type': 'PostalAddress', streetAddress: o.address, addressLocality: 'Warszawa', addressCountry: 'PL' },
     geo: { '@type': 'GeoCoordinates', latitude: o.geoLat, longitude: o.geoLng },
-    openingHours: o.hours,
   }
 }
 export function aggregateRatingLd(ratingValue: string, reviewCount: number) {

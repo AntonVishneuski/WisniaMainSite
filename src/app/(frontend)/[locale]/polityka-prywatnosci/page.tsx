@@ -6,6 +6,8 @@ import { getPayloadClient } from '@/lib/getPayload'
 
 export const revalidate = 3600
 
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
 export async function generateMetadata({
   params,
 }: {
@@ -16,9 +18,16 @@ export async function generateMetadata({
   const title = isRu
     ? 'Политика конфиденциальности · Wiśnia Beauty Studio'
     : 'Polityka prywatności · Wiśnia Beauty Studio'
+  const path = '/polityka-prywatnosci'
+  const canonical = isRu ? `${SITE}/ru${path}` : `${SITE}${path}`
   return {
+    metadataBase: new URL(SITE),
     title,
     robots: { index: true },
+    alternates: {
+      canonical,
+      languages: { pl: `${SITE}${path}`, ru: `${SITE}/ru${path}` },
+    },
   }
 }
 

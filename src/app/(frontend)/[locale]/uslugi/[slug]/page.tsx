@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import type { Locale } from '@/lib/i18n'
 import { locales } from '@/lib/i18n'
-import { getServicePage, getServicePageParams, getPublishedServicePages } from '@/lib/queries'
+import { getServicePage, getServicePageParams, getPublishedServicePages, getServicesNav } from '@/lib/queries'
 import { getPayloadClient } from '@/lib/getPayload'
 import { serviceLd, breadcrumbLd, JsonLd } from '@/lib/jsonld'
 import { resolveCrossLinks } from '@/lib/service-links'
@@ -70,8 +70,8 @@ export default async function Page({
     .findGlobal({ slug: 'settings', locale: locale as Locale })
     .catch(() => null)
 
-  const published: any[] = await getPublishedServicePages(locale as Locale)
-  const services = published.map((p) => ({ slug: p.slug as string, title: p.title as string }))
+  const published: any[] = await getPublishedServicePages(locale as Locale).catch(() => [])
+  const services = await getServicesNav(locale as Locale)
   const crossLinks = resolveCrossLinks(
     page,
     published.map((p) => ({ id: p.id, slug: p.slug, title: p.title })),

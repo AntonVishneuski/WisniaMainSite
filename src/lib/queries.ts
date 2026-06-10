@@ -29,3 +29,13 @@ export async function getServicePageParams() {
   const res = await payload.find({ collection: 'servicePages', where: { status: { equals: 'published' } }, limit: 100, depth: 0, locale: 'pl' })
   return res.docs.map((d: any) => d.slug as string)
 }
+
+export async function getServicesNav(locale: Locale): Promise<{ slug: string; title: string }[]> {
+  try {
+    const docs = await getPublishedServicePages(locale)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (docs as any[]).map((d) => ({ slug: d.slug as string, title: d.title as string }))
+  } catch {
+    return []
+  }
+}

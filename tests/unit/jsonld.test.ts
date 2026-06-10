@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { localBusinessLd, aggregateRatingLd, faqLd, breadcrumbLd } from '../../src/lib/jsonld'
+import { localBusinessLd, aggregateRatingLd, faqLd, breadcrumbLd, serviceLd } from '../../src/lib/jsonld'
 
 describe('jsonld', () => {
   it('builds LocalBusiness with NAP', () => {
@@ -45,6 +45,19 @@ describe('jsonld', () => {
     expect(ld.itemListElement[1].name).toBe('Cennik')
   })
 
+})
+
+describe('serviceLd', () => {
+  it('builds a Service node with provider + areaServed', () => {
+    const ld = serviceLd({ name: 'Depilacja laserowa', description: 'opis', url: 'https://x.pl/uslugi/dl', providerName: 'Wiśnia Beauty Studio', providerUrl: 'https://x.pl' })
+    expect(ld['@type']).toBe('Service')
+    expect(ld.name).toBe('Depilacja laserowa')
+    expect(ld.areaServed).toBe('Warszawa')
+    expect(ld.provider['@type']).toBe('BeautySalon')
+  })
+})
+
+describe('jsonld serialization', () => {
   it('JSON-LD serialization escapes </script> breakout sequences', () => {
     // Simulate what JsonLd does internally — verify the replacement logic neutralises breakout chars
     const dangerous = { name: '</script><script>alert(1)</script>', url: 'https://x.pl' }

@@ -18,6 +18,14 @@ export function breadcrumbLd(items: { name: string; url: string }[]) {
   return { '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: it.url })) }
 }
+export function serviceLd(o: { name: string; description?: string; url: string; providerName: string; providerUrl: string; image?: string }) {
+  return {
+    '@context': 'https://schema.org', '@type': 'Service',
+    name: o.name, description: o.description, url: o.url, image: o.image,
+    areaServed: 'Warszawa',
+    provider: { '@type': 'BeautySalon', name: o.providerName, url: o.providerUrl },
+  }
+}
 export function JsonLd({ data }: { data: object }) {
   const json = JSON.stringify(data)
     .replace(/</g, '\\u003c')

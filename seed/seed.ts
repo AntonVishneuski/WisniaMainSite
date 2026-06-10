@@ -60,15 +60,48 @@ async function run() {
 
   const payload = await getPayload({ config })
 
-  // Always wipe servicePages (idempotent re-seed). Only wipe the rest on full seed.
-  for (const c of ['servicePages'] as const) {
-    const all = await payload.find({ collection: c, limit: 1000, depth: 0 })
-    for (const d of all.docs) await payload.delete({ collection: c, id: d.id })
+  // Service pages wipe strategy:
+  //   - Default (no SEED_WIPE_SERVICE_PAGES): never wipe servicePages. The first-pass uses
+  //     create-if-absent by slug — safe for both local re-runs and production.
+  //   - SEED_WIPE_SERVICE_PAGES=1: wipe all servicePages first (escape hatch for local
+  //     slug-definition changes). Do this BEFORE wiping media to avoid FK violations.
+  const wipeServicePages = process.env.SEED_WIPE_SERVICE_PAGES === '1'
+  if (wipeServicePages) {
+    console.log('[seed] SEED_WIPE_SERVICE_PAGES=1 — wiping all servicePages before recreating')
+    const all = await payload.find({ collection: 'servicePages', limit: 1000, depth: 0 })
+    for (const d of all.docs) await payload.delete({ collection: 'servicePages', id: d.id })
   }
   if (fullSeed) {
-    for (const c of ['prices', 'reviews', 'beforeAfter', 'media'] as const) {
+    // Collect media IDs still referenced by existing servicePages so we don't attempt to
+    // delete them (service_pages_before_after.before/after_image_id are NOT NULL; the DB
+    // FK is SET NULL but the column forbids NULL, so deleting referenced media fails).
+    const spMediaResult = await payload.find({ collection: 'servicePages', limit: 1000, depth: 1 })
+    const spMediaIds = new Set<number>()
+    for (const doc of spMediaResult.docs) {
+      type SPDoc = {
+        heroImage?: { id: number } | number | null
+        beforeAfter?: Array<{ beforeImage?: { id: number } | number | null; afterImage?: { id: number } | number | null }>
+      }
+      const d = doc as SPDoc
+      const heroId = typeof d.heroImage === 'object' && d.heroImage ? d.heroImage.id : (d.heroImage as number | undefined)
+      if (heroId) spMediaIds.add(heroId)
+      for (const ba of d.beforeAfter ?? []) {
+        const bId = typeof ba.beforeImage === 'object' && ba.beforeImage ? ba.beforeImage.id : (ba.beforeImage as number | undefined)
+        const aId = typeof ba.afterImage === 'object' && ba.afterImage ? ba.afterImage.id : (ba.afterImage as number | undefined)
+        if (bId) spMediaIds.add(bId)
+        if (aId) spMediaIds.add(aId)
+      }
+    }
+    for (const c of ['prices', 'reviews', 'beforeAfter'] as const) {
       const all = await payload.find({ collection: c, limit: 1000, depth: 0 })
       for (const d of all.docs) await payload.delete({ collection: c, id: d.id })
+    }
+    // Only delete media not referenced by existing servicePages
+    const allMedia = await payload.find({ collection: 'media', limit: 1000, depth: 0 })
+    for (const d of allMedia.docs) {
+      if (!spMediaIds.has(d.id as number)) {
+        await payload.delete({ collection: 'media', id: d.id })
+      }
     }
   }
 
@@ -198,10 +231,26 @@ async function run() {
     return priceByName.get(entry) ?? null
   }
 
-  // FIRST PASS — create all 7 pages without crossLinks
+  // FIRST PASS — create-if-absent by slug (skip existing pages to preserve admin edits).
+  // If SEED_WIPE_SERVICE_PAGES=1, all pages were already wiped above so every page is new.
   const slugToId = new Map<string, number>()
+  // Track which slugs were CREATED this run (crossLinks only applied to these).
+  const createdSlugs = new Set<string>()
+
+  // Pre-load all existing servicePages to build the slug→id map for crossLink resolution.
+  const existingPages = await payload.find({ collection: 'servicePages', limit: 1000, depth: 0 })
+  for (const doc of existingPages.docs) {
+    const slug = (doc as { slug?: string }).slug ?? ''
+    if (slug) slugToId.set(slug, doc.id as number)
+  }
 
   for (const sp of servicePages) {
+    // If this slug already exists, skip creation entirely.
+    if (slugToId.has(sp.slug)) {
+      console.log(`[seed] servicePages: skipped existing slug "${sp.slug}"`)
+      continue
+    }
+
     // Upload hero image if present
     let heroId: number | null = null
     if (sp.heroFile) {
@@ -286,6 +335,8 @@ async function run() {
 
     const createdId = created.id as number
     slugToId.set(sp.slug, createdId)
+    createdSlugs.add(sp.slug)
+    console.log(`[seed] servicePages: created slug "${sp.slug}" (id ${createdId})`)
 
     // Fetch the PL document to get array row IDs (needed for correct locale update)
     const createdDoc = await payload.findByID({
@@ -348,8 +399,10 @@ async function run() {
     })
   }
 
-  // SECOND PASS — resolve crossLinks slugs → ids and update each page
+  // SECOND PASS — resolve crossLinks slugs → ids and update ONLY pages created this run.
+  // slugToId now covers both existing and newly created pages, so cross-links resolve correctly.
   for (const sp of servicePages) {
+    if (!createdSlugs.has(sp.slug)) continue // skip existing pages
     const pageId = slugToId.get(sp.slug)
     if (!pageId) continue
     const crossIds = sp.crossLinks

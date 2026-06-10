@@ -49,7 +49,7 @@ The `build` script (used locally) runs plain `next build` without the migration 
 ## 5. Seed production content (one-off)
 After the first deploy the schema already exists (migrations ran during `vercel-build`), but
 the **content tables are empty**. Seed the design content (62 prices, 6 reviews, 6 before/after,
-settings) as a separate one-off step:
+7 service pages, settings) as a separate one-off step:
 
 Option A — from your machine against the prod DB:
 ```bash
@@ -59,9 +59,27 @@ Option A — from your machine against the prod DB:
 #   PAYLOAD_SECRET=<prod secret>
 pnpm seed
 ```
-The seed **inserts content only** — the schema is already created by the migration. It is
-**idempotent** (it wipes prices/reviews/beforeAfter/media first), so it's safe to rerun.
-Before/after images are uploaded from `wisnia-beauty/design_handoff/source/assets/` into Blob.
+The seed **inserts content only** — the schema is already created by the migration.
+
+**Service pages are seeded with a create-if-absent strategy (safe to re-run):**
+- For each of the 7 design service pages, the seed looks up an existing doc by `slug`.
+- If one already exists (e.g. edited via the CMS), it is **skipped entirely** — no delete,
+  no overwrite of its content or crossLinks.
+- If a page does not yet exist, it is created (hero/before-after images uploaded, fields set for
+  pl+ru, priceItems resolved).
+- This means re-running `pnpm seed` against a live production database is safe: CMS edits are
+  preserved and the count stays at 7.
+
+Prices, reviews, beforeAfter, and settings are still wiped on a full seed (local / initial prod
+seed). Only run the full seed before the site goes live or when you deliberately want fresh data.
+
+**Forced destructive refresh (local dev only):**
+If you need to wipe all service pages and recreate them from seed data (e.g. after changing the
+seed definitions in `seed/data/service-pages.ts`), set the escape-hatch flag:
+```bash
+SEED_WIPE_SERVICE_PAGES=1 pnpm seed
+```
+**Do not run this against production** — it will delete any admin-authored service page content.
 
 Option B — edit everything by hand in `/admin` instead of seeding.
 

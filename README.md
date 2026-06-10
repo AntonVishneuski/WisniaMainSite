@@ -1,67 +1,69 @@
-# Payload Blank Template
+# Wiśnia Beauty Studio
 
-This template comes configured with the bare minimum to get started on anything you need.
+Marketing site for Wiśnia Beauty Studio — a professional laser hair removal studio.
 
-## Quick start
+## Stack
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+- **Next.js 15** (App Router) + **Payload CMS 3**
+- **PostgreSQL** (database) — local or Docker
+- **Vercel Blob** (media storage in production)
+- **next-intl** (PL + RU localisation)
+- **Tailwind CSS v4** with custom design tokens
+- Deployed to **Vercel**
 
-## Quick Start - local setup
+## Local development
 
-To spin up this template locally, follow these steps:
+### Prerequisites
 
-### Clone
+- Node.js 20+, pnpm 9+
+- Local PostgreSQL instance (or use Docker — see below)
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+### Setup
 
-### Development
+```bash
+pnpm install
+cp .env.example .env
+# Edit .env: set DATABASE_URL, PAYLOAD_SECRET, and any optional vars
+pnpm dev
+```
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+The app runs at <http://localhost:3000>. The Payload admin panel is at <http://localhost:3000/admin>.
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+### Seed demo data
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+```bash
+pnpm seed
+```
 
-#### Docker (Optional)
+### Database migrations
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+```bash
+pnpm payload migrate        # run pending migrations
+pnpm payload migrate:create # create a new migration after schema changes
+```
 
-To do so, follow these steps:
+### Docker (optional Postgres)
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+```bash
+docker-compose up -d        # starts a Postgres 16 container on port 5432
+# Then set DATABASE_URL=postgresql://wisnia:wisnia@localhost:5432/wisnia in .env
+pnpm dev
+```
 
-## How it works
+## Tests
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+```bash
+pnpm test          # unit + integration (Vitest)
+pnpm test:e2e      # end-to-end (Playwright) — requires a running dev server
+```
 
-### Collections
+## Build
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+```bash
+pnpm build         # production build
+pnpm start         # serve the production build locally
+```
 
-- #### Users (Authentication)
+## Deployment
 
-  Users are auth-enabled collections that have access to the admin panel.
-
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/3.x/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
-
-- #### Media
-
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
-
-### Docker
-
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
-
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
-
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
-
-## Questions
-
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for Vercel setup, environment variables, and release process.

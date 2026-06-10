@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Reveal } from '@/components/ui/Reveal'
 
@@ -38,16 +39,17 @@ export function Efekty({ items }: { items: EffectsItem[] }) {
                   {/* Before */}
                   <div className="relative aspect-[3/4] overflow-hidden bg-gray-100">
                     {item.beforeImage?.url ? (
-                      <img
+                      <Image
                         src={item.beforeImage.url}
                         alt={item.beforeImage.alt ?? t('sections.before')}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
+                        fill
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                        className="object-cover"
                       />
                     ) : (
                       <div className="w-full h-full bg-[rgba(201,149,108,0.12)]" />
                     )}
-                    <span className="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-cherry text-cream text-[11px] font-semibold uppercase tracking-[0.06em]">
+                    <span className="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-cherry text-cream text-[11px] font-semibold uppercase tracking-[0.06em] z-10">
                       {t('sections.before')}
                     </span>
                   </div>
@@ -55,16 +57,17 @@ export function Efekty({ items }: { items: EffectsItem[] }) {
                   {/* After */}
                   <div className="relative aspect-[3/4] overflow-hidden bg-gray-100">
                     {item.afterImage?.url ? (
-                      <img
+                      <Image
                         src={item.afterImage.url}
                         alt={item.afterImage.alt ?? t('sections.after')}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
+                        fill
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                        className="object-cover"
                       />
                     ) : (
                       <div className="w-full h-full bg-[rgba(201,149,108,0.08)]" />
                     )}
-                    <span className="absolute top-2 right-2 px-2.5 py-1 rounded-full bg-[#C9956C] text-graphite text-[11px] font-semibold uppercase tracking-[0.06em]">
+                    <span className="absolute top-2 right-2 px-2.5 py-1 rounded-full bg-[#C9956C] text-graphite text-[11px] font-semibold uppercase tracking-[0.06em] z-10">
                       {t('sections.after')}
                     </span>
                   </div>

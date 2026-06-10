@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { setRequestLocale, getTranslations } from 'next-intl/server'
+import { notFound } from 'next/navigation'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { getPayloadClient } from '@/lib/getPayload'
+import { locales, type Locale } from '@/lib/i18n'
 
 export const revalidate = 3600
 
@@ -37,12 +39,13 @@ export default async function PrivacyPage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
+  if (!locales.includes(locale as Locale)) notFound()
   setRequestLocale(locale)
   const t = await getTranslations('privacy')
 
   const payload = await getPayloadClient()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const settings = (await payload.findGlobal({ slug: 'settings' }).catch(() => null)) as any
+  const settings = (await payload.findGlobal({ slug: 'settings', locale: locale as Locale }).catch(() => null)) as any
 
   const sections = [
     { title: t('s1Title'), body: t('s1Body') },

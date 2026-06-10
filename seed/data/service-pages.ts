@@ -92,16 +92,10 @@ export const servicePages: ServicePageRow[] = [
     ],
     priceNames: [
       'Bikini głębokie',
-      'Bikini extra',
-      'Bikini klasyczne',
       'Pachy',
-      'Ręce całe (+ palce)',
-      'Palce rąk i nóg',
-      'Ręce do/od łokcia',
       'Nogi całe',
-      'Nogi do/od kolan (+ kolana)',
+      'Ręce całe (+ palce)',
       'Plecy całe',
-      'Plecy (część)',
     ],
     packagePromo: {
       enabled: true,
@@ -460,7 +454,6 @@ export const servicePages: ServicePageRow[] = [
       'Twarz + podbródek',
       'Twarz + szyja',
       'Twarz + szyja + dekolt',
-      'RF-lifting dłoni w prezencie', // the gift row
     ],
     packagePromo: {
       enabled: true,
@@ -719,7 +712,6 @@ export const servicePages: ServicePageRow[] = [
       'Oczyszczanie kombinowane',
       'Oczyszczanie + peeling',
       'Protokół Anti-Acne',
-      'Oczyszczanie ultradźwiękowe + LED',
     ],
     packagePromo: {
       enabled: true,
@@ -847,11 +839,8 @@ export const servicePages: ServicePageRow[] = [
     priceNames: [
       'Okolice oczu',
       'Biorewitalizacja',
-      'Biorewitalizacja ust',
       'Polinukleotydy',
       'Egzosomy',
-      'Dermapen',
-      'Mezoterapia skóry głowy',
     ],
     packagePromo: {
       enabled: true,

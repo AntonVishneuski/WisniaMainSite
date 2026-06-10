@@ -25,7 +25,7 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
   const t = await getTranslations()
   const homeHref = locale === 'ru' ? '/ru' : '/'
   const uslugiHref = locale === 'ru' ? '/ru/uslugi' : '/uslugi'
-  const { booksyHref } = contactLinks(settings)
+  const { booksyHref, waHref } = contactLinks(settings)
 
   const breadcrumbItems = [
     { label: 'Wiśnia', href: homeHref },
@@ -96,6 +96,10 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
               heading={page.priceHeading ?? undefined}
               rows={(page.priceItems ?? []) as PriceRow[]}
               booksyHref={booksyHref}
+              waHref={waHref}
+              bookLabel={t('cta.bookShort')}
+              waLabel={t('cta.whatsapp')}
+              consultNote={t('service.consultNote')}
             />
             <PackagePromo
               promo={page.packagePromo ?? undefined}

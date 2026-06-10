@@ -25,6 +25,30 @@
     "trust2": "Wykształcenie medyczne",
     "trust3": "Indywidualny protokół"
   },
+  "pain": {
+    "eyebrow": "Rozumiemy Twoje obawy",
+    "title": "Bez przesady. Bez igieł. Bez długiej rekonwalescencji.",
+    "c1t": "Boisz się wyglądać „przerobiona”?",
+    "c1p": "Pracujemy delikatnie i etapami. Efekt to wypoczęta, naturalna skóra, nikt nie powie, że „coś sobie zrobiłaś”.",
+    "c2t": "Nie masz czasu na długą rekonwalescencję?",
+    "c2p": "Większość zabiegów nie wymaga przerwy. Wracasz do pracy tego samego dnia, ze zdrowym blaskiem.",
+    "c3t": "Chcesz efektu, ale bez igieł?",
+    "c3p": "Stawiamy na metody nieinwazyjne: RF, LED, pielęgnacja aparaturowa. Skuteczność bez nakłuwania."
+  },
+  "kierunki": {
+    "eyebrow": "Nasze kierunki",
+    "title": "Cztery kierunki pielęgnacji",
+    "lead": "Nowoczesna aparatura kosmetologiczna, depilacja laserowa Estera i masaże. Wszystko w jednym miejscu, w centrum Warszawy.",
+    "faceT": "Kosmetologia i odmłodzenie",
+    "faceS": "Oczyszczanie, RF twarzy i ciała, IPL (fotoodmładzanie), mezoterapia",
+    "laserT": "Laser",
+    "laserS": "Depilacja laserowa Estera dla kobiet i mężczyzn",
+    "bodyT": "Ciało",
+    "bodyS": "Masaże, Kobido Premium i usuwanie zmian skórnych",
+    "pkgT": "Pakiety",
+    "pkgS": "Combo i kursy -15%",
+    "go": "Zobacz cennik"
+  },
   "sections": {
     "pricesEyebrow": "Cennik",
     "pricesTitle": "Zabiegi i ceny",

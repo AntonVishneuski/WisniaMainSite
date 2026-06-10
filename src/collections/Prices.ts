@@ -1,7 +1,12 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidate'
 
 export const Prices: CollectionConfig = {
   slug: 'prices',
+  hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
+  },
   access: { read: () => true },
   admin: { group: 'Treść', useAsTitle: 'name', defaultColumns: ['name', 'tab', 'category', 'price', 'order'] },
   fields: [

@@ -124,5 +124,26 @@
     "uslugiT": "Usługi",
     "contactT": "Kontakt",
     "privacy": "Polityka prywatności"
+  },
+  "privacy": {
+    "title": "Polityka prywatności",
+    "updated": "Ostatnia aktualizacja: czerwiec 2026",
+    "intro": "Twoja prywatność jest dla nas ważna. Poniżej wyjaśniamy, jakie dane zbieramy, w jakim celu i jakie masz prawa. Dokument dotyczy strony internetowej oraz usług świadczonych w Wiśnia Beauty Studio.",
+    "s1Title": "1. Administrator danych",
+    "s1Body": "Administratorem Twoich danych osobowych jest Wiśnia Beauty Studio, ul. Gen. W. Andersa 15, 00-159 Warszawa (obok LuxMed). Kontakt: telefon +48 453 270 435, WhatsApp oraz Instagram @wisnia_beauty_studio.",
+    "s2Title": "2. Jakie dane zbieramy",
+    "s2Body": "Dane kontaktowe: imię, numer telefonu, ewentualnie adres e-mail, gdy umawiasz wizytę lub piszesz do nas.\n\nDane o stanie skóry i zdrowiu: informacje z wywiadu przed zabiegiem, niezbędne do bezpiecznego wykonania usługi. Przetwarzamy je wyłącznie za Twoją zgodą.\n\nZdjęcia przed i po: wykonujemy je tylko za Twoją wyraźną zgodą; publikujemy w materiałach marketingowych wyłącznie po osobnej akceptacji.\n\nDane techniczne: strona korzysta z map Google i czcionek Google, które mogą zapisywać podstawowe informacje techniczne (np. adres IP).",
+    "s3Title": "3. Cele i podstawy prawne",
+    "s3Body": "Umówienie i realizacja wizyty oraz świadczenie usług (art. 6 ust. 1 lit. b RODO).\n\nBezpieczne wykonanie zabiegu na podstawie wywiadu (art. 9 ust. 2 lit. a RODO, zgoda).\n\nKontakt, odpowiedzi na zapytania i potwierdzenia wizyt (prawnie uzasadniony interes, art. 6 ust. 1 lit. f RODO).\n\nMarketing i publikacja zdjęć efektów wyłącznie na podstawie odrębnej zgody (art. 6 ust. 1 lit. a RODO).\n\nObowiązki prawne, np. rozliczenia (art. 6 ust. 1 lit. c RODO).",
+    "s4Title": "4. Komu udostępniamy dane",
+    "s4Body": "Nie sprzedajemy Twoich danych. Możemy je powierzać zaufanym podmiotom, które pomagają nam prowadzić działalność: system rezerwacji Booksy, dostawcy usług telekomunikacyjnych i hostingu. Podmioty te przetwarzają dane wyłącznie na nasze polecenie.",
+    "s5Title": "5. Jak długo przechowujemy dane",
+    "s5Body": "Dane przechowujemy tak długo, jak to konieczne do realizacji usług oraz wypełnienia obowiązków prawnych. Zgody marketingowe przetwarzamy do czasu ich wycofania.",
+    "s6Title": "6. Twoje prawa",
+    "s6Body": "Masz prawo do: dostępu do swoich danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia, wniesienia sprzeciwu oraz wycofania zgody w dowolnym momencie. Przysługuje Ci również skarga do Prezesa Urzędu Ochrony Danych Osobowych (PUODO).",
+    "s7Title": "7. Kontakt w sprawie danych",
+    "s7Body": "W sprawach dotyczących danych osobowych napisz do nas na WhatsApp lub zadzwoń pod numer +48 453 270 435.",
+    "s8Title": "8. Zmiany polityki",
+    "s8Body": "Możemy aktualizować tę politykę, aby odzwierciedlała zmiany w naszej działalności lub przepisach. Aktualna wersja jest zawsze dostępna na tej stronie."
   }
 }

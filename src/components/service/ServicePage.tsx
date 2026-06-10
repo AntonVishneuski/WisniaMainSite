@@ -39,9 +39,9 @@ export function ServicePage({ page, settings, locale, crossLinks }: Props) {
       {/* Hero */}
       <Reveal>
         <ServiceHero
-          heading={page.hero?.heading || page.title}
-          intro={page.hero?.intro ?? undefined}
-          image={page.hero?.heroImage ?? undefined}
+          heading={page.heading || page.title}
+          intro={page.intro ?? undefined}
+          image={page.heroImage ?? undefined}
           settings={settings}
         />
       </Reveal>

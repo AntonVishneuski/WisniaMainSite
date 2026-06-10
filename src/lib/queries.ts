@@ -11,3 +11,21 @@ export async function getHomeData(locale: Locale) {
   ])
   return { prices: prices.docs, reviews: reviews.docs, beforeAfter: beforeAfter.docs, settings }
 }
+
+export async function getPublishedServicePages(locale: Locale) {
+  const payload = await getPayloadClient()
+  const res = await payload.find({ collection: 'servicePages', locale, where: { status: { equals: 'published' } }, sort: 'order', limit: 100, depth: 0 })
+  return res.docs
+}
+
+export async function getServicePage(slug: string, locale: Locale) {
+  const payload = await getPayloadClient()
+  const res = await payload.find({ collection: 'servicePages', locale, where: { slug: { equals: slug }, status: { equals: 'published' } }, limit: 1, depth: 2 })
+  return res.docs[0] ?? null
+}
+
+export async function getServicePageParams() {
+  const payload = await getPayloadClient()
+  const res = await payload.find({ collection: 'servicePages', where: { status: { equals: 'published' } }, limit: 100, depth: 0, locale: 'pl' })
+  return res.docs.map((d: any) => d.slug as string)
+}

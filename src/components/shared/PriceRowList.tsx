@@ -5,6 +5,8 @@ import { useTranslations } from 'next-intl'
 import { CtaLink } from '@/components/ui/CtaButtons'
 import { groupPrices, type PriceRow } from '@/lib/price-groups'
 
+const TABS_ORDER: PriceRow['tab'][] = ['kosmetologia', 'laser', 'cialo', 'pakiety']
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -137,23 +139,23 @@ export function PriceRowList({
   const t = useTranslations()
   const bookShortLabel = t('cta.bookShort')
 
-  // Determine if any row belongs to 'pakiety' tab to use grid layout
-  const isPakiety = rows.length > 0 && rows[0].tab === 'pakiety'
-
-  // Group rows by category (same logic as Cennik, but we receive a flat list
-  // for a single tab — we re-use groupPrices on just this tab's rows)
+  // Group all rows by tab and category
   const grouped = groupPrices(rows)
-  // Find which tab these rows belong to (all rows assumed to be same tab)
-  const tab = rows[0]?.tab ?? 'kosmetologia'
-  const groups = grouped[tab]
+
+  // Collect only the tabs that have at least one row, in canonical order
+  const presentTabs = TABS_ORDER.filter((tab) => grouped[tab].length > 0)
+
+  if (presentTabs.length === 0) {
+    return <p className="text-center text-gray-soft py-8 text-[15px]">—</p>
+  }
 
   return (
     <>
-      {groups.length === 0 ? (
-        <p className="text-center text-gray-soft py-8 text-[15px]">—</p>
-      ) : (
-        groups.map((group, gi) => (
-          <div key={gi} className="mb-8 last:mb-0">
+      {presentTabs.map((tab) => {
+        const groups = grouped[tab]
+        const isPakiety = tab === 'pakiety'
+        return groups.map((group, gi) => (
+          <div key={`${tab}-${gi}`} className="mb-8 last:mb-0">
             {/* Category header */}
             {group.category && (
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-4 pb-3 border-b-2 border-[rgba(201,149,108,0.3)]">
@@ -196,7 +198,7 @@ export function PriceRowList({
             </div>
           </div>
         ))
-      )}
+      })}
     </>
   )
 }

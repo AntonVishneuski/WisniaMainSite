@@ -26,6 +26,49 @@ export function serviceLd(o: { name: string; description?: string; url: string; 
     provider: { '@type': 'BeautySalon', name: o.providerName, url: o.providerUrl },
   }
 }
+export function medicalWebPageLd(o: {
+  headline: string
+  description?: string
+  url: string
+  datePublished?: string
+  dateModified?: string
+  lastReviewed?: string
+  authorName: string
+  authorJobTitle?: string
+  authorUrl?: string
+  reviewerName?: string
+  reviewerJobTitle?: string
+  image?: string
+  publisherName: string
+  publisherUrl?: string
+  aboutName?: string
+  inLanguage: string
+}) {
+  const author = { '@type': 'Person', name: o.authorName, jobTitle: o.authorJobTitle, url: o.authorUrl }
+  const reviewedBy = o.reviewerName
+    ? { '@type': 'Person', name: o.reviewerName, jobTitle: o.reviewerJobTitle }
+    : undefined
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalWebPage',
+    headline: o.headline,
+    description: o.description,
+    inLanguage: o.inLanguage,
+    url: o.url,
+    mainEntityOfPage: o.url,
+    datePublished: o.datePublished,
+    dateModified: o.dateModified || o.datePublished,
+    lastReviewed: o.lastReviewed,
+    specialty: 'CosmeticProcedure',
+    audience: { '@type': 'MedicalAudience', audienceType: 'Patient' },
+    author,
+    reviewedBy,
+    image: o.image ? { '@type': 'ImageObject', url: o.image } : undefined,
+    publisher: { '@type': 'Organization', name: o.publisherName, url: o.publisherUrl },
+    about: o.aboutName ? { '@type': 'MedicalProcedure', name: o.aboutName } : undefined,
+  }
+}
+
 export function JsonLd({ data }: { data: object }) {
   const json = JSON.stringify(data)
     .replace(/</g, '\\u003c')

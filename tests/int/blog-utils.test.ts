@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readingMinutes } from '@/lib/reading-time'
 import { slugify, extractHeadings } from '@/lib/lexical-headings'
+import { medicalWebPageLd } from '@/lib/jsonld'
 
 const body = (text: string) => ({
   root: { type: 'root', format: '', indent: 0, version: 1, direction: 'ltr',
@@ -39,5 +40,22 @@ describe('extractHeadings', () => {
       { id: 'pierwszy', text: 'Pierwszy', level: 2 },
       { id: 'drugi', text: 'Drugi', level: 3 },
     ])
+  })
+})
+
+describe('medicalWebPageLd', () => {
+  it('emits MedicalWebPage with nested BlogPosting fields', () => {
+    const ld: any = medicalWebPageLd({
+      headline: 'RF lifting', description: 'opis', url: 'https://x/blog/rf',
+      datePublished: '2026-01-01', dateModified: '2026-02-01', lastReviewed: '2026-02-01',
+      authorName: 'Dr A', authorJobTitle: 'Kosmetolog', authorUrl: 'https://x/o-nas',
+      reviewerName: 'Dr B', image: 'https://x/i.webp', publisherName: 'Wiśnia',
+      aboutName: 'RF lifting', inLanguage: 'pl',
+    })
+    expect(ld['@type']).toBe('MedicalWebPage')
+    expect(ld.author.name).toBe('Dr A')
+    expect(ld.reviewedBy.name).toBe('Dr B')
+    expect(ld.datePublished).toBe('2026-01-01')
+    expect(ld.mainEntityOfPage).toBe('https://x/blog/rf')
   })
 })

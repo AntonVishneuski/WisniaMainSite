@@ -13,6 +13,7 @@ import { Reviews } from './collections/Reviews'
 import { BeforeAfter } from './collections/BeforeAfter'
 import { ServicePages } from './collections/ServicePages'
 import { Authors } from './collections/Authors'
+import { Posts } from './collections/Posts'
 import { Settings } from './globals/Settings'
 
 const filename = fileURLToPath(import.meta.url)
@@ -25,7 +26,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Prices, Reviews, BeforeAfter, ServicePages, Authors],
+  collections: [Users, Media, Prices, Reviews, BeforeAfter, ServicePages, Authors, Posts],
   globals: [Settings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

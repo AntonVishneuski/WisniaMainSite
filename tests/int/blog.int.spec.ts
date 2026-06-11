@@ -1,6 +1,6 @@
 // @vitest-environment node
 import 'dotenv/config'
-import { describe, it, expect, beforeAll } from 'vitest'
+import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import { getPayloadClient } from '@/lib/getPayload'
 import { getPublishedPosts, getPost, getPostParams } from '@/lib/queries'
 
@@ -9,6 +9,25 @@ let authorId: number
 describe('blog queries', () => {
   beforeAll(async () => {
     const payload = await getPayloadClient()
+
+    // Clean up any leftover data from a previous run (idempotency)
+    const existingPosts = await payload.find({
+      collection: 'posts',
+      where: { slug: { in: ['pub-test', 'draft-test'] } },
+      limit: 10, depth: 0,
+    })
+    for (const post of existingPosts.docs) {
+      await payload.delete({ collection: 'posts', id: post.id })
+    }
+    const existingAuthors = await payload.find({
+      collection: 'authors',
+      where: { name: { equals: 'Test Autor' } },
+      limit: 10, depth: 0, locale: 'pl',
+    })
+    for (const author of existingAuthors.docs) {
+      await payload.delete({ collection: 'authors', id: author.id })
+    }
+
     const a = await payload.create({ collection: 'authors', locale: 'pl', data: { name: 'Test Autor' } })
     authorId = a.id as number
     const minBody = { root: { type: 'root', format: '' as const, indent: 0, version: 1, direction: 'ltr' as const,
@@ -25,6 +44,21 @@ describe('blog queries', () => {
         author: authorId, body: minBody },
     })
   }, 60000)
+
+  afterAll(async () => {
+    const payload = await getPayloadClient()
+    const posts = await payload.find({
+      collection: 'posts',
+      where: { slug: { in: ['pub-test', 'draft-test'] } },
+      limit: 10, depth: 0,
+    })
+    for (const post of posts.docs) {
+      await payload.delete({ collection: 'posts', id: post.id })
+    }
+    if (authorId) {
+      await payload.delete({ collection: 'authors', id: authorId })
+    }
+  }, 30000)
 
   it('getPublishedPosts excludes drafts', async () => {
     const docs = await getPublishedPosts('pl')

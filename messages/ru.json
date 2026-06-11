@@ -4,7 +4,8 @@
     "prices": "Цены",
     "effects": "Результаты",
     "about": "О нас",
-    "contact": "Контакты"
+    "contact": "Контакты",
+    "blog": "Блог"
   },
   "cta": {
     "whatsapp": "Написать в WhatsApp",
@@ -132,6 +133,29 @@
     "reviewsHeading": "Отзывы",
     "packageCta": "Смотреть пакеты",
     "consultNote": "Точный план и цену согласуем на бесплатной консультации."
+  },
+  "blog": {
+    "lead": "Экспертные статьи о косметологии, лазерной эпиляции и уходе за кожей.",
+    "readMore": "Читать далее",
+    "readingTime": "Время чтения: {min} мин",
+    "publishedOn": "Опубликовано",
+    "updatedOn": "Обновлено",
+    "author": "Автор",
+    "reviewedBy": "Научная редактура",
+    "toc": "Содержание",
+    "relatedPosts": "Похожие статьи",
+    "relatedServiceCtaTitle": "Запишитесь на процедуру",
+    "relatedServiceCtaButton": "Смотреть услугу",
+    "allCategories": "Все",
+    "backToBlog": "Назад в блог",
+    "category": {
+      "depilacja-laserowa": "Лазерная эпиляция",
+      "odmlodzenie-twarzy": "Омоложение лица",
+      "czyszczenie-pielegnacja": "Чистка и уход",
+      "zabiegi-specjalistyczne": "Специальные процедуры",
+      "poradniki-faq": "Гайды и FAQ",
+      "sezonowo-trendy": "Сезонно и тренды"
+    }
   },
   "privacy": {
     "title": "Политика конфиденциальности",

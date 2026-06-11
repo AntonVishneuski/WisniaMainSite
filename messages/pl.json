@@ -4,7 +4,8 @@
     "prices": "Cennik",
     "effects": "Efekty",
     "about": "O nas",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "blog": "Blog"
   },
   "cta": {
     "whatsapp": "Napisz na WhatsApp",
@@ -132,6 +133,29 @@
     "reviewsHeading": "Opinie",
     "packageCta": "Zobacz pakiety",
     "consultNote": "Dokładny plan i wycenę ustalamy na bezpłatnej konsultacji."
+  },
+  "blog": {
+    "lead": "Eksperckie artykuły o kosmetologii, depilacji laserowej i pielęgnacji skóry.",
+    "readMore": "Czytaj dalej",
+    "readingTime": "Czas czytania: {min} min",
+    "publishedOn": "Opublikowano",
+    "updatedOn": "Aktualizacja",
+    "author": "Autor",
+    "reviewedBy": "Recenzja merytoryczna",
+    "toc": "Spis treści",
+    "relatedPosts": "Podobne artykuły",
+    "relatedServiceCtaTitle": "Umów się na zabieg",
+    "relatedServiceCtaButton": "Zobacz usługę",
+    "allCategories": "Wszystkie",
+    "backToBlog": "Wróć do bloga",
+    "category": {
+      "depilacja-laserowa": "Depilacja laserowa",
+      "odmlodzenie-twarzy": "Odmłodzenie twarzy",
+      "czyszczenie-pielegnacja": "Czyszczenie i pielęgnacja",
+      "zabiegi-specjalistyczne": "Zabiegi specjalistyczne",
+      "poradniki-faq": "Poradniki i FAQ",
+      "sezonowo-trendy": "Sezonowo i trendy"
+    }
   },
   "privacy": {
     "title": "Polityka prywatności",

@@ -1,10 +1,9 @@
 import Image from 'next/image'
 
 export function PostMeta({
-  dateLabel, minutes, readingTimeLabel, authorName, authorJobTitle, authorPhoto,
+  dateLabel, readingTimeLabel, authorName, authorJobTitle, authorPhoto,
 }: {
   dateLabel?: string | null
-  minutes: number
   readingTimeLabel: string
   authorName?: string | null
   authorJobTitle?: string | null
@@ -22,7 +21,7 @@ export function PostMeta({
         </span>
       )}
       {dateLabel && <span>{dateLabel}</span>}
-      <span>{readingTimeLabel.replace('{min}', String(minutes))}</span>
+      <span>{readingTimeLabel}</span>
     </div>
   )
 }

@@ -57,8 +57,7 @@ export async function BlogPost({
           <h1 className="font-serif text-[clamp(30px,4.5vw,46px)] font-semibold text-graphite leading-[1.12] mb-4">{post.title}</h1>
           <PostMeta
             dateLabel={dateLabel}
-            minutes={minutes}
-            readingTimeLabel={t('blog.readingTime')}
+            readingTimeLabel={t('blog.readingTime', { min: minutes })}
             authorName={author?.name}
             authorJobTitle={author?.jobTitle}
             authorPhoto={author?.photo}

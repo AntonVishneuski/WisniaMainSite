@@ -5,13 +5,13 @@ import { PostCard, type PostCardData } from './PostCard'
 export type IndexPost = PostCardData & { category: string }
 
 export function BlogIndex({
-  posts, categories, allLabel, readMore, hrefFor,
+  posts, categories, allLabel, readMore, localePrefix,
 }: {
   posts: IndexPost[]
   categories: { value: string; label: string }[]
   allLabel: string
   readMore: string
-  hrefFor: (slug: string) => string
+  localePrefix: string
 }) {
   const [active, setActive] = useState<string>('')
   const present = new Set(posts.map((p) => p.category))
@@ -37,7 +37,7 @@ export function BlogIndex({
       </div>
       {shown.length ? (
         <div className="grid grid-cols-1 min-[640px]:grid-cols-2 min-[960px]:grid-cols-3 gap-[26px]">
-          {shown.map((p) => <PostCard key={p.slug} post={p} href={hrefFor(p.slug)} readMore={readMore} />)}
+          {shown.map((p) => <PostCard key={p.slug} post={p} href={`${localePrefix}/blog/${p.slug}`} readMore={readMore} />)}
         </div>
       ) : (
         <p className="text-gray">—</p>

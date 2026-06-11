@@ -61,7 +61,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
     cover: typeof p.cover === 'object' ? p.cover : null,
   }))
   const categories = CATEGORY_VALUES.map((v) => ({ value: v, label: t(`blog.category.${v}` as any) }))
-  const hrefFor = (slug: string) => (isRu ? `/ru/blog/${slug}` : `/blog/${slug}`)
+  const localePrefix = isRu ? '/ru' : ''
 
   return (
     <>
@@ -78,7 +78,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
             <p className="mt-4 text-[17px] leading-[1.65] text-gray max-w-[600px]">{t('blog.lead')}</p>
           </section>
         </Reveal>
-        <BlogIndex posts={indexPosts} categories={categories} allLabel={t('blog.allCategories')} readMore={t('blog.readMore')} hrefFor={hrefFor} />
+        <BlogIndex posts={indexPosts} categories={categories} allLabel={t('blog.allCategories')} readMore={t('blog.readMore')} localePrefix={localePrefix} />
       </main>
       <Footer locale={locale} settings={settings} services={services} />
       <StickyCta locale={locale} settings={settings} />

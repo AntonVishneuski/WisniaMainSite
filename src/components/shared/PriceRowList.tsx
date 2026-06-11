@@ -59,7 +59,7 @@ function PackageRow({ row }: { row: PriceRow }) {
         <span className="inline-flex items-center w-fit mb-1 px-2 py-0.5 rounded-full bg-cherry text-cream text-[11px] font-semibold tracking-[0.06em]">
           -15%
         </span>
-        <strong className="font-serif text-[17px] font-semibold text-graphite leading-[1.2]">
+        <strong className="font-serif text-[19px] font-semibold text-graphite leading-[1.2]">
           {row.name}
         </strong>
         {row.subline && (
@@ -92,7 +92,7 @@ function NormalRow({
     <div className="flex items-center justify-between gap-4 py-4 border-b border-[rgba(26,26,26,0.08)] last:border-b-0">
       {/* Name + subline */}
       <div className="flex flex-col gap-0.5">
-        <strong className="font-serif text-[17px] font-semibold text-graphite leading-[1.2]">
+        <strong className="font-serif text-[19px] font-semibold text-graphite leading-[1.2]">
           {row.name}
         </strong>
         {row.subline && (
@@ -103,7 +103,7 @@ function NormalRow({
       {/* Price + book CTA */}
       <div className="flex items-center gap-3 shrink-0">
         {row.price && (
-          <span className="font-serif text-[18px] font-semibold text-graphite">
+          <span className="font-serif text-[20px] font-semibold text-graphite">
             {row.price}
           </span>
         )}
@@ -163,7 +163,7 @@ export function PriceRowList({
                 id={categoryAnchor(group.category)}
                 className="scroll-mt-[100px] flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-4 pb-3 border-b-2 border-[rgba(201,149,108,0.3)]"
               >
-                <h3 className="font-serif text-[20px] font-semibold text-graphite leading-[1.2]">
+                <h3 className="font-serif text-[22px] font-semibold text-graphite leading-[1.2]">
                   {group.category}
                 </h3>
                 {group.categorySubtitle && (

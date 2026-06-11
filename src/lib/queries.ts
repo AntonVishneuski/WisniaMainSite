@@ -44,7 +44,7 @@ export async function getServicesNav(locale: Locale): Promise<{ slug: string; ti
 export async function getPublishedPosts(locale: Locale, opts?: { category?: string }) {
   const payload = await getPayloadClient()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const where: any = { status: { equals: 'published' } }
+  const where: any = { status: { equals: 'published' }, noindex: { not_equals: true } }
   if (opts?.category) where.category = { equals: opts.category }
   const res = await payload.find({ collection: 'posts', locale, where, sort: '-publishedAt', limit: 100, depth: 1 })
   return res.docs
@@ -62,7 +62,7 @@ export async function getPost(slug: string, locale: Locale) {
 
 export async function getPostParams() {
   const payload = await getPayloadClient()
-  const res = await payload.find({ collection: 'posts', where: { status: { equals: 'published' } }, limit: 200, depth: 0, locale: 'pl' })
+  const res = await payload.find({ collection: 'posts', where: { status: { equals: 'published' }, noindex: { not_equals: true } }, limit: 200, depth: 0, locale: 'pl' })
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return res.docs.map((d: any) => d.slug as string)
 }
@@ -70,7 +70,7 @@ export async function getPostParams() {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getRelatedPosts(post: any, locale: Locale) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const explicit = (post?.relatedPosts ?? []).filter((p: any) => typeof p === 'object' && p?.status === 'published')
+  const explicit = (post?.relatedPosts ?? []).filter((p: any) => typeof p === 'object' && p?.status === 'published' && p?.slug !== post.slug)
   if (explicit.length >= 3) return explicit.slice(0, 3)
   const payload = await getPayloadClient()
   const res = await payload.find({

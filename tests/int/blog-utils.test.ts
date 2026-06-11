@@ -56,6 +56,6 @@ describe('medicalWebPageLd', () => {
     expect(ld.author.name).toBe('Dr A')
     expect(ld.reviewedBy.name).toBe('Dr B')
     expect(ld.datePublished).toBe('2026-01-01')
-    expect(ld.mainEntityOfPage).toBe('https://x/blog/rf')
+    expect(ld.mainEntityOfPage).toEqual({ '@type': 'WebPage', '@id': 'https://x/blog/rf' })
   })
 })

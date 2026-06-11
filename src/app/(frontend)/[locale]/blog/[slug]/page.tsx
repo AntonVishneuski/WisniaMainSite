@@ -34,10 +34,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     metadataBase: new URL(SITE),
     title, description,
     robots: post.noindex ? { index: false, follow: true } : undefined,
-    alternates: { canonical: url, languages: { pl: `${SITE}/blog/${slug}`, ru: `${SITE}/ru/blog/${slug}` } },
+    alternates: {
+      canonical: url,
+      languages: { pl: `${SITE}/blog/${slug}`, ru: `${SITE}/ru/blog/${slug}`, 'x-default': `${SITE}/blog/${slug}` },
+      types: { 'application/rss+xml': isRu ? `${SITE}/ru/blog/rss.xml` : `${SITE}/blog/rss.xml` },
+    },
     openGraph: {
       type: 'article', url, title, description, siteName: 'Wiśnia Beauty Studio',
       locale: isRu ? 'ru_RU' : 'pl_PL', alternateLocale: isRu ? 'pl_PL' : 'ru_RU',
+      publishedTime: post.publishedAt ?? undefined,
+      modifiedTime: post.updatedAt ?? undefined,
+      authors: [SITE],
       images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
     },
     twitter: { card: 'summary_large_image', title, description, images: [imageUrl] },
@@ -93,12 +100,12 @@ export default async function PostPage({ params }: { params: Promise<{ locale: s
       })} />
       <JsonLd data={breadcrumbLd([
         { name: 'Wiśnia', url: base },
-        { name: 'Blog', url: `${base}/blog` },
+        { name: t('nav.blog'), url: `${base}/blog` },
         { name: post.title, url },
       ])} />
       <Header locale={locale} settings={settings} services={services} />
       <main>
-        <BlogPost post={post} settings={settings} locale={locale} blogLabel="Blog" />
+        <BlogPost post={post} settings={settings} locale={locale} blogLabel={t('nav.blog')} />
         <RelatedPosts posts={relatedCards} heading={t('blog.relatedPosts')} readMore={t('blog.readMore')} hrefFor={hrefFor} />
       </main>
       <Footer locale={locale} settings={settings} services={services} />

@@ -13,8 +13,8 @@ export async function buildFeed(locale: 'pl' | 'ru') {
   const items = (posts as any[]).map((p) => `
     <item>
       <title>${esc(p.title)}</title>
-      <link>${base}/blog/${p.slug}</link>
-      <guid>${base}/blog/${p.slug}</guid>
+      <link>${esc(`${base}/blog/${p.slug}`)}</link>
+      <guid>${esc(`${base}/blog/${p.slug}`)}</guid>
       ${p.publishedAt ? `<pubDate>${new Date(p.publishedAt).toUTCString()}</pubDate>` : ''}
       ${p.excerpt ? `<description>${esc(p.excerpt)}</description>` : ''}
     </item>`).join('')

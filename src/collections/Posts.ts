@@ -26,6 +26,10 @@ export const Posts: CollectionConfig = {
     {
       name: 'slug', type: 'text', required: true, unique: true, index: true,
       admin: { description: 'Polski slug, wspólny dla obu języków, np. depilacja-laserowa-latem' },
+      validate: (value: string | null | undefined) => {
+        if (!value) return 'Slug jest wymagany'
+        return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) ? true : 'Slug: małe litery, cyfry i myślniki (np. depilacja-laserowa-latem)'
+      },
     },
     {
       name: 'status', type: 'select', defaultValue: 'draft',

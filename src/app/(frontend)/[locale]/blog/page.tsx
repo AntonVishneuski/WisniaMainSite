@@ -30,7 +30,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     metadataBase: new URL(SITE),
     title, description,
-    alternates: { canonical, languages: { pl: `${SITE}/blog`, ru: `${SITE}/ru/blog` } },
+    alternates: {
+      canonical,
+      languages: { pl: `${SITE}/blog`, ru: `${SITE}/ru/blog`, 'x-default': `${SITE}/blog` },
+      types: { 'application/rss+xml': isRu ? `${SITE}/ru/blog/rss.xml` : `${SITE}/blog/rss.xml` },
+    },
     openGraph: {
       type: 'website', url: canonical, title, description, siteName: 'Wiśnia Beauty Studio',
       locale: isRu ? 'ru_RU' : 'pl_PL', alternateLocale: isRu ? 'pl_PL' : 'ru_RU',
@@ -47,6 +51,7 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
   const isRu = locale === 'ru'
   const base = isRu ? `${SITE}/ru` : SITE
   const homeHref = isRu ? '/ru' : '/'
+  const blogLabel = t('nav.blog')
 
   const payload = await getPayloadClient()
   const settings: any = await payload.findGlobal({ slug: 'settings', locale: locale as Locale }).catch(() => null)
@@ -65,20 +70,22 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
 
   return (
     <>
-      <JsonLd data={breadcrumbLd([{ name: 'Wiśnia', url: base }, { name: 'Blog', url: `${base}/blog` }])} />
+      <JsonLd data={breadcrumbLd([{ name: 'Wiśnia', url: base }, { name: blogLabel, url: `${base}/blog` }])} />
       <Header locale={locale} settings={settings} services={services} />
       <main>
-        <div className="max-w-[1200px] mx-auto px-6 pt-6">
-          <Breadcrumb items={[{ label: 'Wiśnia', href: homeHref }, { label: 'Blog' }]} />
+        <div className="bg-blush">
+          <div className="max-w-[1200px] mx-auto px-6 pt-6">
+            <Breadcrumb items={[{ label: 'Wiśnia', href: homeHref }, { label: blogLabel }]} />
+          </div>
+          <Reveal>
+            <section className="max-w-[1200px] mx-auto px-6 pt-4 pb-10">
+              <p className="eyebrow mb-3">{blogLabel}</p>
+              <h1 className="font-serif text-[clamp(28px,3.5vw,48px)] font-semibold text-graphite leading-[1.12] max-w-[640px]">{`${blogLabel} · Wiśnia Beauty Studio`}</h1>
+              <p className="mt-4 text-[17px] leading-[1.65] text-gray max-w-[600px]">{t('blog.lead')}</p>
+            </section>
+          </Reveal>
         </div>
-        <Reveal>
-          <section className="max-w-[1200px] mx-auto px-6 pt-4 pb-10">
-            <p className="eyebrow mb-3">Blog</p>
-            <h1 className="font-serif text-[clamp(28px,3.5vw,48px)] font-semibold text-graphite leading-[1.12] max-w-[640px]">Blog · Wiśnia Beauty Studio</h1>
-            <p className="mt-4 text-[17px] leading-[1.65] text-gray max-w-[600px]">{t('blog.lead')}</p>
-          </section>
-        </Reveal>
-        <BlogIndex posts={indexPosts} categories={categories} allLabel={t('blog.allCategories')} readMore={t('blog.readMore')} localePrefix={localePrefix} />
+        <BlogIndex posts={indexPosts} categories={categories} allLabel={t('blog.allCategories')} readMore={t('blog.readMore')} localePrefix={localePrefix} filterLabel={t('blog.filterByCategory')} />
       </main>
       <Footer locale={locale} settings={settings} services={services} />
       <StickyCta locale={locale} settings={settings} />

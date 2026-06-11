@@ -39,3 +39,48 @@ export async function getServicesNav(locale: Locale): Promise<{ slug: string; ti
     return []
   }
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getPublishedPosts(locale: Locale, opts?: { category?: string }) {
+  const payload = await getPayloadClient()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const where: any = { status: { equals: 'published' } }
+  if (opts?.category) where.category = { equals: opts.category }
+  const res = await payload.find({ collection: 'posts', locale, where, sort: '-publishedAt', limit: 100, depth: 1 })
+  return res.docs
+}
+
+export async function getPost(slug: string, locale: Locale) {
+  const payload = await getPayloadClient()
+  const res = await payload.find({
+    collection: 'posts', locale,
+    where: { slug: { equals: slug }, status: { equals: 'published' } },
+    limit: 1, depth: 2,
+  })
+  return res.docs[0] ?? null
+}
+
+export async function getPostParams() {
+  const payload = await getPayloadClient()
+  const res = await payload.find({ collection: 'posts', where: { status: { equals: 'published' } }, limit: 200, depth: 0, locale: 'pl' })
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return res.docs.map((d: any) => d.slug as string)
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getRelatedPosts(post: any, locale: Locale) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const explicit = (post?.relatedPosts ?? []).filter((p: any) => typeof p === 'object' && p?.status === 'published')
+  if (explicit.length >= 3) return explicit.slice(0, 3)
+  const payload = await getPayloadClient()
+  const res = await payload.find({
+    collection: 'posts', locale,
+    where: { status: { equals: 'published' }, category: { equals: post.category }, slug: { not_equals: post.slug } },
+    sort: '-publishedAt', limit: 3, depth: 1,
+  })
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const seen = new Set(explicit.map((p: any) => p.slug))
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const filler = res.docs.filter((d: any) => !seen.has(d.slug))
+  return [...explicit, ...filler].slice(0, 3)
+}

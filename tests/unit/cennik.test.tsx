@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, afterEach } from 'vitest'
 import { render, screen, within, fireEvent } from '@testing-library/react'
 import { NextIntlClientProvider } from 'next-intl'
 import messages from '../../messages/pl.json'
@@ -50,6 +50,10 @@ function renderCennik(prices: PriceRow[]) {
 }
 
 describe('Cennik', () => {
+  afterEach(() => {
+    window.location.hash = ''
+  })
+
   it('renders normal row name and price', () => {
     const { unmount } = renderCennik(kosmetoRows)
     expect(screen.getByText('Wodorowe')).toBeTruthy()
@@ -73,6 +77,17 @@ describe('Cennik', () => {
     const pakietyTab = within(tablist).getByRole('tab', { name: /pakiety/i })
     fireEvent.click(pakietyTab)
     // After activation, the priceWas should be visible in the active panel
+    expect(within(container).getByText('1000 zł')).toBeTruthy()
+    unmount()
+  })
+
+  it('opens the tab requested via URL hash on mount (deep-link from a service page)', () => {
+    window.location.hash = '#tab-pakiety'
+    const { unmount, container } = renderCennik(pakietyRows)
+    const tablist = within(container).getByRole('tablist')
+    const pakietyTab = within(tablist).getByRole('tab', { name: /pakiety/i })
+    // Activated from the hash without any click
+    expect(pakietyTab.getAttribute('aria-selected')).toBe('true')
     expect(within(container).getByText('1000 zł')).toBeTruthy()
     unmount()
   })

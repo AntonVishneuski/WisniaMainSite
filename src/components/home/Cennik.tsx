@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { type PriceRow } from '@/lib/price-groups'
 import { contactLinks } from '@/lib/contact-links'
@@ -37,6 +37,19 @@ export function Cennik({
   const tabRefs = useRef<Map<TabId, HTMLButtonElement>>(new Map())
 
   const { booksyHref } = contactLinks(settings)
+
+  // Open the tab requested via URL hash (e.g. #tab-laser, #tab-pakiety) so
+  // service-page links can deep-link straight into the right price section.
+  useEffect(() => {
+    function syncFromHash() {
+      const frag = window.location.hash.replace(/^#/, '')
+      const id = (frag.startsWith('tab-') ? frag.slice(4) : frag) as TabId
+      if (TABS.some((tb) => tb.id === id)) setActiveTab(id)
+    }
+    syncFromHash()
+    window.addEventListener('hashchange', syncFromHash)
+    return () => window.removeEventListener('hashchange', syncFromHash)
+  }, [])
 
   function handleTabKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     const ids = TABS.map((t) => t.id)

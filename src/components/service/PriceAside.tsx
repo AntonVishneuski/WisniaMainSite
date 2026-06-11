@@ -9,6 +9,8 @@ export function PriceAside({
   bookLabel,
   waLabel,
   consultNote,
+  fullPriceHref,
+  fullPriceLabel,
 }: {
   heading?: string | null
   rows: PriceRow[]
@@ -17,11 +19,13 @@ export function PriceAside({
   bookLabel: string
   waLabel: string
   consultNote?: string | null
+  fullPriceHref?: string | null
+  fullPriceLabel?: string | null
 }) {
   if (!rows || rows.length === 0) return null
 
   return (
-    <aside className="sticky top-[100px] bg-white border border-[var(--line)] rounded-[var(--radius-lg)] shadow-md p-7">
+    <aside className="bg-white border border-[var(--line)] rounded-[var(--radius-lg)] shadow-md p-7">
       {heading && (
         <h2 className="font-serif text-[22px] font-semibold text-graphite mb-5">{heading}</h2>
       )}
@@ -52,6 +56,17 @@ export function PriceAside({
           </div>
         ))}
       </div>
+
+      {/* Link to the full price list (home cennik, matching tab) */}
+      {fullPriceHref && fullPriceLabel && (
+        <a
+          href={fullPriceHref}
+          className="inline-flex items-center gap-1 mt-3.5 text-[13px] font-medium text-cherry border-b border-[var(--line-warm)] hover:border-cherry transition-colors"
+        >
+          {fullPriceLabel}
+          <span aria-hidden="true">→</span>
+        </a>
+      )}
 
       {/* Bottom CTA cluster — stacked full-width */}
       <div className="flex flex-col gap-[10px] mt-5">

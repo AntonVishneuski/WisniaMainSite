@@ -12,14 +12,18 @@ export type PackagePromoData = {
 export function PackagePromo({
   promo,
   ctaLabel,
+  href,
 }: {
   promo?: PackagePromoData | null
   ctaLabel?: string
+  /** Resolved href; overrides the raw promo.link (e.g. mapping #pakiety to the home cennik tab) */
+  href?: string | null
 }) {
   if (!promo?.enabled) return null
 
   const raw = (promo.link ?? '').trim()
-  const safeHref = /^(#|\/|https?:|tel:|mailto:)/i.test(raw) ? raw : '#'
+  const fallbackHref = /^(#|\/|https?:|tel:|mailto:)/i.test(raw) ? raw : '#'
+  const safeHref = href ?? fallbackHref
 
   return (
     <div className="mt-[18px] p-4 border border-[var(--line-warm)] rounded-[var(--radius-md)] bg-gradient-to-br from-[rgba(201,149,108,0.14)] to-[rgba(201,149,108,0.04)]">

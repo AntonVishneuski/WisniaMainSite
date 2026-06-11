@@ -10,6 +10,7 @@ import { CrossLinks } from './CrossLinks'
 import { ReviewCard } from '@/components/shared/ReviewCard'
 import { BeforeAfterCard } from '@/components/shared/BeforeAfterCard'
 import { contactLinks } from '@/lib/contact-links'
+import { resolvePriceAnchor } from '@/lib/price-anchor'
 import type { ServiceLinkRef } from '@/lib/service-links'
 import type { PriceRow } from '@/lib/price-groups'
 
@@ -26,6 +27,12 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
   const homeHref = locale === 'ru' ? '/ru' : '/'
   const uslugiHref = locale === 'ru' ? '/ru/uslugi' : '/uslugi'
   const { booksyHref, waHref } = contactLinks(settings)
+
+  // Full price list lives in the home Cennik section; deep-link the tab that
+  // matches this page's prices, and resolve the package promo anchor there too.
+  const priceTab = ((page.priceItems ?? [])[0] as PriceRow | undefined)?.tab
+  const fullPriceHref = priceTab ? `${homeHref}#tab-${priceTab}` : `${homeHref}#cennik`
+  const packageHref = resolvePriceAnchor(page.packagePromo?.link, homeHref)
 
   const breadcrumbItems = [
     { label: 'Wiśnia', href: homeHref },
@@ -89,8 +96,9 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
           )}
         </div>
 
-        {/* Price aside column */}
-        <div>
+        {/* Price aside column — sticks as one unit on desktop so the price
+            card can't scroll over the package promo below it */}
+        <div className="self-start min-[960px]:sticky min-[960px]:top-[100px]">
           <Reveal>
             <PriceAside
               heading={page.priceHeading ?? undefined}
@@ -100,10 +108,13 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
               bookLabel={t('cta.bookShort')}
               waLabel={t('cta.whatsapp')}
               consultNote={t('service.consultNote')}
+              fullPriceHref={fullPriceHref}
+              fullPriceLabel={t('service.fullPriceCta')}
             />
             <PackagePromo
               promo={page.packagePromo ?? undefined}
               ctaLabel={t('service.packageCta')}
+              href={packageHref}
             />
           </Reveal>
         </div>

@@ -96,6 +96,12 @@ export function Footer({ locale, settings, services = [] }: Props) {
                   {label}
                 </a>
               ))}
+              <Link
+                href={locale === 'ru' ? '/ru/blog' : '/blog'}
+                className="block py-[6px] text-[15px] text-gray transition-colors duration-200 hover:text-cherry"
+              >
+                {t('nav.blog')}
+              </Link>
             </div>
           </div>
 

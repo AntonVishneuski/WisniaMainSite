@@ -203,6 +203,15 @@ export function Header({ locale, settings, services = [] }: Props) {
               </div>
             )}
 
+            <Link
+              href={locale === 'ru' ? '/ru/blog' : '/blog'}
+              className="relative text-[15px] text-graphite py-1 transition-colors duration-200 hover:text-cherry
+                after:absolute after:left-0 after:bottom-[-2px] after:h-[1.5px] after:w-0 after:bg-cherry
+                after:transition-[width] after:duration-[250ms] hover:after:w-full"
+            >
+              {t('nav.blog')}
+            </Link>
+
             {navLinks.map(({ href, label }) => (
               <a
                 key={href}
@@ -330,6 +339,14 @@ export function Header({ locale, settings, services = [] }: Props) {
               </div>
             </div>
           )}
+
+          <Link
+            href={locale === 'ru' ? '/ru/blog' : '/blog'}
+            onClick={() => setDrawerOpen(false)}
+            className="font-serif text-[30px] text-graphite py-2.5 border-b border-[rgba(26,26,26,0.10)]"
+          >
+            {t('nav.blog')}
+          </Link>
 
           {navLinks.map(({ href, label }) => (
             <a

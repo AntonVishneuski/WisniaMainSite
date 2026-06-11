@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { type PriceRow } from '@/lib/price-groups'
+import { categorySlug } from '@/lib/category-anchor'
 import { contactLinks } from '@/lib/contact-links'
 import { PriceRowList } from '@/components/shared/PriceRowList'
 
@@ -38,18 +39,51 @@ export function Cennik({
 
   const { booksyHref } = contactLinks(settings)
 
-  // Open the tab requested via URL hash (e.g. #tab-laser, #tab-pakiety) so
-  // service-page links can deep-link straight into the right price section.
+  // Open the tab requested via URL hash so service-page links deep-link into the
+  // right price section. Supports:
+  //   #tab-<id>        → activate the tab
+  //   #cat-<slug>      → activate the tab that owns the category AND scroll to it
+  //                      (e.g. men's vs women's laser, which share the laser tab)
   useEffect(() => {
+    const catToTab = new Map<string, TabId>()
+    for (const p of prices) {
+      if (p.category) catToTab.set(categorySlug(p.category), p.tab as TabId)
+    }
     function syncFromHash() {
-      const frag = window.location.hash.replace(/^#/, '')
+      const raw = window.location.hash.replace(/^#/, '')
+      let frag = raw
+      try { frag = decodeURIComponent(raw) } catch { /* keep raw */ }
+
+      if (frag.startsWith('cat-')) {
+        const slug = frag.slice(4)
+        const tab = catToTab.get(slug)
+        if (tab) {
+          setActiveTab(tab)
+          // The category header only exists once the (re-rendered) tab panel
+          // mounts, which can take more than a frame during hydration — poll a
+          // few frames until it appears, then scroll it in (scroll-mt offsets
+          // for the sticky header).
+          let attempts = 0
+          const tryScroll = () => {
+            const el = document.getElementById(`cat-${slug}`)
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            } else if (attempts++ < 30) {
+              requestAnimationFrame(tryScroll)
+            }
+          }
+          requestAnimationFrame(tryScroll)
+        }
+        return
+      }
+
       const id = (frag.startsWith('tab-') ? frag.slice(4) : frag) as TabId
       if (TABS.some((tb) => tb.id === id)) setActiveTab(id)
     }
     syncFromHash()
     window.addEventListener('hashchange', syncFromHash)
     return () => window.removeEventListener('hashchange', syncFromHash)
-  }, [])
+  }, [prices])
 
   function handleTabKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     const ids = TABS.map((t) => t.id)

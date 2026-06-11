@@ -11,6 +11,7 @@ import { ReviewCard } from '@/components/shared/ReviewCard'
 import { BeforeAfterCard } from '@/components/shared/BeforeAfterCard'
 import { contactLinks } from '@/lib/contact-links'
 import { resolvePriceAnchor } from '@/lib/price-anchor'
+import { categoryAnchor } from '@/lib/category-anchor'
 import type { ServiceLinkRef } from '@/lib/service-links'
 import type { PriceRow } from '@/lib/price-groups'
 
@@ -28,10 +29,15 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
   const uslugiHref = locale === 'ru' ? '/ru/uslugi' : '/uslugi'
   const { booksyHref, waHref } = contactLinks(settings)
 
-  // Full price list lives in the home Cennik section; deep-link the tab that
-  // matches this page's prices, and resolve the package promo anchor there too.
-  const priceTab = ((page.priceItems ?? [])[0] as PriceRow | undefined)?.tab
-  const fullPriceHref = priceTab ? `${homeHref}#tab-${priceTab}` : `${homeHref}#cennik`
+  // Full price list lives in the home Cennik section; deep-link the exact
+  // CATEGORY that matches this page's prices (e.g. men's vs women's laser),
+  // falling back to the tab, then the whole section.
+  const firstPrice = (page.priceItems ?? [])[0] as PriceRow | undefined
+  const fullPriceHref = firstPrice?.category
+    ? `${homeHref}#${categoryAnchor(firstPrice.category)}`
+    : firstPrice?.tab
+      ? `${homeHref}#tab-${firstPrice.tab}`
+      : `${homeHref}#cennik`
   const packageHref = resolvePriceAnchor(page.packagePromo?.link, homeHref)
 
   const breadcrumbItems = [

@@ -4,6 +4,7 @@ import { ArrowRight, Gift, Microscope } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { CtaLink } from '@/components/ui/CtaButtons'
 import { groupPrices, type PriceRow } from '@/lib/price-groups'
+import { categoryAnchor } from '@/lib/category-anchor'
 
 const TABS_ORDER: PriceRow['tab'][] = ['kosmetologia', 'laser', 'cialo', 'pakiety']
 
@@ -158,7 +159,10 @@ export function PriceRowList({
           <div key={`${tab}-${gi}`} className="mb-8 last:mb-0">
             {/* Category header */}
             {group.category && (
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-4 pb-3 border-b-2 border-[rgba(201,149,108,0.3)]">
+              <div
+                id={categoryAnchor(group.category)}
+                className="scroll-mt-[100px] flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-4 pb-3 border-b-2 border-[rgba(201,149,108,0.3)]"
+              >
                 <h3 className="font-serif text-[20px] font-semibold text-graphite leading-[1.2]">
                   {group.category}
                 </h3>

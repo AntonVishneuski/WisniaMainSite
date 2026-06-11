@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next'
+import { SITE_URL } from "@/lib/site-url"
 import { getServicePageParams, getPostParams } from '@/lib/queries'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const url = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  const url = SITE_URL
   const staticPaths = ['', '/polityka-prywatnosci', '/uslugi', '/blog']
   let slugs: string[] = []
   try { slugs = await getServicePageParams() } catch { slugs = [] }

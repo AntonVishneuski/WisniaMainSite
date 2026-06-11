@@ -1,9 +1,13 @@
 import type { MetadataRoute } from 'next'
+import { SITE_URL } from '@/lib/site-url'
 
 export default function robots(): MetadataRoute.Robots {
-  const url = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  // Keep preview/staging deployments out of the search index entirely.
+  if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production') {
+    return { rules: [{ userAgent: '*', disallow: '/' }] }
+  }
   return {
     rules: [{ userAgent: '*', allow: '/', disallow: ['/admin', '/api'] }],
-    sitemap: `${url}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   }
 }

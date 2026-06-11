@@ -1,4 +1,5 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server'
+import { SITE_URL } from "@/lib/site-url"
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import type { Locale } from '@/lib/i18n'
@@ -13,7 +14,7 @@ import { BlogPost } from '@/components/blog/BlogPost'
 import { RelatedPosts } from '@/components/blog/RelatedPosts'
 
 export const revalidate = 3600
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+const SITE = SITE_URL
 
 export async function generateStaticParams() {
   const slugs = await getPostParams()

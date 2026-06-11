@@ -1,4 +1,5 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server'
+import { SITE_URL } from "@/lib/site-url"
 import type { Metadata } from 'next'
 import { getHomeData, getServicesNav } from '@/lib/queries'
 import type { Locale } from '@/lib/i18n'
@@ -20,7 +21,7 @@ import { Kontakt } from '@/components/home/Kontakt'
 
 export const revalidate = 3600
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+const SITE = SITE_URL
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params

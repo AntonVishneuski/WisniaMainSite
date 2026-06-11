@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SITE_URL } from "@/lib/site-url"
 import { setRequestLocale, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Header } from '@/components/layout/Header'
@@ -9,7 +10,7 @@ import { getServicesNav } from '@/lib/queries'
 
 export const revalidate = 3600
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+const SITE = SITE_URL
 
 export async function generateMetadata({
   params,

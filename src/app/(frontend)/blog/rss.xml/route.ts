@@ -1,6 +1,7 @@
 import { getPublishedPosts } from '@/lib/queries'
+import { SITE_URL } from "@/lib/site-url"
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+const SITE = SITE_URL
 export const revalidate = 3600
 
 function esc(s: string) {

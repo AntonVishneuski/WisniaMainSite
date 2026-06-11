@@ -1,4 +1,5 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server'
+import { SITE_URL } from "@/lib/site-url"
 import type { Metadata } from 'next'
 import { locales } from '@/lib/i18n'
 import type { Locale } from '@/lib/i18n'
@@ -14,7 +15,7 @@ import { Breadcrumb } from '@/components/service/Breadcrumb'
 import { BlogIndex, type IndexPost } from '@/components/blog/BlogIndex'
 
 export const revalidate = 3600
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+const SITE = SITE_URL
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))

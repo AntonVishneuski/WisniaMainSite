@@ -35,6 +35,17 @@ export function Header({ locale, settings, services = [] }: Props) {
     }
   }, [drawerOpen])
 
+  // Close the mobile drawer if the viewport grows to the desktop breakpoint
+  // (otherwise the full-screen overlay stays stuck open on resize).
+  useEffect(() => {
+    if (!drawerOpen) return
+    function onResize() {
+      if (window.innerWidth >= 960) setDrawerOpen(false)
+    }
+    window.addEventListener('resize', onResize, { passive: true })
+    return () => window.removeEventListener('resize', onResize)
+  }, [drawerOpen])
+
   // Focus trap within drawer while open
   function handleDrawerKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     if (e.key !== 'Tab') return

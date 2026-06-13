@@ -1,14 +1,16 @@
 'use client'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 export function LangToggle({ locale }: { locale: string }) {
   const pathname = usePathname()
-  const router = useRouter()
 
   function to(l: 'pl' | 'ru') {
+    if (l === locale) return
     const stripped = pathname.replace(/^\/(pl|ru)(?=\/|$)/, '') || '/'
     const hash = typeof window !== 'undefined' ? window.location.hash : ''
-    router.push((l === 'pl' ? stripped : `/ru${stripped === '/' ? '' : stripped}`) + hash)
+    // Hard navigation: a language switch is a full locale/RSC context change;
+    // router.push intermittently no-ops here, so navigate the document directly.
+    window.location.href = (l === 'pl' ? stripped : `/ru${stripped === '/' ? '' : stripped}`) + hash
   }
 
   return (

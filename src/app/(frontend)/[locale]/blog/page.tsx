@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params
   const t = await getTranslations({ locale })
   const isRu = locale === 'ru'
-  const title = `Blog · Wiśnia Beauty Studio`
+  const title = `${t('nav.blog')} · Wiśnia Beauty Studio`
   const description = t('blog.lead')
   const canonical = isRu ? `${SITE}/ru/blog` : `${SITE}/blog`
   return {

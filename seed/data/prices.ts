@@ -484,7 +484,7 @@ export const prices: PriceRow[] = [
     category: { pl: 'Combo depilacji', ru: 'Комбо эпиляции' },
     categorySubtitle: { pl: 'za wizytę · -15%', ru: 'за визит · -15%' },
     name: { pl: 'Bikini głębokie + pachy', ru: 'Бикини глубокое + подмышки' },
-    price: { pl: '330 zł', ru: '330 zł' },
+    price: { pl: '315 zł', ru: '315 zł' },
     priceWas: { pl: 'zamiast 370 zł', ru: 'вместо 370 zł' },
     isPackage: true,
     order: 52,

@@ -5,6 +5,7 @@ export interface SettingsLocale {
   whatsapp: string
   instagram: string
   hours: string
+  mapEmbedUrl: string
   booksyUrl: string
   googleRating: string
   booksyRating: string
@@ -18,6 +19,7 @@ export const settings: { pl: SettingsLocale; ru: SettingsLocale } = {
     whatsapp: '48453270435',
     instagram: 'https://instagram.com/wisnia_beauty_studio',
     hours: 'Pon–Sob 8:00–20:00',
+    mapEmbedUrl: 'https://www.google.com/maps?q=ul.+Gen.+W.+Andersa+15,+Warszawa&output=embed',
     booksyUrl: 'https://wisniabeauty.booksy.com/a',
     googleRating: '5,0',
     booksyRating: '4,9',
@@ -29,6 +31,7 @@ export const settings: { pl: SettingsLocale; ru: SettingsLocale } = {
     whatsapp: '48453270435',
     instagram: 'https://instagram.com/wisnia_beauty_studio',
     hours: 'Пн–Сб 8:00–20:00',
+    mapEmbedUrl: 'https://www.google.com/maps?q=ul.+Gen.+W.+Andersa+15,+Warszawa&output=embed',
     booksyUrl: 'https://wisniabeauty.booksy.com/a',
     googleRating: '5,0',
     booksyRating: '4,9',

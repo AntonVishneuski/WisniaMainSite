@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Jost } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { locales, type Locale } from '../../../lib/i18n'
 import { getPayloadClient } from '../../../lib/getPayload'
 import { Gtm, GtmNoScript } from '../../../components/analytics/Gtm'
@@ -36,6 +37,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
           {children}
           <ConsentBanner />
         </NextIntlClientProvider>
+        <SpeedInsights />
       </body>
     </html>
   )

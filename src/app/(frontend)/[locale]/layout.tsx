@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { locales, type Locale } from '../../../lib/i18n'
 import { getPayloadClient } from '../../../lib/getPayload'
 import { Gtm, GtmNoScript } from '../../../components/analytics/Gtm'
+import { MetaPixel } from '../../../components/analytics/MetaPixel'
 import { ConsentInit } from '../../../components/analytics/ConsentInit'
 import { ConsentBanner } from '../../../components/analytics/ConsentBanner'
 import { UtmCapture } from '../../../components/analytics/UtmCapture'
@@ -31,6 +32,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         <ConsentInit />
         <Gtm gtmId={settings?.gtmId} />
         <GtmNoScript gtmId={settings?.gtmId} />
+        <MetaPixel pixelId={settings?.metaPixelId} />
         <NextIntlClientProvider messages={messages} locale={locale}>
           <UtmCapture />
           {children}

@@ -22,20 +22,27 @@ export function ConsentBanner() {
 
   function accept() {
     try { localStorage.setItem('wisnia-consent', 'granted') } catch {}
-    type WinWithGtag = typeof window & { gtag: (...args: unknown[]) => void }
-    if (typeof window !== 'undefined' && typeof (window as unknown as WinWithGtag).gtag === 'function') {
-      ;(window as unknown as WinWithGtag).gtag('consent', 'update', {
+    type WinWithTrackers = typeof window & {
+      gtag?: (...args: unknown[]) => void
+      fbq?: (...args: unknown[]) => void
+    }
+    const w = window as unknown as WinWithTrackers
+    if (typeof window !== 'undefined' && typeof w.gtag === 'function') {
+      w.gtag('consent', 'update', {
         ad_storage: 'granted',
         analytics_storage: 'granted',
         ad_user_data: 'granted',
         ad_personalization: 'granted',
       })
     }
+    if (typeof w.fbq === 'function') w.fbq('consent', 'grant')
     setVisible(false)
   }
 
   function reject() {
     try { localStorage.setItem('wisnia-consent', 'denied') } catch {}
+    const w = window as unknown as { fbq?: (...args: unknown[]) => void }
+    if (typeof w.fbq === 'function') w.fbq('consent', 'revoke')
     setVisible(false)
   }
 

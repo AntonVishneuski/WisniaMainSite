@@ -36,6 +36,7 @@ export const Settings: GlobalConfig = {
       { name: 'siteUrl', type: 'text', admin: { description: 'np. https://wisniabeauty.pl' } },
       { name: 'gtmId', type: 'text', admin: { description: 'GTM-XXXXXXX' } },
       { name: 'ga4Id', type: 'text' },
+      { name: 'metaPixelId', type: 'text', admin: { description: 'Meta (Facebook) Pixel ID — same cyfry, np. 1234567890123456' } },
       { name: 'searchConsoleToken', type: 'text' },
       { name: 'defaultOgImage', type: 'upload', relationTo: 'media' },
       { name: 'geoLat', type: 'text' },

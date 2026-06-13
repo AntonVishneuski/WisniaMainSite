@@ -840,6 +840,10 @@ export interface Setting {
    */
   gtmId?: string | null;
   ga4Id?: string | null;
+  /**
+   * Meta (Facebook) Pixel ID — same cyfry, np. 1234567890123456
+   */
+  metaPixelId?: string | null;
   searchConsoleToken?: string | null;
   defaultOgImage?: (number | null) | Media;
   geoLat?: string | null;
@@ -866,6 +870,7 @@ export interface SettingsSelect<T extends boolean = true> {
   siteUrl?: T;
   gtmId?: T;
   ga4Id?: T;
+  metaPixelId?: T;
   searchConsoleToken?: T;
   defaultOgImage?: T;
   geoLat?: T;

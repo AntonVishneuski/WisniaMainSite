@@ -89,9 +89,9 @@ function NormalRow({
 }) {
   const bookingHref = row.bookingUrl ?? booksyHref
   return (
-    <div className="flex items-center justify-between gap-4 py-4 border-b border-[rgba(26,26,26,0.08)] last:border-b-0">
+    <div className="flex flex-col gap-2 min-[640px]:flex-row min-[640px]:items-center min-[640px]:justify-between min-[640px]:gap-4 py-4 border-b border-[rgba(26,26,26,0.08)] last:border-b-0">
       {/* Name + subline */}
-      <div className="flex flex-col gap-0.5">
+      <div className="flex flex-col gap-0.5 min-w-0">
         <strong className="font-serif text-[19px] font-semibold text-graphite leading-[1.2]">
           {row.name}
         </strong>

@@ -26,6 +26,8 @@ export const ServicePages: CollectionConfig = {
       { name: 'heroImage', type: 'upload', relationTo: 'media' },
       { name: 'heading', type: 'text', localized: true },
       { name: 'intro', type: 'textarea', localized: true },
+      { name: 'priceFrom', type: 'text', localized: true,
+        admin: { description: 'Opcjonalna cena „od” obok CTA w hero, np. „od 550 zł” / „от 550 zł”' } },
     ] },
     { name: 'about', type: 'richText', localized: true },
     { name: 'forWhom', type: 'richText', localized: true },

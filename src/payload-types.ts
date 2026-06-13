@@ -290,6 +290,10 @@ export interface ServicePage {
   heroImage?: (number | null) | Media;
   heading?: string | null;
   intro?: string | null;
+  /**
+   * Opcjonalna cena „od” obok CTA w hero, np. „od 550 zł” / „от 550 zł”
+   */
+  priceFrom?: string | null;
   about?: {
     root: {
       type: string;
@@ -678,6 +682,7 @@ export interface ServicePagesSelect<T extends boolean = true> {
   heroImage?: T;
   heading?: T;
   intro?: T;
+  priceFrom?: T;
   about?: T;
   forWhom?: T;
   steps?:

@@ -1,6 +1,7 @@
 import * as migration_20260610_120323_initial from './20260610_120323_initial';
 import * as migration_20260610_182916_service_pages from './20260610_182916_service_pages';
 import * as migration_20260611_071402_blog from './20260611_071402_blog';
+import * as migration_20260613_211639_hero_price_from from './20260613_211639_hero_price_from';
 
 export const migrations = [
   {
@@ -16,6 +17,11 @@ export const migrations = [
   {
     up: migration_20260611_071402_blog.up,
     down: migration_20260611_071402_blog.down,
-    name: '20260611_071402_blog'
+    name: '20260611_071402_blog',
+  },
+  {
+    up: migration_20260613_211639_hero_price_from.up,
+    down: migration_20260613_211639_hero_price_from.down,
+    name: '20260613_211639_hero_price_from'
   },
 ];

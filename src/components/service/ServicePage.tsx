@@ -60,6 +60,7 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
           intro={page.intro ?? undefined}
           image={page.heroImage ?? undefined}
           settings={settings}
+          priceFrom={page.priceFrom ?? undefined}
         />
       </Reveal>
 

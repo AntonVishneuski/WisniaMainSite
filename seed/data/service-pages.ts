@@ -4,6 +4,7 @@ export interface ServicePageRow {
   title: { pl: string; ru: string }
   heading: { pl: string; ru: string }
   intro: { pl: string; ru: string }
+  priceFrom?: { pl: string; ru: string }
   about: { pl: string; ru: string }
   forWhom: { pl: string; ru: string } | null
   results: { pl: string; ru: string } | null
@@ -273,6 +274,7 @@ export const servicePages: ServicePageRow[] = [
   // 2 — IPL fotoodmładzanie
   {
     slug: 'ipl-fotoodmladzanie-warszawa',
+    priceFrom: { pl: 'od 550 zł', ru: 'от 550 zł' },
     order: 2,
     title: {
       pl: 'IPL fotoodmładzanie',

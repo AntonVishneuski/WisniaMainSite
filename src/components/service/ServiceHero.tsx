@@ -16,11 +16,13 @@ export function ServiceHero({
   intro,
   image,
   settings,
+  priceFrom,
 }: {
   heading: string
   intro?: string | null
   image?: ServiceHeroImage
   settings: ContactSettings
+  priceFrom?: string | null
 }) {
   const t = useTranslations()
   const tSvc = useTranslations('service')
@@ -107,6 +109,10 @@ export function ServiceHero({
               Booksy
             </CtaLink>
           </div>
+
+          {priceFrom && (
+            <p className="mt-4 font-serif text-[18px] font-semibold text-cherry">{priceFrom}</p>
+          )}
         </div>
 
         {/* Media column */}

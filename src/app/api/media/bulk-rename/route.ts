@@ -19,33 +19,38 @@ async function renameBlobAndSizes(
   replace: string,
   token: string,
 ): Promise<{ url: string; filename: string; sizes?: Record<string, unknown> }> {
-  const oldPathname = new URL(doc.url).pathname.slice(1)
-  const newPathname = oldPathname.replaceAll(find, replace)
-  const { url: newUrl } = await copy(doc.url, newPathname, { access: 'public', token })
-  await del(doc.url, { token })
-
-  if (!doc.sizes) {
-    return { url: newUrl, filename: doc.filename.replaceAll(find, replace) }
-  }
+  // Copy all blobs first, then delete all old ones atomically.
+  // This prevents broken DB records if a mid-sequence copy fails.
+  const oldUrls: string[] = [doc.url]
+  const oldMainPathname = new URL(doc.url).pathname.slice(1)
+  const { url: newUrl } = await copy(doc.url, oldMainPathname.replaceAll(find, replace), { access: 'public', token })
 
   const newSizes: Record<string, unknown> = {}
-  for (const [sizeName, sizeData] of Object.entries(doc.sizes)) {
-    if (!sizeData?.url || !sizeData?.filename) {
-      newSizes[sizeName] = sizeData
-      continue
-    }
-    const oldSizePathname = new URL(sizeData.url).pathname.slice(1)
-    const newSizePathname = oldSizePathname.replaceAll(find, replace)
-    const { url: newSizeUrl } = await copy(sizeData.url, newSizePathname, { access: 'public', token })
-    await del(sizeData.url, { token })
-    newSizes[sizeName] = {
-      ...sizeData,
-      url: newSizeUrl,
-      filename: sizeData.filename.replaceAll(find, replace),
+  if (doc.sizes) {
+    for (const [sizeName, sizeData] of Object.entries(doc.sizes)) {
+      if (!sizeData?.url || !sizeData?.filename) {
+        newSizes[sizeName] = sizeData
+        continue
+      }
+      oldUrls.push(sizeData.url)
+      const oldSizePathname = new URL(sizeData.url).pathname.slice(1)
+      const { url: newSizeUrl } = await copy(sizeData.url, oldSizePathname.replaceAll(find, replace), { access: 'public', token })
+      newSizes[sizeName] = {
+        ...sizeData,
+        url: newSizeUrl,
+        filename: sizeData.filename.replaceAll(find, replace),
+      }
     }
   }
 
-  return { url: newUrl, filename: doc.filename.replaceAll(find, replace), sizes: newSizes }
+  // All copies succeeded — safe to delete originals in one batch call
+  await del(oldUrls, { token })
+
+  return {
+    url: newUrl,
+    filename: doc.filename.replaceAll(find, replace),
+    ...(doc.sizes ? { sizes: newSizes } : {}),
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -90,6 +95,11 @@ export async function POST(req: NextRequest) {
     try {
       const doc = (await payload.findByID({ collection, id, depth: 0 })) as MediaDoc
 
+      if (!doc.url || !doc.filename) {
+        failed.push(id)
+        continue
+      }
+
       if (!doc.filename.includes(find)) {
         renamed.push(id)
         continue
@@ -110,7 +120,8 @@ export async function POST(req: NextRequest) {
           url: newUrl,
           ...(newSizes ? { sizes: newSizes } : {}),
         },
-        overrideAccess: true,
+        overrideAccess: false,
+        user,
       })
 
       renamed.push(id)

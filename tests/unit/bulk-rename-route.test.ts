@@ -57,7 +57,7 @@ describe('POST /api/media/bulk-rename', () => {
       { access: 'public', token: BLOB_TOKEN },
     )
     expect(mockDel).toHaveBeenCalledWith(
-      'https://abc.public.blob.vercel-storage.com/ba4-after-2.jpg',
+      ['https://abc.public.blob.vercel-storage.com/ba4-after-2.jpg'],
       { token: BLOB_TOKEN },
     )
   })

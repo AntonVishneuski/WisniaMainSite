@@ -212,6 +212,7 @@ export interface Media {
  */
 export interface MediaVideo {
   id: number;
+  title: string;
   alt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -654,6 +655,7 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "media-videos_select".
  */
 export interface MediaVideosSelect<T extends boolean = true> {
+  title?: T;
   alt?: T;
   updatedAt?: T;
   createdAt?: T;

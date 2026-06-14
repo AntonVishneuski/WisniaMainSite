@@ -72,7 +72,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     <>
       <JsonLd data={businessLd} />
       <JsonLd data={faqLd(faqItems)} />
-      <Header locale={locale} settings={s} services={services} />
+      <Header locale={locale} settings={s} services={services} isHome />
       <main>
         <Hero settings={s} />
         <PainCards />
@@ -85,7 +85,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <Faq />
         <Kontakt settings={s} />
       </main>
-      <Footer locale={locale} settings={s} services={services} />
+      <Footer locale={locale} settings={s} services={services} isHome />
       <StickyCta locale={locale} settings={s} />
     </>
   )

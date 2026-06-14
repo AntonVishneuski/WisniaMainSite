@@ -2,11 +2,12 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import type { SiteSettings } from './types'
 import { contactLinks } from '@/lib/contact-links'
+import { sectionHref } from '@/lib/section-links'
 
 type ServiceItem = { slug: string; title: string }
-type Props = { locale: string; settings: SiteSettings; services?: ServiceItem[] }
+type Props = { locale: string; settings: SiteSettings; services?: ServiceItem[]; isHome?: boolean }
 
-export function Footer({ locale, settings, services = [] }: Props) {
+export function Footer({ locale, settings, services = [], isHome = false }: Props) {
   const t = useTranslations()
   const year = new Date().getFullYear()
 
@@ -14,12 +15,14 @@ export function Footer({ locale, settings, services = [] }: Props) {
   const privacyHref = locale === 'ru' ? '/ru/polityka-prywatnosci' : '/polityka-prywatnosci'
   const serviceBase = locale === 'ru' ? '/ru/uslugi' : '/uslugi'
 
+  // Off the home page these sections don't exist, so a bare "#cennik" anchor is
+  // a dead link — sectionHref points it back at the home page section instead.
   const navLinks = [
-    { href: '#cennik', label: t('nav.prices') },
-    { href: '#efekty', label: t('nav.effects') },
-    { href: '#o-nas', label: t('nav.about') },
-    { href: '#kontakt', label: t('nav.contact') },
-  ]
+    { hash: '#cennik', label: t('nav.prices') },
+    { hash: '#efekty', label: t('nav.effects') },
+    { hash: '#o-nas', label: t('nav.about') },
+    { hash: '#kontakt', label: t('nav.contact') },
+  ].map(({ hash, label }) => ({ href: sectionHref(hash, locale, isHome), label }))
 
   return (
     <footer className="bg-blush text-gray pt-[72px] pb-8 border-t border-[rgba(201,149,108,0.35)]">

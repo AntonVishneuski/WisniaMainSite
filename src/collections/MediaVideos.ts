@@ -14,6 +14,12 @@ export const MediaVideos: CollectionConfig = {
   admin: {
     group: 'Treść',
     useAsTitle: 'title',
+    components: {
+      actions: [
+        '/src/components/admin/BulkDeleteAction',
+        '/src/components/admin/BulkRenameAction',
+      ],
+    },
   },
   fields: [
     {

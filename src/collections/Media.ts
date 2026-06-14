@@ -13,10 +13,14 @@ export const Media: CollectionConfig = {
   admin: {
     group: 'Treść',
     components: {
-      actions: [
-        '/src/components/admin/BulkDeleteAction',
-        '/src/components/admin/BulkRenameAction',
-      ],
+      views: {
+        list: {
+          actions: [
+            '/src/components/admin/BulkDeleteAction',
+            '/src/components/admin/BulkRenameAction',
+          ],
+        },
+      },
     },
   },
   fields: [

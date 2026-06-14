@@ -15,10 +15,14 @@ export const MediaVideos: CollectionConfig = {
     group: 'Treść',
     useAsTitle: 'title',
     components: {
-      actions: [
-        '/src/components/admin/BulkDeleteAction',
-        '/src/components/admin/BulkRenameAction',
-      ],
+      views: {
+        list: {
+          actions: [
+            '/src/components/admin/BulkDeleteAction',
+            '/src/components/admin/BulkRenameAction',
+          ],
+        },
+      },
     },
   },
   fields: [

@@ -4,6 +4,7 @@ import { getPayloadClient } from '@/lib/getPayload'
 import { headers } from 'next/headers'
 
 const ALLOWED_COLLECTIONS = ['media', 'media-videos'] as const
+type AllowedCollection = typeof ALLOWED_COLLECTIONS[number]
 
 export async function POST(req: NextRequest) {
   const payload = await getPayloadClient()
@@ -36,7 +37,7 @@ export async function POST(req: NextRequest) {
 
   for (const id of ids) {
     try {
-      await payload.delete({ collection, id, overrideAccess: false, user })
+      await payload.delete({ collection: collection as AllowedCollection, id, overrideAccess: false, user })
       deleted.push(id)
     } catch (err) {
       console.error(`bulk-delete failed for ${collection}/${id}:`, err)

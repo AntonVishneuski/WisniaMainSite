@@ -5,6 +5,7 @@ import { headers } from 'next/headers'
 import { copy, del } from '@vercel/blob'
 
 const ALLOWED_COLLECTIONS = ['media', 'media-videos'] as const
+type AllowedCollection = typeof ALLOWED_COLLECTIONS[number]
 
 type MediaDoc = {
   id: string
@@ -93,7 +94,7 @@ export async function POST(req: NextRequest) {
 
   for (const id of ids) {
     try {
-      const doc = (await payload.findByID({ collection, id, depth: 0 })) as MediaDoc
+      const doc = (await payload.findByID({ collection: collection as AllowedCollection, id, depth: 0 })) as unknown as MediaDoc
 
       if (!doc.url || !doc.filename) {
         failed.push(id)
@@ -113,7 +114,7 @@ export async function POST(req: NextRequest) {
       )
 
       await payload.update({
-        collection,
+        collection: collection as AllowedCollection,
         id,
         data: {
           filename: newFilename,

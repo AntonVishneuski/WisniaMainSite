@@ -23,6 +23,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }
 
+  if (ids.length > 200 || ids.some(id => typeof id !== 'string' || !id)) {
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+  }
+
   if (!ALLOWED_COLLECTIONS.includes(collection as typeof ALLOWED_COLLECTIONS[number])) {
     return NextResponse.json({ error: 'Invalid collection' }, { status: 400 })
   }

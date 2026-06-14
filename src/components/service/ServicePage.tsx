@@ -59,6 +59,7 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
           heading={page.heading || page.title}
           intro={page.intro ?? undefined}
           image={page.heroImage ?? undefined}
+          video={page.heroVideo ?? undefined}
           settings={settings}
           priceFrom={page.priceFrom ?? undefined}
         />

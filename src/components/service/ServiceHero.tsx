@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { ImageIcon } from 'lucide-react'
 import { CtaLink } from '@/components/ui/CtaButtons'
+import { HeroMedia } from '@/components/ui/HeroMedia'
 import { contactLinks, type ContactSettings } from '@/lib/contact-links'
 
 export type ServiceHeroImage = {
@@ -11,16 +11,22 @@ export type ServiceHeroImage = {
   alt?: string | null
 } | null
 
+export type ServiceHeroVideo = {
+  url?: string | null
+} | null
+
 export function ServiceHero({
   heading,
   intro,
   image,
+  video,
   settings,
   priceFrom,
 }: {
   heading: string
   intro?: string | null
   image?: ServiceHeroImage
+  video?: ServiceHeroVideo
   settings: ContactSettings
   priceFrom?: string | null
 }) {
@@ -117,13 +123,12 @@ export function ServiceHero({
 
         {/* Media column */}
         <div className="max-w-[420px] min-[960px]:max-w-none min-[960px]:mt-0 mt-1.5">
-          {image?.url ? (
+          {video?.url || image?.url ? (
             <div className="relative aspect-[4/5] rounded-[var(--radius-xl)] overflow-hidden shadow-lg">
-              <Image
-                src={image.url}
-                alt={image.alt ?? heading}
-                fill
-                className="object-cover"
+              <HeroMedia
+                videoUrl={video?.url}
+                posterUrl={image?.url}
+                alt={image?.alt ?? heading}
                 sizes="(max-width: 960px) 420px, 50vw"
               />
             </div>

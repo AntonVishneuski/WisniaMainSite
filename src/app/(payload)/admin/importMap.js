@@ -1,5 +1,5 @@
-import { default as default_d639bbe095469a7e69572e655a4a24e1 } from '../../../src/components/admin/BulkDeleteAction'
-import { default as default_c24598f43c125704d36e33b5fc06e1c0 } from '../../../src/components/admin/BulkRenameAction'
+import { default as default_ca2302add671350ccb72e0683c17394e } from '../../../components/admin/BulkDeleteAction'
+import { default as default_1464f6f04f4fd959e9fbf9b90e17c4a8 } from '../../../components/admin/BulkRenameAction'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -28,8 +28,8 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 
 /** @type import('payload').ImportMap */
 export const importMap = {
-  "/src/components/admin/BulkDeleteAction#default": default_d639bbe095469a7e69572e655a4a24e1,
-  "/src/components/admin/BulkRenameAction#default": default_c24598f43c125704d36e33b5fc06e1c0,
+  "/components/admin/BulkDeleteAction#default": default_ca2302add671350ccb72e0683c17394e,
+  "/components/admin/BulkRenameAction#default": default_1464f6f04f4fd959e9fbf9b90e17c4a8,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,

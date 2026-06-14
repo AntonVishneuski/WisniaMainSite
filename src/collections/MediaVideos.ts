@@ -18,8 +18,8 @@ export const MediaVideos: CollectionConfig = {
       views: {
         list: {
           actions: [
-            '/src/components/admin/BulkDeleteAction',
-            '/src/components/admin/BulkRenameAction',
+            '/components/admin/BulkDeleteAction',
+            '/components/admin/BulkRenameAction',
           ],
         },
       },

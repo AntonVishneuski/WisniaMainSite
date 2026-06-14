@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'media-videos': MediaVideo;
     prices: Price;
     reviews: Review;
     beforeAfter: BeforeAfter;
@@ -84,6 +85,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'media-videos': MediaVideosSelect<false> | MediaVideosSelect<true>;
     prices: PricesSelect<false> | PricesSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     beforeAfter: BeforeAfterSelect<false> | BeforeAfterSelect<true>;
@@ -206,6 +208,25 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-videos".
+ */
+export interface MediaVideo {
+  id: number;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "prices".
  */
 export interface Price {
@@ -287,7 +308,14 @@ export interface ServicePage {
   ogImage?: (number | null) | Media;
   serviceName?: string | null;
   serviceDescription?: string | null;
+  /**
+   * Zdjęcie hero. Jeśli ustawione jest też wideo — służy jako poster/zapas.
+   */
   heroImage?: (number | null) | Media;
+  /**
+   * Opcjonalnie. Jeśli ustawione — w hero odtwarza się wideo (bez dźwięku, w pętli); zdjęcie służy jako poster i zapas.
+   */
+  heroVideo?: (number | null) | MediaVideo;
   heading?: string | null;
   intro?: string | null;
   /**
@@ -477,6 +505,10 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'media-videos';
+        value: number | MediaVideo;
+      } | null)
+    | ({
         relationTo: 'prices';
         value: number | Price;
       } | null)
@@ -619,6 +651,24 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-videos_select".
+ */
+export interface MediaVideosSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "prices_select".
  */
 export interface PricesSelect<T extends boolean = true> {
@@ -680,6 +730,7 @@ export interface ServicePagesSelect<T extends boolean = true> {
   serviceName?: T;
   serviceDescription?: T;
   heroImage?: T;
+  heroVideo?: T;
   heading?: T;
   intro?: T;
   priceFrom?: T;
@@ -848,6 +899,10 @@ export interface Setting {
   defaultOgImage?: (number | null) | Media;
   geoLat?: string | null;
   geoLng?: string | null;
+  /**
+   * Opcjonalne wideo w hero strony głównej (bez dźwięku, w pętli). Bez niego pokazywane jest zdjęcie.
+   */
+  heroVideo?: (number | null) | MediaVideo;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -875,6 +930,7 @@ export interface SettingsSelect<T extends boolean = true> {
   defaultOgImage?: T;
   geoLat?: T;
   geoLng?: T;
+  heroVideo?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

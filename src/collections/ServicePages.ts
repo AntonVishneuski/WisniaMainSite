@@ -23,7 +23,10 @@ export const ServicePages: CollectionConfig = {
       { name: 'serviceDescription', type: 'textarea', localized: true },
     ] },
     { type: 'collapsible', label: 'Hero', fields: [
-      { name: 'heroImage', type: 'upload', relationTo: 'media' },
+      { name: 'heroImage', type: 'upload', relationTo: 'media',
+        admin: { description: 'Zdjęcie hero. Jeśli ustawione jest też wideo — służy jako poster/zapas.' } },
+      { name: 'heroVideo', type: 'upload', relationTo: 'media-videos',
+        admin: { description: 'Opcjonalnie. Jeśli ustawione — w hero odtwarza się wideo (bez dźwięku, w pętli); zdjęcie służy jako poster i zapas.' } },
       { name: 'heading', type: 'text', localized: true },
       { name: 'intro', type: 'textarea', localized: true },
       { name: 'priceFrom', type: 'text', localized: true,

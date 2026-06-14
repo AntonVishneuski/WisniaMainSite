@@ -42,5 +42,9 @@ export const Settings: GlobalConfig = {
       { name: 'geoLat', type: 'text' },
       { name: 'geoLng', type: 'text' },
     ] },
+    { type: 'collapsible', label: 'Hero (strona główna)', fields: [
+      { name: 'heroVideo', type: 'upload', relationTo: 'media-videos',
+        admin: { description: 'Opcjonalne wideo w hero strony głównej (bez dźwięku, w pętli). Bez niego pokazywane jest zdjęcie.' } },
+    ] },
   ],
 }

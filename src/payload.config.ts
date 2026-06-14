@@ -8,6 +8,7 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { MediaVideos } from './collections/MediaVideos'
 import { Prices } from './collections/Prices'
 import { Reviews } from './collections/Reviews'
 import { BeforeAfter } from './collections/BeforeAfter'
@@ -26,7 +27,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Prices, Reviews, BeforeAfter, ServicePages, Authors, Posts],
+  collections: [Users, Media, MediaVideos, Prices, Reviews, BeforeAfter, ServicePages, Authors, Posts],
   globals: [Settings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -50,7 +51,7 @@ export default buildConfig({
   plugins: [
     vercelBlobStorage({
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
-      collections: { media: true },
+      collections: { media: true, 'media-videos': true },
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
   ],

@@ -35,6 +35,11 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: postgresAdapter({
+    // Use committed migrations only. Without this, Payload's default dev/test
+    // "push" mode syncs the config schema straight into the connected DB (prod,
+    // via .env) and leaves a `dev` row in payload_migrations that hangs
+    // `payload migrate` on deploy. Schema changes must go through migrations.
+    push: false,
     pool: {
       connectionString: process.env.DATABASE_URL || process.env.POSTGRES_URL || '',
     },

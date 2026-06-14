@@ -13,8 +13,14 @@ export const MediaVideos: CollectionConfig = {
   },
   admin: {
     group: 'Treść',
+    useAsTitle: 'title',
   },
   fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
     {
       name: 'alt',
       type: 'text',

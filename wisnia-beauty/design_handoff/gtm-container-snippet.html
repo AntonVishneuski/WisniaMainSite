@@ -1,0 +1,37 @@
+<!--
+  GOOGLE TAG MANAGER — контейнер для Wiśnia Beauty
+  =================================================
+  Один контейнер GTM на сайте → внутри него настраиваются ВСЕ теги:
+  Meta Pixel, GA4, Google Ads, согласие на cookies. Менять теги можно
+  без правок кода.
+
+  ЧТО СДЕЛАТЬ:
+  1. Контейнер GTM-TGMXPHZW уже создан и подставлен ниже.
+  2. ID GTM-TGMXPHZW уже подставлен (оба блока).
+  3. БЛОК 1 (head) — как можно выше в <head> каждой страницы.
+     БЛОК 2 (body) — сразу после открывающего <body> каждой страницы.
+     В реальном проекте — в глобальный layout/шаблон (один раз на все страницы).
+  4. Опубликовать сайт + опубликовать контейнер в GTM.
+  5. Проверить расширением "Tag Assistant" (Google) — контейнер виден.
+
+  ВНУТРИ GTM настраиваются (см. вики-гайд "GTM — настройка трекинга"):
+  - Meta Pixel (наш ID) + событие CTAClick (хук уже есть в main.js)
+  - GA4 (Measurement ID G-XXXX)
+  - Google Ads (Conversion ID/Label)
+  - Consent Mode + баннер согласия (RODO/GDPR)
+-->
+
+<!-- ===== БЛОК 1 — в <head> ===== -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGMXPHZW');</script>
+<!-- End Google Tag Manager -->
+
+<!-- ===== БЛОК 2 — сразу после <body> ===== -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TGMXPHZW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->

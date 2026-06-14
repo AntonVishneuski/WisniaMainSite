@@ -13,6 +13,12 @@ export const MediaVideos: CollectionConfig = {
   },
   admin: {
     group: 'Treść',
+    components: {
+      actions: [
+        '/src/components/admin/BulkDeleteAction',
+        '/src/components/admin/BulkRenameAction',
+      ],
+    },
   },
   fields: [
     {

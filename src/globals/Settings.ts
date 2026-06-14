@@ -44,7 +44,7 @@ export const Settings: GlobalConfig = {
     ] },
     { type: 'collapsible', label: 'Hero (strona główna)', fields: [
       { name: 'heroVideo', type: 'upload', relationTo: 'media-videos',
-        admin: { description: 'Opcjonalne wideo w hero strony głównej (bez dźwięku, w pętli). Bez niego pokazywane jest zdjęcie.' } },
+        admin: { description: 'Opcjonalne video w hero strony głównej (bez dźwięku, w pętli). Bez niego pokazywane jest zdjęcie.' } },
     ] },
   ],
 }

@@ -3,7 +3,7 @@ import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidat
 
 export const MediaVideos: CollectionConfig = {
   slug: 'media-videos',
-  labels: { singular: 'Wideo', plural: 'Wideo' },
+  labels: { singular: 'Video', plural: 'Video' },
   hooks: {
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],

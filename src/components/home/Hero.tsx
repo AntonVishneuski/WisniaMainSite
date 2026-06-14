@@ -1,13 +1,14 @@
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 import { Award, Stethoscope, UserCheck, Star } from 'lucide-react'
 import { CtaLink } from '@/components/ui/CtaButtons'
+import { HeroMedia } from '@/components/ui/HeroMedia'
 import { contactLinks, type ContactSettings } from '@/lib/contact-links'
 
 type HeroSettings = ContactSettings & {
   whatsapp?: string | null
   phone?: string | null
   booksyUrl?: string | null
+  heroVideo?: { url?: string | null } | null
 }
 
 export function Hero({ settings }: { settings: HeroSettings }) {
@@ -107,14 +108,13 @@ export function Hero({ settings }: { settings: HeroSettings }) {
         </div>
 
         {/* Media column */}
-        <div className="relative w-full max-w-[420px] mx-auto min-[960px]:mx-0">
-          <Image
-            src="/assets/hero-olga.jpg"
+        <div className="relative w-full max-w-[420px] mx-auto min-[960px]:mx-0 aspect-[4/5] rounded-[var(--radius-xl)] overflow-hidden shadow-[0_24px_60px_rgba(110,18,44,0.12)]">
+          <HeroMedia
+            videoUrl={settings?.heroVideo?.url}
+            posterUrl="/assets/hero-olga.jpg"
             alt="Olga Vishneuskaya przy pracy"
-            width={420}
-            height={525}
             priority
-            className="w-full h-auto rounded-[var(--radius-xl)] object-cover shadow-[0_24px_60px_rgba(110,18,44,0.12)]"
+            sizes="420px"
           />
         </div>
       </div>

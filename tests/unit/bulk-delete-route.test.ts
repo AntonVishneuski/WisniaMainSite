@@ -4,13 +4,12 @@ import { NextRequest } from 'next/server'
 const mockDelete = vi.fn().mockResolvedValue({ id: 'x' })
 const mockAuth = vi.fn()
 
-vi.mock('payload', () => ({
-  getPayload: vi.fn().mockResolvedValue({
+vi.mock('@/lib/getPayload', () => ({
+  getPayloadClient: vi.fn().mockResolvedValue({
     delete: mockDelete,
     auth: mockAuth,
   }),
 }))
-vi.mock('@payload-config', () => ({ default: {} }))
 vi.mock('next/headers', () => ({
   headers: vi.fn().mockResolvedValue(new Headers()),
 }))
@@ -56,5 +55,23 @@ describe('POST /api/media/bulk-delete', () => {
     const body = await res.json()
     expect(body.deleted).toEqual(['good'])
     expect(body.failed).toEqual(['bad'])
+  })
+
+  it('returns 400 for invalid collection', async () => {
+    const req = new NextRequest('http://localhost/api/media/bulk-delete', {
+      method: 'POST',
+      body: JSON.stringify({ ids: ['1'], collection: 'users' }),
+    })
+    const res = await POST(req)
+    expect(res.status).toBe(400)
+  })
+
+  it('returns 400 when body is malformed', async () => {
+    const req = new NextRequest('http://localhost/api/media/bulk-delete', {
+      method: 'POST',
+      body: 'not-json',
+    })
+    const res = await POST(req)
+    expect(res.status).toBe(400)
   })
 })

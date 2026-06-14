@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, afterEach } from 'vitest'
+import { describe, it, expect, vi, afterEach, beforeAll } from 'vitest'
 import { render, cleanup, fireEvent } from '@testing-library/react'
 import BulkRenameAction from '../../src/components/admin/BulkRenameAction'
 
@@ -10,6 +10,10 @@ const mockUseSelection = vi.fn()
 vi.mock('@payloadcms/ui', () => ({
   useSelection: () => mockUseSelection(),
 }))
+
+beforeAll(() => {
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ json: () => Promise.resolve({ docs: [] }) }))
+})
 
 afterEach(() => cleanup())
 

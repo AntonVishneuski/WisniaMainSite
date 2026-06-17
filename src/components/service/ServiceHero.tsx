@@ -130,6 +130,7 @@ export function ServiceHero({
                 posterUrl={image?.url}
                 alt={image?.alt ?? heading}
                 sizes="(max-width: 960px) 420px, 50vw"
+                priority
               />
             </div>
           ) : (

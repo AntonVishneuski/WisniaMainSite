@@ -71,6 +71,10 @@ export const ServicePages: CollectionConfig = {
       { name: 'afterImage', type: 'upload', relationTo: 'media', required: true },
       { name: 'caption', type: 'text', localized: true },
     ] },
+    { name: 'gallery', type: 'array', labels: { singular: 'Zdjęcie', plural: 'Zdjęcia' }, fields: [
+      { name: 'image', type: 'upload', relationTo: 'media', required: true },
+      { name: 'caption', type: 'text', localized: true },
+    ] },
     { name: 'crossLinks', type: 'relationship', relationTo: 'servicePages', hasMany: true },
   ],
 }

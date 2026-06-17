@@ -310,11 +310,11 @@ export interface ServicePage {
   serviceName?: string | null;
   serviceDescription?: string | null;
   /**
-   * Zdjęcie hero. Jeśli ustawione jest też wideo — służy jako poster/zapas.
+   * Zdjęcie hero. Jeśli ustawione jest też video — służy jako poster/zapas.
    */
   heroImage?: (number | null) | Media;
   /**
-   * Opcjonalnie. Jeśli ustawione — w hero odtwarza się wideo (bez dźwięku, w pętli); zdjęcie służy jako poster i zapas.
+   * Opcjonalnie. Jeśli ustawione — w hero odtwarza się video (bez dźwięku, w pętli); zdjęcie służy jako poster i zapas.
    */
   heroVideo?: (number | null) | MediaVideo;
   heading?: string | null;
@@ -402,6 +402,13 @@ export interface ServicePage {
     | {
         beforeImage: number | Media;
         afterImage: number | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  gallery?:
+    | {
+        image: number | Media;
         caption?: string | null;
         id?: string | null;
       }[]
@@ -779,6 +786,13 @@ export interface ServicePagesSelect<T extends boolean = true> {
         caption?: T;
         id?: T;
       };
+  gallery?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
   crossLinks?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -902,7 +916,7 @@ export interface Setting {
   geoLat?: string | null;
   geoLng?: string | null;
   /**
-   * Opcjonalne wideo w hero strony głównej (bez dźwięku, w pętli). Bez niego pokazywane jest zdjęcie.
+   * Opcjonalne video w hero strony głównej (bez dźwięku, w pętli). Bez niego pokazywane jest zdjęcie.
    */
   heroVideo?: (number | null) | MediaVideo;
   updatedAt?: string | null;

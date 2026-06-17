@@ -144,6 +144,40 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
         </Reveal>
       )}
 
+      {/* Gallery */}
+      {page.gallery && page.gallery.length > 0 && (
+        <Reveal>
+          <div className="max-w-[1200px] mx-auto px-6 pb-[clamp(32px,5vw,56px)]">
+            <h2 className="text-2xl font-serif text-graphite mb-5">
+              {t('service.galleryHeading')}
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 min-[960px]:grid-cols-4 gap-3">
+              {(page.gallery as any[]).map((item: any, i: number) => {
+                const img = item.image
+                if (!img?.url) return null
+                return (
+                  <figure key={i} className="overflow-hidden rounded-xl">
+                    <img
+                      src={img.sizes?.card?.url ?? img.url}
+                      alt={img.alt ?? item.caption ?? ''}
+                      width={img.sizes?.card?.width ?? img.width ?? 400}
+                      height={img.sizes?.card?.height ?? img.height ?? 400}
+                      className="w-full h-full object-cover aspect-square"
+                      loading="lazy"
+                    />
+                    {item.caption && (
+                      <figcaption className="text-xs text-center text-graphite/60 px-2 pt-1">
+                        {item.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                )
+              })}
+            </div>
+          </div>
+        </Reveal>
+      )}
+
       {/* Reviews */}
       {page.reviews && page.reviews.length > 0 && (
         <Reveal>

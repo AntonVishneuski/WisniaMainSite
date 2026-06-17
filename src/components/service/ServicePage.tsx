@@ -11,6 +11,7 @@ import { ReviewCard } from '@/components/shared/ReviewCard'
 import { BeforeAfterCard } from '@/components/shared/BeforeAfterCard'
 import { contactLinks } from '@/lib/contact-links'
 import { resolvePriceAnchor } from '@/lib/price-anchor'
+import { parseMinPrice, formatPriceFrom } from '@/lib/price-from'
 import { categoryAnchor } from '@/lib/category-anchor'
 import type { ServiceLinkRef } from '@/lib/service-links'
 import type { PriceRow } from '@/lib/price-groups'
@@ -40,6 +41,13 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
       : `${homeHref}#cennik`
   const packageHref = resolvePriceAnchor(page.packagePromo?.link, homeHref)
 
+  // "from" price in the hero: a manually-set priceFrom wins (it may carry custom
+  // wording); otherwise derive "od/от {min} zł" from the linked price list so
+  // every service shows a starting price without manual upkeep.
+  const minPrice = parseMinPrice(((page.priceItems ?? []) as PriceRow[]).map((p) => p?.price))
+  const heroPriceFrom =
+    page.priceFrom ?? (minPrice != null ? formatPriceFrom(minPrice, locale) : undefined)
+
   const breadcrumbItems = [
     { label: 'Wiśnia', href: homeHref },
     { label: uslugiLabel, href: uslugiHref },
@@ -61,7 +69,7 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
           image={page.heroImage ?? undefined}
           video={page.heroVideo ?? undefined}
           settings={settings}
-          priceFrom={page.priceFrom ?? undefined}
+          priceFrom={heroPriceFrom}
         />
       </Reveal>
 

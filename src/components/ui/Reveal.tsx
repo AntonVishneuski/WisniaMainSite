@@ -8,6 +8,9 @@ export function Reveal({ children, className = '' }: { children: React.ReactNode
     // Show immediately (no scroll animation) for reduced-motion users or when
     // IntersectionObserver is unavailable, so content is never stuck hidden.
     const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+    // Visibility depends on client-only APIs (matchMedia/IntersectionObserver) and must
+    // stay false on first paint to match SSR, so this flip can't move out of the effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (reduceMotion || typeof IntersectionObserver === 'undefined') { setVis(true); return }
     const el = ref.current
     if (!el) return

@@ -23,6 +23,9 @@ export function HeroMedia({ videoUrl, posterUrl, alt, priority, sizes, placehold
   useEffect(() => {
     if (!videoUrl) return
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+    // Upgrade poster→video only after mount (see note above) to avoid a hydration
+    // mismatch; this client-only flip can't be hoisted out of the effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!reduce) setPlayVideo(true)
   }, [videoUrl])
 

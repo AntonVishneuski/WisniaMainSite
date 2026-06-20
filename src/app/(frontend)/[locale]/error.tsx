@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+
 export default function Error({
   reset,
 }: {
@@ -77,7 +79,7 @@ export default function Error({
         >
           Spróbuj ponownie
         </button>
-        <a
+        <Link
           href="/"
           style={{
             padding: '0.6rem 1.5rem',
@@ -93,7 +95,7 @@ export default function Error({
           }}
         >
           Strona główna
-        </a>
+        </Link>
       </div>
     </div>
   )

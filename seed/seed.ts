@@ -14,7 +14,7 @@ const abs = (p: string) => path.resolve(process.cwd(), p)
 
 /** Convert structured heading/paragraph blocks to a minimal Payload Lexical richText value */
 function blocksToLexical(blocks: Block[]) {
-  const fmt = '' as ''
+  const fmt = '' as const
   const textChild = (text: string) => ({
     type: 'text',
     text,
@@ -30,7 +30,7 @@ function blocksToLexical(blocks: Block[]) {
       format: fmt,
       indent: 0,
       version: 1,
-      direction: 'ltr' as 'ltr',
+      direction: 'ltr' as const,
       children: blocks.map((b) =>
         b.kind === 'p'
           ? {
@@ -38,7 +38,7 @@ function blocksToLexical(blocks: Block[]) {
               format: fmt,
               indent: 0,
               version: 1,
-              direction: 'ltr' as 'ltr',
+              direction: 'ltr' as const,
               children: [textChild(b.text)],
             }
           : {
@@ -47,7 +47,7 @@ function blocksToLexical(blocks: Block[]) {
               format: fmt,
               indent: 0,
               version: 1,
-              direction: 'ltr' as 'ltr',
+              direction: 'ltr' as const,
               children: [textChild(b.text)],
             },
       ),
@@ -58,21 +58,21 @@ function blocksToLexical(blocks: Block[]) {
 /** Convert plain text (paragraphs separated by \n\n) to minimal Payload Lexical richText value */
 function textToLexical(str?: string | null) {
   const paras = (str ?? '').split('\n\n').filter(Boolean)
-  const fmt = '' as ''
+  const fmt = '' as const
   return {
     root: {
       type: 'root',
       format: fmt,
       indent: 0,
       version: 1,
-      direction: 'ltr' as 'ltr',
+      direction: 'ltr' as const,
       children: paras.length
         ? paras.map((p) => ({
             type: 'paragraph',
             format: fmt,
             indent: 0,
             version: 1,
-            direction: 'ltr' as 'ltr',
+            direction: 'ltr' as const,
             children: [
               {
                 type: 'text',
@@ -91,7 +91,7 @@ function textToLexical(str?: string | null) {
               format: fmt,
               indent: 0,
               version: 1,
-              direction: 'ltr' as 'ltr',
+              direction: 'ltr' as const,
               children: [] as never[],
             },
           ],

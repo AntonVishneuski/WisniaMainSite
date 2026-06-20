@@ -19,6 +19,9 @@ export default function BulkRenameAction() {
 
   useEffect(() => {
     if (!open || !collection || selectedIDs.length === 0) return
+    // Clear stale preview before refetching when the selection changes (admin-only,
+    // client-only). Intentional reset; setState-in-effect is fine here.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDocs([])
     const idsParam = selectedIDs.join(',')
     fetch(`/api/${collection}?where[id][in]=${idsParam}&limit=100&depth=0`, {

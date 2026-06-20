@@ -14,6 +14,9 @@ export function ConsentBanner() {
   useEffect(() => {
     try {
       const stored = localStorage.getItem('wisnia-consent')
+      // Banner visibility derives from localStorage (unavailable at SSR), so it starts
+      // hidden and flips after mount — setState-in-effect is the correct pattern here.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (!stored) setVisible(true)
     } catch {
       // localStorage unavailable — don't show banner

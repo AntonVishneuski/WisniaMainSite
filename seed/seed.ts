@@ -371,6 +371,7 @@ async function run() {
         forWhom: sp.forWhom ? textToLexical(sp.forWhom.pl) : undefined,
         results: sp.results ? textToLexical(sp.results.pl) : undefined,
         steps: sp.steps.map((s) => ({ title: s.title.pl, text: s.text.pl })),
+        faq: (sp.faq ?? []).map((f) => ({ question: f.question.pl, answer: f.answer.pl })),
         priceItems: priceIds,
         packagePromo: {
           enabled: sp.packagePromo.enabled,
@@ -415,6 +416,7 @@ async function run() {
     const reviewIds = ((createdDoc.reviews ?? []) as ArrayRow[]).map((r) => r.id)
     const baIds = ((createdDoc.beforeAfter ?? []) as ArrayRow[]).map((b) => b.id)
     const stepIds = ((createdDoc.steps ?? []) as ArrayRow[]).map((s) => s.id)
+    const faqIds = ((createdDoc.faq ?? []) as ArrayRow[]).map((f) => f.id)
 
     // Update RU locale — pass row IDs to preserve PL data in non-localized fields
     await payload.update({
@@ -433,6 +435,11 @@ async function run() {
           id: stepIds[i],
           title: s.title.ru,
           text: s.text.ru,
+        })),
+        faq: (sp.faq ?? []).map((f, i) => ({
+          id: faqIds[i],
+          question: f.question.ru,
+          answer: f.answer.ru,
         })),
         packagePromo: {
           enabled: sp.packagePromo.enabled,

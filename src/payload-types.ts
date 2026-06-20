@@ -375,6 +375,13 @@ export interface ServicePage {
     };
     [k: string]: unknown;
   } | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
   priceHeading?: string | null;
   priceItems?: (number | Price)[] | null;
   packagePromo?: {
@@ -753,6 +760,13 @@ export interface ServicePagesSelect<T extends boolean = true> {
         id?: T;
       };
   results?: T;
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
   priceHeading?: T;
   priceItems?: T;
   packagePromo?:

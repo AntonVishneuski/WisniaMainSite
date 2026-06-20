@@ -18,7 +18,7 @@ function mockReducedMotion(reduce: boolean) {
 afterEach(() => cleanup())
 
 describe('HeroMedia', () => {
-  it('plays the video (muted/loop/playsinline/autoplay + poster) when motion is allowed', () => {
+  it('plays the video (muted/loop/playsinline/autoplay) when motion is allowed', () => {
     mockReducedMotion(false)
     const { container } = render(
       <HeroMedia videoUrl="/v.mp4" posterUrl="/p.jpg" alt="hero" sizes="420px" />,
@@ -30,8 +30,19 @@ describe('HeroMedia', () => {
     expect(video!.autoplay).toBe(true)
     expect(video!.playsInline).toBe(true)
     expect(video!.getAttribute('preload')).toBe('metadata')
-    expect(video!.getAttribute('poster')).toBe('/p.jpg')
     expect(video!.querySelector('source')?.getAttribute('src')).toBe('/v.mp4')
+  })
+
+  it('keeps the poster image mounted under the video so there is no blank gap', () => {
+    mockReducedMotion(false)
+    const { container } = render(
+      <HeroMedia videoUrl="/v.mp4" posterUrl="/p.jpg" alt="hero" sizes="420px" priority />,
+    )
+    // Poster persists as the base layer even while the video is present.
+    expect(container.querySelector('img')).toBeTruthy()
+    expect(container.querySelector('video')).toBeTruthy()
+    // Video starts hidden until it has a frame, revealing the poster underneath.
+    expect(container.querySelector('video')!.className).toContain('opacity-0')
   })
 
   it('shows the poster image (no video) under prefers-reduced-motion', () => {

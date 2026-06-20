@@ -8,6 +8,7 @@ export interface ServicePageRow {
   about: { pl: string; ru: string }
   forWhom: { pl: string; ru: string } | null
   results: { pl: string; ru: string } | null
+  faq?: Array<{ question: { pl: string; ru: string }; answer: { pl: string; ru: string } }>
   steps: Array<{ title: { pl: string; ru: string }; text: { pl: string; ru: string } }>
   priceNames: string[]
   packagePromo: {
@@ -68,6 +69,78 @@ export const servicePages: ServicePageRow[] = [
       pl: 'Trwałe ograniczenie owłosienia, gładka skóra bez podrażnień i wrastających włosów. Liczba sesji zależy od strefy i indywidualnych cech.',
       ru: 'Стойкое сокращение волос, гладкая кожа без раздражений и вросших волос. Число сеансов зависит от зоны и индивидуальных особенностей.',
     },
+    faq: [
+      {
+        question: { pl: 'Czy zabieg boli?', ru: 'Это больно?' },
+        answer: {
+          pl: 'Większość klientek opisuje odczucia jako ciepłe mrowienie. Laser Estera ma system chłodzenia, który czyni zabieg komfortowym. Wrażliwość zależy od strefy i indywidualnego progu.',
+          ru: 'Большинство клиенток описывают ощущения как тёплые покалывания. Лазер Estera оснащён системой охлаждения, которая делает процедуру комфортной. Чувствительность зависит от зоны и индивидуального порога.',
+        },
+      },
+      {
+        question: { pl: 'Ile potrzeba sesji?', ru: 'Сколько нужно сеансов?' },
+        answer: {
+          pl: 'Zwykle 6–10 zabiegów: włosy rosną cyklicznie, a laser działa na włosy w aktywnej fazie wzrostu. Dokładna liczba zależy od strefy, typu włosów i gospodarki hormonalnej — ocenimy na bezpłatnej konsultacji.',
+          ru: 'Как правило, 6–10 процедур: волосы растут циклами, и лазер действует на волоски в активной фазе роста. Точное число зависит от зоны, типа волос и гормонального фона — оценим на бесплатной консультации.',
+        },
+      },
+      {
+        question: { pl: 'Jak często powtarzać?', ru: 'Как часто повторять?' },
+        answer: {
+          pl: 'Zwykle co 4–6 tygodni. Odstęp dobieramy indywidualnie do strefy i reakcji skóry.',
+          ru: 'Обычно раз в 4–6 недель. Интервал подбираем индивидуально по зоне и реакции кожи.',
+        },
+      },
+      {
+        question: { pl: 'Czy są przeciwwskazania?', ru: 'Есть ли противопоказания?' },
+        answer: {
+          pl: 'Tak. Do najważniejszych należą: ciąża i karmienie piersią, świeża opalenizna, przyjmowanie leków fotouczulających, niektóre choroby skóry i ogólne, onkologia. Pełną listę i kwalifikację ocenimy na konsultacji.',
+          ru: 'Да. Среди основных: беременность и грудное вскармливание, свежий загар, приём фотосенсибилизирующих препаратов, отдельные кожные и общие заболевания, онкология. Полный список и пригодность оценим на консультации.',
+        },
+      },
+      {
+        question: { pl: 'Jak przygotować się do zabiegu?', ru: 'Как подготовиться к процедуре?' },
+        answer: {
+          pl: 'Dobę wcześniej ogol strefę (nie woskiem ani depilatorem — korzeń włosa musi zostać). Na 2 tygodnie przed unikaj słońca i solarium, nie używaj samoopalacza. W dniu zabiegu — czysta skóra bez kremów i dezodorantu.',
+          ru: 'За сутки побрейте зону (не воском и не эпилятором — корень волоса должен остаться). За 2 недели избегайте солнца и солярия, не используйте автозагар. В день процедуры — чистая кожа без кремов и дезодоранта.',
+        },
+      },
+      {
+        question: { pl: 'Czego nie robić po zabiegu?', ru: 'Что нельзя делать после?' },
+        answer: {
+          pl: 'Przez 48 godzin: bez sauny, basenu, gorącej kąpieli i intensywnych treningów. Przez 2 tygodnie — bez bezpośredniego słońca, stosuj SPF. Nie trzyj i nie drap obrobionej strefy.',
+          ru: '48 часов: без сауны, бассейна, горячей ванны и интенсивных тренировок. 2 недели — без прямого солнца, используйте SPF. Не трите и не царапайте обработанную зону.',
+        },
+      },
+      {
+        question: { pl: 'Czy zabieg pasuje do mojego koloru skóry i włosów?', ru: 'Подойдёт ли мне по цвету кожи и волос?' },
+        answer: {
+          pl: 'Najlepszy efekt — na ciemnych włosach. Jasne, rude i siwe reagują słabiej, a na ciemnej i opalonej skórze parametry dobieramy ostrożniej. Dokładnie ocenimy na bezpłatnej konsultacji.',
+          ru: 'Лучший результат — на тёмных волосах. Светлые, рыжие и седые реагируют слабее, а на смуглой и загорелой коже параметры подбираются осторожнее. Точно скажем на бесплатной консультации.',
+        },
+      },
+      {
+        question: { pl: 'Czy można latem?', ru: 'Можно ли летом?' },
+        answer: {
+          pl: 'Można, jeśli strefa jest zakryta przed słońcem i nie ma świeżej opalenizny. Latem szczególnie ważne są SPF i rezygnacja z solarium 2 tygodnie przed zabiegiem i po nim.',
+          ru: 'Можно, если зона закрыта от солнца и нет свежего загара. Летом особенно важны SPF и отказ от солярия за 2 недели до и после.',
+        },
+      },
+      {
+        question: { pl: 'Ile trwa sesja?', ru: 'Сколько длится сеанс?' },
+        answer: {
+          pl: 'Od kilku minut (np. pachy) do pół godziny i dłużej (całe nogi) — zależnie od strefy.',
+          ru: 'От нескольких минут (например, подмышки) до получаса и дольше (ноги полностью) — зависит от зоны.',
+        },
+      },
+      {
+        question: { pl: 'W jakich językach obsługujecie?', ru: 'На каких языках вы принимаете?' },
+        answer: {
+          pl: 'Obsługujemy po polsku, ukraińsku i rosyjsku. Pisz lub dzwoń w wygodnym dla Ciebie języku.',
+          ru: 'Обслуживаем на польском, украинском и русском. Пишите или звоните на удобном вам языке.',
+        },
+      },
+    ],
     steps: [
       {
         title: { pl: 'Konsultacja', ru: 'Консультация' },

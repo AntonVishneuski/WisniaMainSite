@@ -39,6 +39,12 @@ export const ServicePages: CollectionConfig = {
       { name: 'text', type: 'textarea', localized: true },
     ] },
     { name: 'results', type: 'richText', localized: true },
+    { name: 'faq', type: 'array', labels: { singular: 'Pytanie (FAQ)', plural: 'FAQ' },
+      admin: { description: 'Najczęstsze pytania — renderowane jako akordeon i jako FAQPage schema (rich snippet w Google).' },
+      fields: [
+        { name: 'question', type: 'text', localized: true, required: true },
+        { name: 'answer', type: 'textarea', localized: true, required: true },
+      ] },
     { name: 'priceHeading', type: 'text', localized: true },
     { name: 'priceItems', type: 'relationship', relationTo: 'prices', hasMany: true },
     { type: 'group', name: 'packagePromo', fields: [

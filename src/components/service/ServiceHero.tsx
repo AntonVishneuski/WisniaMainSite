@@ -22,6 +22,7 @@ export function ServiceHero({
   video,
   settings,
   priceFrom,
+  rating,
 }: {
   heading: string
   intro?: string | null
@@ -29,6 +30,7 @@ export function ServiceHero({
   video?: ServiceHeroVideo
   settings: ContactSettings
   priceFrom?: string | null
+  rating?: string | null
 }) {
   const t = useTranslations()
   const tSvc = useTranslations('service')
@@ -48,6 +50,28 @@ export function ServiceHero({
           {intro && (
             <p className="text-[19px] text-gray max-w-[60ch] mb-6 leading-[1.65]">{intro}</p>
           )}
+
+          {/* Trust strip — rating + credibility on the first screen (audit #7) */}
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-6 text-[13.5px] text-gray-soft">
+            {rating && (
+              <span className="inline-flex items-center gap-1.5 font-medium text-graphite">
+                <span className="flex gap-0.5 text-rose-gold" aria-hidden="true">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <svg key={i} viewBox="0 0 24 24" className="w-[15px] h-[15px] fill-current">
+                      <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.785 1.401 8.169L12 18.896l-7.335 3.868 1.401-8.169L.132 9.21l8.2-1.192z" />
+                    </svg>
+                  ))}
+                </span>
+                {rating} {t('service.trustGoogle')}
+              </span>
+            )}
+            <span className="text-rose-gold/40" aria-hidden="true">·</span>
+            <span>{t('service.trustYears')}</span>
+            <span className="text-rose-gold/40" aria-hidden="true">·</span>
+            <span>{t('service.trustMedical')}</span>
+            <span className="text-rose-gold/40" aria-hidden="true">·</span>
+            <span>{t('service.trustCenter')}</span>
+          </div>
 
           {/* CTA cluster */}
           <div className="flex flex-wrap gap-3">

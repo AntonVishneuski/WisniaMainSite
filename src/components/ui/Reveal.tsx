@@ -5,7 +5,10 @@ export function Reveal({ children, className = '' }: { children: React.ReactNode
   const ref = useRef<HTMLDivElement>(null)
   const [vis, setVis] = useState(false)
   useEffect(() => {
-    if (typeof IntersectionObserver === 'undefined') { setVis(true); return }
+    // Show immediately (no scroll animation) for reduced-motion users or when
+    // IntersectionObserver is unavailable, so content is never stuck hidden.
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+    if (reduceMotion || typeof IntersectionObserver === 'undefined') { setVis(true); return }
     const el = ref.current
     if (!el) return
     const io = new IntersectionObserver(

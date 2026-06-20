@@ -8,6 +8,7 @@ import { PriceAside } from './PriceAside'
 import { PackagePromo } from './PackagePromo'
 import { CrossLinks } from './CrossLinks'
 import { ReviewCard } from '@/components/shared/ReviewCard'
+import { ServiceFaq } from './ServiceFaq'
 import { BeforeAfterCard } from '@/components/shared/BeforeAfterCard'
 import { contactLinks } from '@/lib/contact-links'
 import { resolvePriceAnchor } from '@/lib/price-anchor'
@@ -61,17 +62,18 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
         <Breadcrumb items={breadcrumbItems} />
       </div>
 
-      {/* Hero */}
-      <Reveal>
-        <ServiceHero
-          heading={page.heading || page.title}
-          intro={page.intro ?? undefined}
-          image={page.heroImage ?? undefined}
-          video={page.heroVideo ?? undefined}
-          settings={settings}
-          priceFrom={heroPriceFrom}
-        />
-      </Reveal>
+      {/* Hero — intentionally NOT wrapped in <Reveal>: it is above the fold, so the
+          H1 and subtitle must be visible instantly on load (no fade-in wait) and must
+          not depend on JS. */}
+      <ServiceHero
+        heading={page.heading || page.title}
+        intro={page.intro ?? undefined}
+        image={page.heroImage ?? undefined}
+        video={page.heroVideo ?? undefined}
+        settings={settings}
+        priceFrom={heroPriceFrom}
+        rating={settings?.googleRating || '5,0'}
+      />
 
       {/* Main content + price aside */}
       <div className="max-w-[1200px] mx-auto px-6 py-[clamp(40px,6vw,72px)] grid grid-cols-1 min-[960px]:grid-cols-[1fr_340px] gap-[clamp(32px,5vw,64px)] items-start">
@@ -204,6 +206,13 @@ export async function ServicePage({ page, settings, locale, crossLinks, uslugiLa
               ))}
             </div>
           </div>
+        </Reveal>
+      )}
+
+      {/* FAQ */}
+      {page.faq && page.faq.length > 0 && (
+        <Reveal>
+          <ServiceFaq heading={t('service.faqHeading')} items={page.faq as { question?: string | null; answer?: string | null }[]} />
         </Reveal>
       )}
 

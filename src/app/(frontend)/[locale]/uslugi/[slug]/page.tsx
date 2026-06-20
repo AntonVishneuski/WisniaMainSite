@@ -6,7 +6,7 @@ import type { Locale } from '@/lib/i18n'
 import { locales } from '@/lib/i18n'
 import { getServicePage, getServicePageParams, getPublishedServicePages, getServicesNav } from '@/lib/queries'
 import { getPayloadClient } from '@/lib/getPayload'
-import { serviceLd, breadcrumbLd, JsonLd } from '@/lib/jsonld'
+import { serviceLd, breadcrumbLd, localBusinessLd, aggregateRatingLd, offersLd, reviewsLd, faqLd, JsonLd } from '@/lib/jsonld'
 import { resolveCrossLinks } from '@/lib/service-links'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -16,6 +16,23 @@ import { ServicePage } from '@/components/service/ServicePage'
 export const revalidate = 3600
 
 const SITE = SITE_URL
+
+/** Parse a numeric amount from a price string like "110 zł", "od 650 zł", "1 000 zł". */
+function parsePln(price?: string | null): number | null {
+  if (!price) return null
+  const m = String(price).replace(/\s/g, '').match(/(\d+(?:[.,]\d+)?)/)
+  if (!m) return null
+  const n = Number(m[1].replace(',', '.'))
+  return Number.isFinite(n) ? n : null
+}
+/** Build schema.org sameAs URLs from settings (Instagram handle or URL, Booksy). */
+function socialSameAs(s: { instagram?: string | null; booksyUrl?: string | null } | null): string[] {
+  const out: string[] = []
+  const ig = s?.instagram
+  if (ig) out.push(/^https?:/i.test(ig) ? ig : `https://www.instagram.com/${String(ig).replace(/^@/, '')}`)
+  if (s?.booksyUrl) out.push(s.booksyUrl)
+  return out
+}
 
 export async function generateStaticParams() {
   const slugs = await getServicePageParams()
@@ -91,6 +108,19 @@ export default async function Page({
   const uslugiLabel = t('nav.uslugi')
   const imageUrl = page.ogImage?.url ?? page.heroImage?.url ?? `${SITE}/assets/hero-olga.jpg`
 
+  // Structured-data inputs (audit #4): offers from the linked price list, rating +
+  // reviews from settings/page, FAQ from the page's faq field (when present).
+  const priceItems = (page.priceItems ?? []) as Array<{ name?: string; price?: string | null }>
+  const offers = priceItems
+    .map((p) => ({ name: p?.name ?? '', price: parsePln(p?.price) }))
+    .filter((o): o is { name: string; price: number } => Boolean(o.name) && o.price != null)
+  const reviewsArr = (page.reviews ?? []) as Array<{ author: string; rating?: number; quote?: string }>
+  const ratingValue = String(settings?.googleRating || '5,0').replace(',', '.')
+  const reviewCount = (settings?.reviewsCount as number) || reviewsArr.length
+  const faqItems = ((page.faq ?? []) as Array<{ question?: string; answer?: string }>)
+    .map((f) => ({ q: f?.question ?? '', a: f?.answer ?? '' }))
+    .filter((f) => f.q && f.a)
+
   return (
     <>
       <JsonLd
@@ -101,8 +131,28 @@ export default async function Page({
           providerName: 'Wiśnia Beauty Studio',
           providerUrl: SITE,
           image: imageUrl,
+          offers: offers.length ? offersLd(offers) : undefined,
         })}
       />
+      <JsonLd
+        data={localBusinessLd({
+          name: 'Wiśnia Beauty Studio',
+          url: SITE,
+          phone: settings?.phone,
+          address: settings?.address,
+          geoLat: settings?.geoLat,
+          geoLng: settings?.geoLng,
+          image: imageUrl,
+          // Confirmed hours Mon–Sat 08:00–20:00; update if the salon's schedule changes.
+          openingHours: 'Mo-Sa 08:00-20:00',
+          sameAs: socialSameAs(settings),
+          aggregateRating: reviewCount > 0 ? aggregateRatingLd(ratingValue, reviewCount) : undefined,
+          review: reviewsArr.length
+            ? reviewsLd(reviewsArr.map((r) => ({ author: r.author, rating: r.rating, body: r.quote })))
+            : undefined,
+        })}
+      />
+      {faqItems.length > 0 && <JsonLd data={faqLd(faqItems)} />}
       <JsonLd
         data={breadcrumbLd([
           { name: 'Wiśnia', url: base },

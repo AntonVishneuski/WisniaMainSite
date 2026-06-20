@@ -1,14 +1,51 @@
-export function localBusinessLd(o: { name: string; url: string; phone?: string; address?: string; geoLat?: string; geoLng?: string; hours?: string; image?: string }) {
+export function localBusinessLd(o: {
+  name: string
+  url: string
+  phone?: string
+  address?: string
+  geoLat?: string
+  geoLng?: string
+  hours?: string
+  image?: string
+  sameAs?: string[]
+  openingHours?: string | string[]
+  aggregateRating?: object
+  review?: object[]
+}) {
   return {
     '@context': 'https://schema.org', '@type': 'BeautySalon',
     name: o.name, url: o.url, telephone: o.phone, image: o.image,
     priceRange: '$$',
     address: { '@type': 'PostalAddress', streetAddress: o.address, addressLocality: 'Warszawa', addressCountry: 'PL' },
     geo: { '@type': 'GeoCoordinates', latitude: o.geoLat, longitude: o.geoLng },
+    ...(o.openingHours ? { openingHours: o.openingHours } : {}),
+    ...(o.sameAs && o.sameAs.length ? { sameAs: o.sameAs } : {}),
+    ...(o.aggregateRating ? { aggregateRating: o.aggregateRating } : {}),
+    ...(o.review && o.review.length ? { review: o.review } : {}),
   }
 }
 export function aggregateRatingLd(ratingValue: string, reviewCount: number) {
   return { '@type': 'AggregateRating', ratingValue, reviewCount }
+}
+/** schema.org Offer[] for a Service's `offers` (prices in PLN by default). */
+export function offersLd(items: { name: string; price: number; priceCurrency?: string; url?: string }[]) {
+  return items.map((o) => ({
+    '@type': 'Offer',
+    name: o.name,
+    price: o.price,
+    priceCurrency: o.priceCurrency ?? 'PLN',
+    availability: 'https://schema.org/InStock',
+    ...(o.url ? { url: o.url } : {}),
+  }))
+}
+/** schema.org Review[] for embedding under a LocalBusiness/Service. */
+export function reviewsLd(items: { author: string; rating?: number; body?: string }[]) {
+  return items.map((r) => ({
+    '@type': 'Review',
+    author: { '@type': 'Person', name: r.author },
+    reviewRating: { '@type': 'Rating', ratingValue: String(r.rating ?? 5), bestRating: '5' },
+    ...(r.body ? { reviewBody: r.body } : {}),
+  }))
 }
 export function faqLd(items: { q: string; a: string }[]) {
   return { '@context': 'https://schema.org', '@type': 'FAQPage',
@@ -18,12 +55,23 @@ export function breadcrumbLd(items: { name: string; url: string }[]) {
   return { '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: it.url })) }
 }
-export function serviceLd(o: { name: string; description?: string; url: string; providerName: string; providerUrl: string; image?: string }) {
+export function serviceLd(o: {
+  name: string
+  description?: string
+  url: string
+  providerName: string
+  providerUrl: string
+  image?: string
+  offers?: object[]
+  aggregateRating?: object
+}) {
   return {
     '@context': 'https://schema.org', '@type': 'Service',
-    name: o.name, description: o.description, url: o.url, image: o.image,
+    name: o.name, serviceType: o.name, description: o.description, url: o.url, image: o.image,
     areaServed: 'Warszawa',
     provider: { '@type': 'BeautySalon', name: o.providerName, url: o.providerUrl },
+    ...(o.offers && o.offers.length ? { offers: o.offers } : {}),
+    ...(o.aggregateRating ? { aggregateRating: o.aggregateRating } : {}),
   }
 }
 export function medicalWebPageLd(o: {

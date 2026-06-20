@@ -10,6 +10,7 @@ import { MetaPixel } from '../../../components/analytics/MetaPixel'
 import { ConsentInit } from '../../../components/analytics/ConsentInit'
 import { ConsentBanner } from '../../../components/analytics/ConsentBanner'
 import { UtmCapture } from '../../../components/analytics/UtmCapture'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const cormorant = Cormorant_Garamond({ subsets: ['latin', 'latin-ext'], weight: ['600'], variable: '--font-cormorant', display: 'swap' })
 const jost = Jost({ subsets: ['latin', 'latin-ext'], variable: '--font-jost', display: 'swap' })
@@ -42,6 +43,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         <Gtm gtmId={settings?.gtmId} />
         <GtmNoScript gtmId={settings?.gtmId} />
         <MetaPixel pixelId={settings?.metaPixelId} />
+        <SpeedInsights />
         <NextIntlClientProvider messages={messages} locale={locale}>
           <UtmCapture />
           {children}

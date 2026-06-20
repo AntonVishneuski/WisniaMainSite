@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import { type PriceRow } from '@/lib/price-groups'
 import { categorySlug } from '@/lib/category-anchor'
 import { contactLinks } from '@/lib/contact-links'
+import { pushEvent } from '@/lib/analytics'
 import { PriceRowList } from '@/components/shared/PriceRowList'
 
 // ---------------------------------------------------------------------------
@@ -36,8 +37,34 @@ export function Cennik({
   const t = useTranslations()
   const [activeTab, setActiveTab] = useState<TabId>('kosmetologia')
   const tabRefs = useRef<Map<TabId, HTMLButtonElement>>(new Map())
+  const sectionRef = useRef<HTMLElement>(null)
 
   const { booksyHref } = contactLinks(settings)
+
+  // Fire `view_price` once when the pricing section enters the viewport — the
+  // funnel signal that a visitor reached pricing (pairs with cta_click).
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el || typeof IntersectionObserver === 'undefined') return
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          pushEvent('view_price')
+          obs.disconnect()
+        }
+      },
+      { threshold: 0.3 },
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  // User-initiated tab change (click / keyboard). Hash-driven sync stays silent
+  // so deep-links don't inflate the event.
+  function selectTab(id: TabId) {
+    setActiveTab(id)
+    pushEvent('price_tab', { category: id })
+  }
 
   // Open the tab requested via URL hash so service-page links deep-link into the
   // right price section. Supports:
@@ -101,13 +128,13 @@ export function Cennik({
     if (nextIndex !== null) {
       e.preventDefault()
       const nextId = ids[nextIndex]
-      setActiveTab(nextId)
+      selectTab(nextId)
       tabRefs.current.get(nextId)?.focus()
     }
   }
 
   return (
-    <section id="cennik" className="bg-blush w-full py-[clamp(56px,9vw,112px)]">
+    <section ref={sectionRef} id="cennik" className="bg-blush w-full py-[clamp(56px,9vw,112px)]">
       <div className="max-w-[1200px] mx-auto px-6">
 
         {/* Section header */}
@@ -135,7 +162,7 @@ export function Cennik({
                 aria-selected={activeTab === id}
                 aria-controls={`panel-${id}`}
                 tabIndex={activeTab === id ? 0 : -1}
-                onClick={() => setActiveTab(id)}
+                onClick={() => selectTab(id)}
                 className={[
                   'inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-[14.5px] font-medium transition-all duration-200',
                   activeTab === id

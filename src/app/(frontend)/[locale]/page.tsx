@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     metadataBase: new URL(SITE),
     title, description,
-    alternates: { canonical, languages: { pl: SITE, ru: `${SITE}/ru` } },
+    alternates: { canonical, languages: { pl: SITE, ru: `${SITE}/ru`, 'x-default': SITE } },
     openGraph: {
       type: 'website', url: canonical, title, description,
       siteName: 'Wiśnia Beauty Studio',

@@ -30,7 +30,7 @@ export async function generateMetadata({
     robots: { index: true },
     alternates: {
       canonical,
-      languages: { pl: `${SITE}${path}`, ru: `${SITE}/ru${path}` },
+      languages: { pl: `${SITE}${path}`, ru: `${SITE}/ru${path}`, 'x-default': `${SITE}${path}` },
     },
   }
 }

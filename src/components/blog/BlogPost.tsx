@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { getFormatter, getTranslations } from 'next-intl/server'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { Reveal } from '@/components/ui/Reveal'
@@ -47,8 +48,9 @@ export async function BlogPost({
 
       {post.cover?.url && (
         <div className="max-w-[1000px] mx-auto px-6">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={post.cover.url} alt={post.cover.alt ?? post.title} className="w-full aspect-[16/9] object-cover rounded-[var(--radius-xl)]" />
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[var(--radius-xl)]">
+            <Image src={post.cover.url} alt={post.cover.alt ?? post.title} fill priority className="object-cover" sizes="(max-width:1000px) 100vw, 952px" />
+          </div>
         </div>
       )}
 

@@ -23,6 +23,7 @@ Local build is verified (`pnpm build` passes; SSG for `/[locale]` with ISR, dyna
 | `BLOB_READ_WRITE_TOKEN` | from Vercel Blob (auto if attached) |
 | `PAYLOAD_SECRET` | a fresh 32+ char random string (e.g. `openssl rand -hex 24`) — **not** the local one |
 | `NEXT_PUBLIC_SITE_URL` | your production URL, e.g. `https://wisniabeauty.pl` |
+| `NEXT_PUBLIC_SENTRY_DSN` | (optional) Sentry project DSN — error tracking stays dormant without it |
 
 ## 3. Build settings
 - Framework preset: **Next.js**. Build command: leave as default (Vercel will auto-detect and
@@ -97,7 +98,17 @@ Also (from the design handoff TODOs):
 - Add a male hero photo + male reviews for the men's laser page (Phase 2), and real photos for the
   placeholder service heroes (Phase 2).
 
-## 7. SEO go-live checklist
+## 7. Analytics checklist
+- [ ] `gtmId` set in `/admin` → Ustawienia (GTM container **published**, not just saved as draft).
+- [ ] GA4 property linked inside the GTM container; `ga4Id` set in Settings.
+- [ ] `metaPixelId` set in `/admin` → Ustawienia → Analityka (pixel is wired but dormant until set).
+- [ ] Consent banner verified: analytics/pixel events must **queue before accept** and fire after
+      (RODO — GTM consent mode + `fbq('consent', …)` are already wired in code).
+- [ ] Funnel events arrive in GA4 Realtime: CTA clicks (WhatsApp / Booksy / phone), scroll depth.
+- [ ] Meta Events Manager shows `PageView` + `Lead`/`CTAClick` test events.
+- [ ] `NEXT_PUBLIC_SENTRY_DSN` set (optional) — verify a test error appears in Sentry.
+
+## 8. SEO go-live checklist
 - Submit `https://<domain>/sitemap.xml` in **Google Search Console** (verify via `searchConsoleToken`).
 - Set up the **Google Business Profile** with NAP matching the site.
 - Confirm Lighthouse SEO ≥ 95 and LCP ≤ ~2.5–3s on mobile.

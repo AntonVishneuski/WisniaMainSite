@@ -4,7 +4,7 @@ Marketing site for Wiśnia Beauty Studio — a professional laser hair removal s
 
 ## Stack
 
-- **Next.js 15** (App Router) + **Payload CMS 3**
+- **Next.js 16** (App Router) + **Payload CMS 3**
 - **PostgreSQL** (database) — local or Docker
 - **Vercel Blob** (media storage in production)
 - **next-intl** (PL + RU localisation)

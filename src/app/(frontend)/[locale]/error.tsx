@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
+import { homePath } from '@/lib/section-links'
 
 export default function Error({
   reset,
@@ -11,7 +12,7 @@ export default function Error({
 }) {
   const t = useTranslations('error')
   const locale = useLocale()
-  const homeHref = locale === 'ru' ? '/ru' : '/'
+  const homeHref = homePath(locale)
 
   return (
     <div

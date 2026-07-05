@@ -185,5 +185,12 @@
     "s7Body": "W sprawach dotyczących danych osobowych napisz do nas na WhatsApp lub zadzwoń pod numer +48 453 270 435.",
     "s8Title": "8. Zmiany polityki",
     "s8Body": "Możemy aktualizować tę politykę, aby odzwierciedlała zmiany w naszej działalności lub przepisach. Aktualna wersja jest zawsze dostępna na tej stronie."
+  },
+  "error": {
+    "tag": "Błąd",
+    "title": "Coś poszło nie tak",
+    "description": "Przepraszamy za niedogodności. Spróbuj ponownie lub wróć na stronę główną.",
+    "retry": "Spróbuj ponownie",
+    "home": "Strona główna"
   }
 }

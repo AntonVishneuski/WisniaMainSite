@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 
 export default function Error({
   reset,
@@ -8,6 +9,10 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  const t = useTranslations('error')
+  const locale = useLocale()
+  const homeHref = locale === 'ru' ? '/ru' : '/'
+
   return (
     <div
       style={{
@@ -31,7 +36,7 @@ export default function Error({
           marginBottom: '1rem',
         }}
       >
-        Błąd · Ошибка
+        {t('tag')}
       </p>
       <h1
         style={{
@@ -43,7 +48,7 @@ export default function Error({
           lineHeight: 1.15,
         }}
       >
-        Coś poszło nie tak
+        {t('title')}
       </h1>
       <p
         style={{
@@ -54,12 +59,7 @@ export default function Error({
           lineHeight: 1.6,
         }}
       >
-        Przepraszamy za niedogodności. Spróbuj ponownie lub wróć na stronę
-        główną.
-        <br />
-        <span style={{ fontSize: '13px', opacity: 0.8 }}>
-          Приносим извинения. Попробуйте снова или вернитесь на главную.
-        </span>
+        {t('description')}
       </p>
       <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
         <button
@@ -77,10 +77,10 @@ export default function Error({
             cursor: 'pointer',
           }}
         >
-          Spróbuj ponownie
+          {t('retry')}
         </button>
         <Link
-          href="/"
+          href={homeHref}
           style={{
             padding: '0.6rem 1.5rem',
             backgroundColor: 'transparent',
@@ -94,7 +94,7 @@ export default function Error({
             textDecoration: 'none',
           }}
         >
-          Strona główna
+          {t('home')}
         </Link>
       </div>
     </div>

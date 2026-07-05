@@ -263,6 +263,71 @@ export const servicePages: ServicePageRow[] = [
       pl: 'Gładsza skóra, mniej wrastających włosów i podrażnień. Pełną listę stref i wycenę ustalamy indywidualnie, napisz na WhatsApp.',
       ru: 'Более гладкая кожа, меньше врастания и раздражения. Полный список зон и цену согласуем индивидуально, напишите в WhatsApp.',
     },
+    faq: [
+      {
+        question: { pl: 'Czy depilacja laserowa boli mężczyzn bardziej?', ru: 'Мужчинам больнее?' },
+        answer: {
+          pl: 'Męskie włosy są zwykle grubsze i ciemniejsze, więc odczucia mogą być nieco silniejsze — ale laser Estera ma system chłodzenia, a parametry dobieramy indywidualnie. Większość klientów przechodzi zabieg komfortowo.',
+          ru: 'Мужские волосы обычно толще и темнее, поэтому ощущения могут быть чуть сильнее — но лазер Estera оснащён системой охлаждения, а параметры подбираем индивидуально. Большинство клиентов переносит процедуру спокойно.',
+        },
+      },
+      {
+        question: { pl: 'Ile sesji potrzebują mężczyźni?', ru: 'Сколько сеансов нужно мужчинам?' },
+        answer: {
+          pl: 'Zwykle 8–12 zabiegów co 4–6 tygodni: męskie owłosienie jest gęstsze i silniej stymulowane hormonalnie. Dokładny plan ustalimy na bezpłatnej konsultacji.',
+          ru: 'Обычно 8–12 процедур раз в 4–6 недель: мужские волосы гуще и сильнее стимулируются гормонами. Точный план составим на бесплатной консультации.',
+        },
+      },
+      {
+        question: { pl: 'Czy można tylko przerzedzić włosy, a nie usuwać ich całkowicie?', ru: 'Можно ли просто уменьшить густоту, не удаляя волосы полностью?' },
+        answer: {
+          pl: 'Tak. Wielu mężczyzn wybiera właśnie redukcję gęstości, np. na klatce piersiowej. Efekt kontrolujemy liczbą sesji — włosy stają się rzadsze i cieńsze.',
+          ru: 'Да. Многие мужчины выбирают именно уменьшение густоты, например на груди. Эффект регулируем количеством сеансов — волосы становятся реже и тоньше.',
+        },
+      },
+      {
+        question: { pl: 'Jakie strefy są najpopularniejsze?', ru: 'Какие зоны самые популярные?' },
+        answer: {
+          pl: 'Plecy i kark, klatka piersiowa z brzuchem, kontur brody, pachy i szyja. Robimy też inne strefy — pełną listę i wycenę ustalimy na WhatsApp.',
+          ru: 'Спина и задняя часть шеи, грудь с животом, контур бороды, подмышки и шея. Делаем и другие зоны — полный список и цену согласуем в WhatsApp.',
+        },
+      },
+      {
+        question: { pl: 'Na czym polega depilacja konturu brody?', ru: 'Как работает эпиляция контура бороды?' },
+        answer: {
+          pl: 'Precyzyjnie usuwamy włosy poza linią zarostu — na szyi i policzkach. Sama broda pozostaje nietknięta, a kontur jest równy bez codziennego golenia i podrażnień.',
+          ru: 'Точечно убираем волосы за линией бороды — на шее и щеках. Сама борода остаётся нетронутой, а контур — ровным без ежедневного бритья и раздражения.',
+        },
+      },
+      {
+        question: { pl: 'Jak przygotować się do zabiegu?', ru: 'Как подготовиться к процедуре?' },
+        answer: {
+          pl: 'Dobę wcześniej ogol strefę (nie woskiem ani depilatorem — korzeń włosa musi zostać). Na 2 tygodnie przed unikaj słońca i solarium. W dniu zabiegu — czysta skóra bez kremów i dezodorantu.',
+          ru: 'За сутки побрейте зону (не воском и не эпилятором — корень волоса должен остаться). За 2 недели избегайте солнца и солярия. В день процедуры — чистая кожа без кремов и дезодоранта.',
+        },
+      },
+      {
+        question: { pl: 'Czego unikać po zabiegu?', ru: 'Чего избегать после процедуры?' },
+        answer: {
+          pl: 'Przez 48 godzin: bez sauny, basenu i intensywnych treningów. Przez 2 tygodnie — bez bezpośredniego słońca, stosuj SPF.',
+          ru: '48 часов: без сауны, бассейна и интенсивных тренировок. 2 недели — без прямого солнца, используйте SPF.',
+        },
+      },
+      {
+        question: { pl: 'Czy zabieg jest dyskretny?', ru: 'Насколько это деликатно?' },
+        answer: {
+          pl: 'Tak, zabieg odbywa się sam na sam z kosmetologiem, bez pośpiechu i zbędnych pytań. Depilacja męska to u nas codzienność.',
+          ru: 'Процедура проходит один на один с косметологом, без спешки и лишних вопросов. Мужская эпиляция для нас — обычная практика.',
+        },
+      },
+      {
+        question: { pl: 'W jakich językach obsługujecie?', ru: 'На каких языках вы принимаете?' },
+        answer: {
+          pl: 'Po polsku, ukraińsku i rosyjsku. Pisz lub dzwoń w wygodnym dla Ciebie języku.',
+          ru: 'На польском, украинском и русском. Пишите или звоните на удобном вам языке.',
+        },
+      },
+    ],
     steps: [
       {
         title: { pl: 'Konsultacja', ru: 'Консультация' },
@@ -373,6 +438,64 @@ export const servicePages: ServicePageRow[] = [
       pl: 'Bardziej jednolity koloryt, mniej przebarwień i naczynek, świeższa i rozświetlona skóra. Efekty są indywidualne i zależą od stanu skóry.',
       ru: 'Более ровный тон, меньше пигментации и сосудов, свежая и сияющая кожа. Результаты индивидуальны и зависят от состояния кожи.',
     },
+    faq: [
+      {
+        question: { pl: 'Czym IPL różni się od lasera?', ru: 'Чем IPL отличается от лазера?' },
+        answer: {
+          pl: 'IPL to intensywne światło impulsowe o szerokim spektrum: działa jednocześnie na przebarwienia, naczynka i kondycję skóry. Laser ma jedną długość fali i służy głównie do depilacji. Do wyrównania kolorytu i odmładzania wybieramy IPL.',
+          ru: 'IPL — интенсивный импульсный свет с широким спектром: он одновременно работает с пигментацией, сосудами и качеством кожи. У лазера одна длина волны, он используется в основном для эпиляции. Для выравнивания тона и омоложения выбираем IPL.',
+        },
+      },
+      {
+        question: { pl: 'Czy zabieg boli?', ru: 'Это больно?' },
+        answer: {
+          pl: 'Impulsy odczuwane są jako krótkie, ciepłe błyski. Zabieg jest bez igieł i nie wymaga znieczulenia.',
+          ru: 'Импульсы ощущаются как короткие тёплые вспышки. Процедура без игл и не требует обезболивания.',
+        },
+      },
+      {
+        question: { pl: 'Ile zabiegów potrzeba?', ru: 'Сколько нужно процедур?' },
+        answer: {
+          pl: 'Zwykle 3–5 co 3–4 tygodnie, zależnie od stanu skóry. Plan ustalimy na konsultacji.',
+          ru: 'Обычно 3–5 с интервалом 3–4 недели, в зависимости от состояния кожи. План составим на консультации.',
+        },
+      },
+      {
+        question: { pl: 'Kiedy widać efekt?', ru: 'Когда виден результат?' },
+        answer: {
+          pl: 'Przebarwienia najpierw ciemnieją, a w ciągu 7–14 dni stopniowo się złuszczają. Świeższy koloryt widać po 1–2 zabiegach, pełny efekt — po serii.',
+          ru: 'Пигментация сначала темнеет, а в течение 7–14 дней постепенно сходит. Более свежий тон виден после 1–2 процедур, полный результат — после курса.',
+        },
+      },
+      {
+        question: { pl: 'Czy potrzebna jest rekonwalescencja?', ru: 'Нужно ли восстановление?' },
+        answer: {
+          pl: 'Nie. Możliwe lekkie zaczerwienienie przez kilka godzin — możesz od razu wrócić do codziennych zajęć. Przez 2 tygodnie stosuj SPF.',
+          ru: 'Нет. Возможно лёгкое покраснение на несколько часов — можно сразу вернуться к делам. 2 недели используйте SPF.',
+        },
+      },
+      {
+        question: { pl: 'Kiedy najlepiej robić IPL?', ru: 'Когда лучше делать IPL?' },
+        answer: {
+          pl: 'Optymalnie jesienią i zimą, gdy skóra nie jest opalona. Latem zabieg jest możliwy, jeśli unikasz słońca i stosujesz SPF.',
+          ru: 'Оптимально осенью и зимой, когда кожа не загорелая. Летом процедура возможна, если избегать солнца и использовать SPF.',
+        },
+      },
+      {
+        question: { pl: 'Czy są przeciwwskazania?', ru: 'Есть ли противопоказания?' },
+        answer: {
+          pl: 'Tak: ciąża, świeża opalenizna, leki fotouczulające, aktywne zmiany skórne w obszarze zabiegu. Kwalifikację ocenimy na konsultacji.',
+          ru: 'Да: беременность, свежий загар, фотосенсибилизирующие препараты, активные высыпания в зоне процедуры. Пригодность оценим на консультации.',
+        },
+      },
+      {
+        question: { pl: 'Co to jest protokół Forever Young?', ru: 'Что такое протокол Forever Young?' },
+        answer: {
+          pl: 'To anti-agingowy protokół fotoodmładzania: seria impulsów stymuluje odnowę skóry i produkcję kolagenu, poprawiając gęstość, koloryt i blask. Dobierzemy go na konsultacji.',
+          ru: 'Это anti-age протокол фотоомоложения: серия импульсов стимулирует обновление кожи и выработку коллагена, улучшая плотность, тон и сияние. Подберём его на консультации.',
+        },
+      },
+    ],
     steps: [
       {
         title: { pl: 'Konsultacja', ru: 'Консультация' },
@@ -502,6 +625,71 @@ export const servicePages: ServicePageRow[] = [
       pl: 'Bardziej napięta, jędrna skóra i wyraźniejszy owal twarzy. Do zabiegu twarzy dodajemy RF-lifting dłoni w prezencie.',
       ru: 'Более подтянутая, упругая кожа и чёткий овал лица. К процедуре для лица RF-лифтинг кистей рук в подарок.',
     },
+    faq: [
+      {
+        question: { pl: 'Jak działa RF-lifting?', ru: 'Как работает RF-лифтинг?' },
+        answer: {
+          pl: 'Fale radiowe podgrzewają głębsze warstwy skóry, pobudzając kurczenie i odbudowę włókien kolagenowych. Skóra staje się gęstsza, bardziej napięta, a owal twarzy — wyraźniejszy.',
+          ru: 'Радиоволны прогревают глубокие слои кожи, стимулируя сокращение и обновление коллагеновых волокон. Кожа становится плотнее и более подтянутой, овал лица — чётче.',
+        },
+      },
+      {
+        question: { pl: 'Czy to boli?', ru: 'Это больно?' },
+        answer: {
+          pl: 'Nie. Zabieg odczuwany jest jako przyjemne ciepło, bez igieł i bez znieczulenia.',
+          ru: 'Нет. Процедура ощущается как приятное тепло, без игл и без обезболивания.',
+        },
+      },
+      {
+        question: { pl: 'Ile zabiegów potrzeba i jak często?', ru: 'Сколько нужно процедур и как часто?' },
+        answer: {
+          pl: 'Najlepszy efekt daje kurs 3–4 zabiegów co 4–7 tygodni. Pojedynczy zabieg sprawdza się jako „odświeżenie” przed ważnym wydarzeniem.',
+          ru: 'Лучший результат даёт курс из 3–4 процедур с интервалом 4–7 недель. Разовая процедура подходит как «освежение» перед важным событием.',
+        },
+      },
+      {
+        question: { pl: 'Kiedy widać efekt i jak długo się utrzymuje?', ru: 'Когда виден эффект и сколько он держится?' },
+        answer: {
+          pl: 'Lekki efekt napięcia widać od razu, a pełny narasta przez 2–3 miesiące w miarę odbudowy kolagenu. Po serii utrzymuje się wiele miesięcy — warto podtrzymywać go zabiegami przypominającymi.',
+          ru: 'Лёгкая подтянутость заметна сразу, а полный эффект нарастает 2–3 месяца по мере обновления коллагена. После курса результат держится многие месяцы — его стоит поддерживать повторными процедурами.',
+        },
+      },
+      {
+        question: { pl: 'Czy potrzebna jest przerwa od codziennych zajęć?', ru: 'Нужен ли перерыв в обычных делах?' },
+        answer: {
+          pl: 'Nie. Możliwe delikatne zaczerwienienie, które znika w ciągu kilku godzin. Od razu wracasz do swoich planów.',
+          ru: 'Нет. Возможно лёгкое покраснение, которое проходит за несколько часов. Сразу возвращаетесь к своим планам.',
+        },
+      },
+      {
+        question: { pl: 'Czy można robić RF-lifting latem?', ru: 'Можно ли делать RF-лифтинг летом?' },
+        answer: {
+          pl: 'Tak. RF nie działa na melaninę, więc opalenizna nie jest przeciwwskazaniem — to dobry zabieg na cały rok.',
+          ru: 'Да. RF не воздействует на меланин, поэтому загар не является противопоказанием — процедура подходит круглый год.',
+        },
+      },
+      {
+        question: { pl: 'Czy są przeciwwskazania?', ru: 'Есть ли противопоказания?' },
+        answer: {
+          pl: 'Tak: ciąża, rozrusznik serca, metalowe implanty w obszarze zabiegu, aktywne stany zapalne skóry. Kwalifikację ocenimy na konsultacji.',
+          ru: 'Да: беременность, кардиостимулятор, металлические импланты в зоне процедуры, активные воспаления кожи. Пригодность оценим на консультации.',
+        },
+      },
+      {
+        question: { pl: 'W jakim wieku zacząć?', ru: 'С какого возраста начинать?' },
+        answer: {
+          pl: 'Najczęściej po 30. roku życia, gdy skóra traci jędrność. RF sprawdza się też profilaktycznie — pobudza kolagen, zanim pojawią się wyraźne oznaki starzenia.',
+          ru: 'Чаще всего после 30 лет, когда кожа теряет упругость. RF работает и как профилактика — стимулирует коллаген до появления выраженных признаков старения.',
+        },
+      },
+      {
+        question: { pl: 'Czy RF-lifting dłoni naprawdę jest w prezencie?', ru: 'RF-лифтинг кистей действительно в подарок?' },
+        answer: {
+          pl: 'Tak — do każdego zabiegu RF-liftingu twarzy dodajemy lifting skóry dłoni gratis.',
+          ru: 'Да — к каждой процедуре RF-лифтинга лица добавляем лифтинг кожи кистей рук бесплатно.',
+        },
+      },
+    ],
     steps: [
       {
         title: { pl: 'Konsultacja', ru: 'Консультация' },
@@ -533,13 +721,13 @@ export const servicePages: ServicePageRow[] = [
     packagePromo: {
       enabled: true,
       badge: '-15%',
-      title: { pl: '6× RF-lifting twarz + szyja', ru: '6× RF-лифтинг лицо + шея' },
+      title: { pl: '4× RF-lifting twarz + szyja', ru: '4× RF-лифтинг лицо + шея' },
       desc: {
         pl: 'Pełny kurs w korzystniejszej cenie.',
         ru: 'Полный курс по выгодной цене.',
       },
-      nowPrice: { pl: '4590 zł', ru: '4590 zł' },
-      wasPrice: { pl: 'zamiast 5400 zł', ru: 'вместо 5400 zł' },
+      nowPrice: { pl: '3060 zł', ru: '3060 zł' },
+      wasPrice: { pl: 'zamiast 3600 zł', ru: 'вместо 3600 zł' },
       link: '#pakiety',
     },
     reviews: [
@@ -630,6 +818,71 @@ export const servicePages: ServicePageRow[] = [
       pl: 'Mniej widocznych naczynek, równiejszy koloryt i mniejsze zaczerwienienie. Liczba zabiegów zależy od nasilenia zmian.',
       ru: 'Меньше видимых сосудов, ровнее тон и меньше покраснений. Число процедур зависит от выраженности.',
     },
+    faq: [
+      {
+        question: { pl: 'Jak usuwacie naczynka?', ru: 'Как вы удаляете сосуды?' },
+        answer: {
+          pl: 'Energia świetlna podgrzewa i zamyka rozszerzone naczynko, które organizm stopniowo usuwa. Bez igieł i bez nakłuwania skóry.',
+          ru: 'Световая энергия нагревает и «запаивает» расширенный сосуд, который организм постепенно выводит. Без игл и без проколов кожи.',
+        },
+      },
+      {
+        question: { pl: 'Czy to boli?', ru: 'Это больно?' },
+        answer: {
+          pl: 'Impulsy odczuwane są jako krótkie ukłucia ciepła. Zabieg trwa krótko i nie wymaga znieczulenia.',
+          ru: 'Импульсы ощущаются как короткие тёплые покалывания. Процедура быстрая и не требует обезболивания.',
+        },
+      },
+      {
+        question: { pl: 'Ile zabiegów potrzeba?', ru: 'Сколько нужно процедур?' },
+        answer: {
+          pl: 'Pojedyncze naczynka często znikają po 1–2 zabiegach. Rozległa kuperoza wymaga zwykle serii 3–5 zabiegów. Ocenimy to na konsultacji.',
+          ru: 'Единичные сосуды часто исчезают за 1–2 процедуры. Выраженный купероз обычно требует курса из 3–5 процедур. Оценим на консультации.',
+        },
+      },
+      {
+        question: { pl: 'Czy naczynko znika od razu?', ru: 'Сосуд исчезает сразу?' },
+        answer: {
+          pl: 'Nie zawsze. Część naczynek blednie natychmiast, inne zanikają stopniowo w ciągu 2–4 tygodni po zabiegu.',
+          ru: 'Не всегда. Часть сосудов бледнеет сразу, другие исчезают постепенно в течение 2–4 недель после процедуры.',
+        },
+      },
+      {
+        question: { pl: 'Czy naczynka mogą wrócić?', ru: 'Могут ли сосуды вернуться?' },
+        answer: {
+          pl: 'Zamknięte naczynko nie wraca, ale przy skłonności do kuperozy mogą pojawiać się nowe. Pomaga profilaktyka: SPF, unikanie przegrzewania i odpowiednia pielęgnacja.',
+          ru: 'Закрытый сосуд не возвращается, но при склонности к куперозу могут появляться новые. Помогает профилактика: SPF, избегание перегрева и правильный уход.',
+        },
+      },
+      {
+        question: { pl: 'Jakie strefy można obrabiać?', ru: 'Какие зоны можно обрабатывать?' },
+        answer: {
+          pl: 'Nos, policzki, całą twarz i nogi. Rodzaj i głębokość naczynek ocenimy na konsultacji.',
+          ru: 'Нос, щёки, всё лицо и ноги. Тип и глубину сосудов оценим на консультации.',
+        },
+      },
+      {
+        question: { pl: 'Co po zabiegu?', ru: 'Что после процедуры?' },
+        answer: {
+          pl: 'Możliwe zaczerwienienie i lekki obrzęk przez 1–2 dni. Przez 48 godzin unikaj sauny, gorącej kąpieli i intensywnego wysiłku; przez 2 tygodnie stosuj SPF.',
+          ru: 'Возможно покраснение и лёгкий отёк на 1–2 дня. 48 часов избегайте сауны, горячей ванны и интенсивных нагрузок; 2 недели используйте SPF.',
+        },
+      },
+      {
+        question: { pl: 'Czy można latem?', ru: 'Можно ли летом?' },
+        answer: {
+          pl: 'Zabieg wymaga skóry bez świeżej opalenizny. Latem jest możliwy, jeśli strefa jest chroniona przed słońcem — optymalnie jednak jesień i zima.',
+          ru: 'Для процедуры кожа должна быть без свежего загара. Летом возможно, если зона защищена от солнца, но оптимально — осень и зима.',
+        },
+      },
+      {
+        question: { pl: 'Czy są przeciwwskazania?', ru: 'Есть ли противопоказания?' },
+        answer: {
+          pl: 'Tak: ciąża, świeża opalenizna, leki fotouczulające, niektóre choroby skóry i naczyń. Pełną kwalifikację przeprowadzimy na konsultacji.',
+          ru: 'Да: беременность, свежий загар, фотосенсибилизирующие препараты, отдельные заболевания кожи и сосудов. Полную оценку проведём на консультации.',
+        },
+      },
+    ],
     steps: [
       {
         title: { pl: 'Konsultacja', ru: 'Консультация' },
@@ -759,6 +1012,64 @@ export const servicePages: ServicePageRow[] = [
       pl: 'Oczyszczona, gładsza i rozświetlona skóra, zwężone pory i zdrowy koloryt. Pierwszy raz? Zacznij od wodorowego oczyszczania.',
       ru: 'Очищенная, гладкая и сияющая кожа, сужённые поры и здоровый тон. Впервые? Начните с водородной чистки.',
     },
+    faq: [
+      {
+        question: { pl: 'Jaki rodzaj oczyszczania wybrać?', ru: 'Какую чистку выбрать?' },
+        answer: {
+          pl: 'Metodę dobieramy po analizie skóry: wodorowe, kombinowane, z peelingiem, ultradźwiękowe z LED lub protokół anti-acne. Jeśli to Twój pierwszy raz — zacznij od delikatnego oczyszczania wodorowego.',
+          ru: 'Метод подбираем после анализа кожи: водородная, комбинированная, с пилингом, ультразвуковая с LED или протокол anti-acne. Если вы впервые — начните с мягкой водородной чистки.',
+        },
+      },
+      {
+        question: { pl: 'Czy oczyszczanie boli?', ru: 'Чистка — это больно?' },
+        answer: {
+          pl: 'Większość etapów jest przyjemna. Ekstrakcja zaskórników może być odczuwalna, ale pracujemy delikatnie i dostosowujemy intensywność do skóry.',
+          ru: 'Большинство этапов приятные. Экстракция чёрных точек может быть чувствительной, но мы работаем бережно и подстраиваем интенсивность под кожу.',
+        },
+      },
+      {
+        question: { pl: 'Czy po zabiegu będą ślady?', ru: 'Будут ли следы после процедуры?' },
+        answer: {
+          pl: 'Możliwe lekkie zaczerwienienie do 24 godzin, zależnie od metody i wrażliwości skóry. Oczyszczanie wodorowe zwykle nie zostawia śladów.',
+          ru: 'Возможно лёгкое покраснение до 24 часов, в зависимости от метода и чувствительности кожи. Водородная чистка обычно не оставляет следов.',
+        },
+      },
+      {
+        question: { pl: 'Jak często robić oczyszczanie?', ru: 'Как часто делать чистку?' },
+        answer: {
+          pl: 'Zwykle co 4–8 tygodni, zależnie od typu cery. Przy protokole anti-acne częstotliwość ustalamy indywidualnie.',
+          ru: 'Обычно раз в 4–8 недель, в зависимости от типа кожи. При протоколе anti-acne частоту подбираем индивидуально.',
+        },
+      },
+      {
+        question: { pl: 'Czy oczyszczanie pomoże na trądzik?', ru: 'Поможет ли чистка при акне?' },
+        answer: {
+          pl: 'Tak, protokół anti-acne redukuje niedoskonałości i stany zapalne przy regularnych zabiegach. Przy nasilonym trądziku pracujemy równolegle z leczeniem dermatologicznym.',
+          ru: 'Да, протокол anti-acne уменьшает высыпания и воспаления при регулярных процедурах. При выраженном акне работаем параллельно с дерматологическим лечением.',
+        },
+      },
+      {
+        question: { pl: 'Czy przy wrażliwej skórze można?', ru: 'Можно ли с чувствительной кожей?' },
+        answer: {
+          pl: 'Tak — wybieramy wtedy delikatne metody: oczyszczanie wodorowe lub ultradźwiękowe z terapią LED, która łagodzi i regeneruje.',
+          ru: 'Да — в этом случае выбираем мягкие методы: водородную чистку или ультразвуковую с LED-терапией, которая успокаивает и восстанавливает кожу.',
+        },
+      },
+      {
+        question: { pl: 'Ile trwa zabieg?', ru: 'Сколько длится процедура?' },
+        answer: {
+          pl: 'Około 60–90 minut, zależnie od metody i stanu skóry.',
+          ru: 'Около 60–90 минут, в зависимости от метода и состояния кожи.',
+        },
+      },
+      {
+        question: { pl: 'Jak pielęgnować skórę po zabiegu?', ru: 'Как ухаживать за кожей после?' },
+        answer: {
+          pl: 'Przez dobę bez makijażu, sauny i intensywnego treningu; stosuj SPF. Po zabiegu dostaniesz plan pielęgnacji domowej, by efekt utrzymał się dłużej.',
+          ru: 'Сутки без макияжа, сауны и интенсивных тренировок; используйте SPF. После процедуры вы получите план домашнего ухода, чтобы эффект держался дольше.',
+        },
+      },
+    ],
     steps: [
       {
         title: { pl: 'Analiza', ru: 'Анализ' },
@@ -888,6 +1199,78 @@ export const servicePages: ServicePageRow[] = [
       pl: 'Skóra nawilżona, gęstsza i bardziej promienna, wygładzone drobne zmarszczki. Oferujemy m.in. biorewitalizację, polinukleotydy i egzosomy.',
       ru: 'Кожа увлажнённая, плотнее и сияющая, разглаженные мелкие морщинки. Предлагаем биоревитализацию, полинуклеотиды и экзосомы.',
     },
+    faq: [
+      {
+        question: { pl: 'Na czym polega mezoterapia?', ru: 'Что такое мезотерапия?' },
+        answer: {
+          pl: 'To seria mikroiniekcji, którymi dostarczamy w głąb skóry koktajle z kwasem hialuronowym, witaminami i innymi składnikami aktywnymi — dokładnie tam, gdzie skóra ich potrzebuje.',
+          ru: 'Это серия микроинъекций, которыми мы доставляем вглубь кожи коктейли с гиалуроновой кислотой, витаминами и другими активными компонентами — именно туда, где они нужны коже.',
+        },
+      },
+      {
+        question: { pl: 'Czy to boli?', ru: 'Это больно?' },
+        answer: {
+          pl: 'Używamy bardzo cienkich igieł, a ukłucia są płytkie i krótkie. Większość klientek przechodzi zabieg komfortowo; wrażliwość zależy od strefy.',
+          ru: 'Мы используем очень тонкие иглы, а уколы поверхностные и быстрые. Большинство клиенток переносит процедуру комфортно; чувствительность зависит от зоны.',
+        },
+      },
+      {
+        question: { pl: 'Czy po zabiegu będą ślady?', ru: 'Будут ли следы после процедуры?' },
+        answer: {
+          pl: 'Możliwe drobne grudki i ślady po ukłuciach, które znikają w ciągu 1–3 dni. To normalna reakcja skóry.',
+          ru: 'Возможны небольшие папулы и следы от уколов, которые проходят за 1–3 дня. Это нормальная реакция кожи.',
+        },
+      },
+      {
+        question: { pl: 'Ile zabiegów potrzeba?', ru: 'Сколько нужно процедур?' },
+        answer: {
+          pl: 'Zwykle kurs 3–6 zabiegów co 2–4 tygodnie, potem zabiegi podtrzymujące. Plan dobierzemy na konsultacji.',
+          ru: 'Обычно курс из 3–6 процедур раз в 2–4 недели, затем поддерживающие процедуры. План подберём на консультации.',
+        },
+      },
+      {
+        question: { pl: 'Kiedy widać efekt?', ru: 'Когда виден эффект?' },
+        answer: {
+          pl: 'Nawilżenie i świeżość widać już po pierwszym zabiegu. Efekt jest kumulacyjny — pełny rezultat pojawia się po serii.',
+          ru: 'Увлажнение и свежесть заметны уже после первой процедуры. Эффект накопительный — полный результат появляется после курса.',
+        },
+      },
+      {
+        question: { pl: 'Czym różni się biorewitalizacja od mezoterapii?', ru: 'Чем биоревитализация отличается от мезотерапии?' },
+        answer: {
+          pl: 'Biorewitalizacja opiera się głównie na kwasie hialuronowym i głęboko nawilża, a mezoterapia to koktajle dobierane do konkretnych potrzeb skóry. Na konsultacji doradzimy, co będzie lepsze.',
+          ru: 'Биоревитализация основана в первую очередь на гиалуроновой кислоте и глубоко увлажняет, а мезотерапия — это коктейли, подобранные под конкретные потребности кожи. На консультации подскажем, что подойдёт лучше.',
+        },
+      },
+      {
+        question: { pl: 'Co to są polinukleotydy i egzosomy?', ru: 'Что такое полинуклеотиды и экзосомы?' },
+        answer: {
+          pl: 'To nowoczesne preparaty regenerujące: pobudzają odbudowę skóry, poprawiają jej gęstość i jakość. Sprawdzają się m.in. przy skórze zmęczonej, odwodnionej i wokół oczu.',
+          ru: 'Это современные регенерирующие препараты: они стимулируют восстановление кожи, улучшают её плотность и качество. Хорошо работают, в том числе, на уставшей, обезвоженной коже и вокруг глаз.',
+        },
+      },
+      {
+        question: { pl: 'Czy mezoterapia pomaga na wypadanie włosów?', ru: 'Помогает ли мезотерапия при выпадении волос?' },
+        answer: {
+          pl: 'Tak. Mezoterapia skóry głowy odżywia mieszki włosowe i wzmacnia włosy. Najlepsze efekty daje seria zabiegów.',
+          ru: 'Да. Мезотерапия кожи головы питает волосяные фолликулы и укрепляет волосы. Лучший результат даёт курс процедур.',
+        },
+      },
+      {
+        question: { pl: 'Czy są przeciwwskazania?', ru: 'Есть ли противопоказания?' },
+        answer: {
+          pl: 'Tak: ciąża i karmienie piersią, aktywne stany zapalne w miejscu zabiegu, zaburzenia krzepnięcia krwi, onkologia. Kwalifikację ocenimy na konsultacji.',
+          ru: 'Да: беременность и грудное вскармливание, активные воспаления в зоне процедуры, нарушения свёртываемости крови, онкология. Пригодность оценим на консультации.',
+        },
+      },
+      {
+        question: { pl: 'Czego unikać po zabiegu?', ru: 'Чего избегать после процедуры?' },
+        answer: {
+          pl: 'Przez dobę nie nakładaj makijażu i nie dotykaj strefy zabiegu. Przez 48–72 godziny unikaj sauny, basenu i intensywnego wysiłku.',
+          ru: 'Сутки не наносите макияж и не трогайте зону процедуры. 48–72 часа избегайте сауны, бассейна и интенсивных нагрузок.',
+        },
+      },
+    ],
     steps: [
       {
         title: { pl: 'Konsultacja', ru: 'Консультация' },

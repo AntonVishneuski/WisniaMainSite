@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import type { SiteSettings } from './types'
 import { contactLinks } from '@/lib/contact-links'
-import { sectionHref } from '@/lib/section-links'
+import { localePath, sectionHref } from '@/lib/section-links'
 
 type ServiceItem = { slug: string; title: string }
 type Props = { locale: string; settings: SiteSettings; services?: ServiceItem[]; isHome?: boolean }
@@ -12,8 +12,9 @@ export function Footer({ locale, settings, services = [], isHome = false }: Prop
   const year = new Date().getFullYear()
 
   const { instagramHref, instagramHandle, waHref, phoneHref } = contactLinks(settings)
-  const privacyHref = locale === 'ru' ? '/ru/polityka-prywatnosci' : '/polityka-prywatnosci'
-  const serviceBase = locale === 'ru' ? '/ru/uslugi' : '/uslugi'
+  const privacyHref = localePath(locale, '/polityka-prywatnosci')
+  const serviceBase = localePath(locale, '/uslugi')
+  const blogHref = localePath(locale, '/blog')
 
   // Off the home page these sections don't exist, so a bare "#cennik" anchor is
   // a dead link — sectionHref points it back at the home page section instead.
@@ -74,7 +75,7 @@ export function Footer({ locale, settings, services = [], isHome = false }: Prop
               </a>
               <a
                 href={phoneHref}
-                aria-label="Telefon"
+                aria-label={t('a11y.phone')}
                 className="w-11 h-11 rounded-full border border-[rgba(201,149,108,0.35)] text-cherry bg-[rgba(255,255,255,0.5)] flex items-center justify-center transition-all duration-200 hover:bg-cherry hover:text-cream hover:-translate-y-0.5"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-5 h-5">
@@ -100,7 +101,7 @@ export function Footer({ locale, settings, services = [], isHome = false }: Prop
                 </a>
               ))}
               <Link
-                href={locale === 'ru' ? '/ru/blog' : '/blog'}
+                href={blogHref}
                 className="block py-[6px] text-[15px] text-gray transition-colors duration-200 hover:text-cherry"
               >
                 {t('nav.blog')}

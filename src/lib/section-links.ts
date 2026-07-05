@@ -11,6 +11,12 @@ export function homePath(locale: string): string {
   return locale === 'ru' ? '/ru' : '/'
 }
 
+// Locale-prefixed internal path: localePath('ru', '/blog') → '/ru/blog'.
+// For the bare home path use homePath (localePath would yield '/ru/').
+export function localePath(locale: string, path: string): string {
+  return locale === 'ru' ? `/ru${path}` : path
+}
+
 export function sectionHref(hash: string, locale: string, isHome: boolean): string {
   // homePath('pl') is '/', so '/' + '#cennik' = '/#cennik' (no double slash).
   return isHome ? hash : `${homePath(locale)}${hash}`

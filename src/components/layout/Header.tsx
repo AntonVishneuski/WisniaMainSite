@@ -6,7 +6,7 @@ import { LangToggle } from './LangToggle'
 import { CtaLink } from '@/components/ui/CtaButtons'
 import type { SiteSettings } from './types'
 import { contactLinks } from '@/lib/contact-links'
-import { homePath, sectionHref } from '@/lib/section-links'
+import { homePath, localePath, sectionHref } from '@/lib/section-links'
 
 type ServiceItem = { slug: string; title: string }
 type Props = { locale: string; settings: SiteSettings; services?: ServiceItem[]; isHome?: boolean }
@@ -19,7 +19,8 @@ export function Header({ locale, settings, services = [], isHome = false }: Prop
 
   const { booksyHref, waHref } = contactLinks(settings)
   const homeHref = homePath(locale)
-  const serviceBase = locale === 'ru' ? '/ru/uslugi' : '/uslugi'
+  const serviceBase = localePath(locale, '/uslugi')
+  const blogHref = localePath(locale, '/blog')
 
   const burgerRef = useRef<HTMLButtonElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
@@ -160,7 +161,7 @@ export function Header({ locale, settings, services = [], isHome = false }: Prop
 
           {/* Desktop nav */}
           <nav
-            aria-label="Główna nawigacja"
+            aria-label={t('a11y.mainNav')}
             className="hidden min-[960px]:flex items-center gap-[30px]"
           >
             {/* Usługi dropdown — only shown when services are available */}
@@ -196,7 +197,7 @@ export function Header({ locale, settings, services = [], isHome = false }: Prop
                 {servicesOpen && (
                   <nav
                     id="services-dropdown"
-                    aria-label="Usługi"
+                    aria-label={t('nav.uslugi')}
                     className="absolute left-0 top-[calc(100%+10px)] min-w-[200px] bg-[rgba(253,250,247,0.98)] backdrop-blur-[14px] border border-[rgba(201,149,108,0.35)] rounded-[12px] shadow-[0_8px_24px_rgba(110,18,44,0.10)] py-2 z-[110]"
                   >
                     <ul className="list-none m-0 p-0">
@@ -218,7 +219,7 @@ export function Header({ locale, settings, services = [], isHome = false }: Prop
             )}
 
             <Link
-              href={locale === 'ru' ? '/ru/blog' : '/blog'}
+              href={blogHref}
               className="relative text-[15px] text-graphite py-1 transition-colors duration-200 hover:text-cherry
                 after:absolute after:left-0 after:bottom-[-2px] after:h-[1.5px] after:w-0 after:bg-cherry
                 after:transition-[width] after:duration-[250ms] hover:after:w-full"
@@ -260,7 +261,7 @@ export function Header({ locale, settings, services = [], isHome = false }: Prop
               ref={burgerRef}
               type="button"
               className="min-[960px]:hidden border-0 bg-transparent text-graphite p-1.5 rounded-[8px]"
-              aria-label="Menu"
+              aria-label={t('a11y.menu')}
               aria-expanded={drawerOpen}
               aria-controls="mobile-drawer"
               onClick={() => setDrawerOpen(true)}
@@ -300,7 +301,7 @@ export function Header({ locale, settings, services = [], isHome = false }: Prop
         style={{ transition: 'transform 0.35s cubic-bezier(.4,0,.2,1)' }}
         aria-modal="true"
         role="dialog"
-        aria-label="Menu nawigacyjne"
+        aria-label={t('a11y.navMenu')}
         aria-hidden={!drawerOpen}
         inert={!drawerOpen ? true : undefined}
         onKeyDown={drawerOpen ? handleDrawerKeyDown : undefined}
@@ -316,7 +317,7 @@ export function Header({ locale, settings, services = [], isHome = false }: Prop
             ref={closeButtonRef}
             type="button"
             className="border-0 bg-transparent text-graphite"
-            aria-label="Zamknij"
+            aria-label={t('a11y.close')}
             onClick={() => setDrawerOpen(false)}
           >
             <svg
@@ -355,7 +356,7 @@ export function Header({ locale, settings, services = [], isHome = false }: Prop
           )}
 
           <Link
-            href={locale === 'ru' ? '/ru/blog' : '/blog'}
+            href={blogHref}
             onClick={() => setDrawerOpen(false)}
             className="font-serif text-[30px] text-graphite py-2.5 border-b border-[rgba(26,26,26,0.10)]"
           >

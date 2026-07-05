@@ -192,5 +192,13 @@
     "description": "Przepraszamy za niedogodności. Spróbuj ponownie lub wróć na stronę główną.",
     "retry": "Spróbuj ponownie",
     "home": "Strona główna"
+  },
+  "a11y": {
+    "mainNav": "Główna nawigacja",
+    "menu": "Menu",
+    "navMenu": "Menu nawigacyjne",
+    "close": "Zamknij",
+    "phone": "Telefon",
+    "call": "Zadzwoń"
   }
 }

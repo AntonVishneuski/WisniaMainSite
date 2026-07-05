@@ -48,7 +48,7 @@ export function StickyCta({ settings }: Props) {
         method="phone"
         href={phoneHref}
         className="w-[52px] h-[52px] flex-none flex items-center justify-center rounded-[var(--radius-md,16px)] border-[1.5px] border-cherry text-cherry bg-white transition-all duration-200 hover:bg-cherry hover:text-cream"
-        aria-label="Zadzwoń"
+        aria-label={t('a11y.call')}
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-[22px] h-[22px]">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.95a16 16 0 0 0 6.06 6.06l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z" strokeLinecap="round" strokeLinejoin="round" />

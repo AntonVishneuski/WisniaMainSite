@@ -1,14 +1,22 @@
 'use client'
 
+import { useEffect } from 'react'
+import * as Sentry from '@sentry/nextjs'
+
 // Catches errors thrown by the root layout, where [locale]/error.tsx can't help.
 // Replaces the whole document, so no layout fonts/styles are available here —
 // system font fallbacks and a plain <a> only.
 export default function GlobalError({
+  error,
   reset,
 }: {
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  useEffect(() => {
+    Sentry.captureException(error)
+  }, [error])
+
   return (
     <html lang="pl">
       <body style={{ margin: 0 }}>

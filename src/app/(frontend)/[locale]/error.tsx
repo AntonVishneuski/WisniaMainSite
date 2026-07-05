@@ -1,10 +1,13 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
+import * as Sentry from '@sentry/nextjs'
 import { useLocale, useTranslations } from 'next-intl'
 import { homePath } from '@/lib/section-links'
 
 export default function Error({
+  error,
   reset,
 }: {
   error: Error & { digest?: string }
@@ -13,6 +16,10 @@ export default function Error({
   const t = useTranslations('error')
   const locale = useLocale()
   const homeHref = homePath(locale)
+
+  useEffect(() => {
+    Sentry.captureException(error)
+  }, [error])
 
   return (
     <div

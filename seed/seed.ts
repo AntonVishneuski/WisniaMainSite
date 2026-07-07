@@ -125,47 +125,86 @@ async function run() {
   }
 
   // Service pages wipe strategy:
-  //   - Default (no SEED_WIPE_SERVICE_PAGES): never wipe servicePages. The first-pass uses
+  //   - Default (no SEED_WIPE_SERVICE_PAGES): never wipe servicePages. The first pass uses
   //     create-if-absent by slug — safe for both local re-runs and production.
-  //   - SEED_WIPE_SERVICE_PAGES=1: wipe all servicePages first (escape hatch for local
-  //     slug-definition changes). Do this BEFORE wiping media to avoid FK violations.
+  //   - SEED_WIPE_SERVICE_PAGES=1: wipe all servicePages first (escape hatch for slug changes).
+  //
+  // Before wiping, snapshot the admin-managed fields that the CODE data file does NOT manage —
+  // hero image/video, OG image, gallery, price heading and publish status — keyed by slug.
+  // These are re-applied on recreate wherever the code is silent, so a wipe/reseed never
+  // discards media or state an editor set in /admin. (A page with heroFile:null in code but an
+  // admin-uploaded hero is exactly how the men's-depilation hero was lost.)
+  const mediaId = (v: unknown): number | undefined => {
+    if (typeof v === 'number') return v
+    if (v && typeof v === 'object' && typeof (v as { id?: unknown }).id === 'number') {
+      return (v as { id: number }).id
+    }
+    return undefined
+  }
+  type PreservedSP = {
+    heroImage?: number
+    heroVideo?: number
+    ogImage?: number
+    status?: string
+    priceHeadingPl?: string | null
+    priceHeadingRu?: string | null
+    gallery?: Array<{ image: number; captionPl: string | null; captionRu: string | null }>
+  }
+  const preservedSP = new Map<string, PreservedSP>()
+
   const wipeServicePages = seedServicePages && process.env.SEED_WIPE_SERVICE_PAGES === '1'
   if (wipeServicePages) {
-    console.log('[seed] SEED_WIPE_SERVICE_PAGES=1 — wiping all servicePages before recreating')
-    const all = await payload.find({ collection: 'servicePages', limit: 1000, depth: 0 })
-    for (const d of all.docs) await payload.delete({ collection: 'servicePages', id: d.id })
+    console.log('[seed] SEED_WIPE_SERVICE_PAGES=1 — snapshotting admin media/status, then wiping servicePages')
+    type SPRow = { slug?: string; priceHeading?: string | null; gallery?: Array<{ image?: unknown; caption?: string | null }> }
+    const plDocs = await payload.find({ collection: 'servicePages', limit: 10000, depth: 0, locale: 'pl' })
+    const ruDocs = await payload.find({ collection: 'servicePages', limit: 10000, depth: 0, locale: 'ru' })
+    const ruBySlug = new Map<string, SPRow>()
+    for (const d of ruDocs.docs) {
+      const s = (d as SPRow).slug
+      if (s) ruBySlug.set(s, d as SPRow)
+    }
+    for (const doc of plDocs.docs) {
+      const d = doc as SPRow & { heroImage?: unknown; heroVideo?: unknown; ogImage?: unknown; status?: string }
+      const slug = d.slug ?? ''
+      if (!slug) continue
+      const ru = ruBySlug.get(slug)
+      const gallery = (Array.isArray(d.gallery) ? d.gallery : [])
+        .map((g, i) => ({
+          image: mediaId(g.image),
+          captionPl: g.caption ?? null,
+          captionRu: ru?.gallery?.[i]?.caption ?? null,
+        }))
+        .filter((g): g is { image: number; captionPl: string | null; captionRu: string | null } =>
+          typeof g.image === 'number',
+        )
+      preservedSP.set(slug, {
+        heroImage: mediaId(d.heroImage),
+        heroVideo: mediaId(d.heroVideo),
+        ogImage: mediaId(d.ogImage),
+        status: d.status,
+        priceHeadingPl: d.priceHeading ?? null,
+        priceHeadingRu: ru?.priceHeading ?? null,
+        gallery: gallery.length ? gallery : undefined,
+      })
+    }
+    for (const d of plDocs.docs) await payload.delete({ collection: 'servicePages', id: d.id })
   }
+
   if (fullSeed) {
-    // Collect media IDs still referenced by existing servicePages so we don't attempt to
-    // delete them (service_pages_before_after.before/after_image_id are NOT NULL; the DB
-    // FK is SET NULL but the column forbids NULL, so deleting referenced media fails).
-    const spMediaResult = await payload.find({ collection: 'servicePages', limit: 1000, depth: 1 })
-    const spMediaIds = new Set<number>()
-    for (const doc of spMediaResult.docs) {
-      type SPDoc = {
-        heroImage?: { id: number } | number | null
-        beforeAfter?: Array<{ beforeImage?: { id: number } | number | null; afterImage?: { id: number } | number | null }>
-      }
-      const d = doc as SPDoc
-      const heroId = typeof d.heroImage === 'object' && d.heroImage ? d.heroImage.id : (d.heroImage as number | undefined)
-      if (heroId) spMediaIds.add(heroId)
-      for (const ba of d.beforeAfter ?? []) {
-        const bId = typeof ba.beforeImage === 'object' && ba.beforeImage ? ba.beforeImage.id : (ba.beforeImage as number | undefined)
-        const aId = typeof ba.afterImage === 'object' && ba.afterImage ? ba.afterImage.id : (ba.afterImage as number | undefined)
-        if (bId) spMediaIds.add(bId)
-        if (aId) spMediaIds.add(aId)
-      }
-    }
+    // Content collections the seed fully owns and recreates each run — ROW deletes only.
+    //
+    // IMPORTANT: this block used to ALSO bulk-delete the entire `media` collection to clear
+    // re-uploaded duplicates. That was catastrophic. The "protected" set was computed from
+    // servicePages AFTER they were wiped (so it was empty → every media row deleted), and even
+    // when populated it only covered servicePages.heroImage + beforeAfter — never posts.cover,
+    // posts.ogImage, authors.photo, servicePages.ogImage/gallery, or settings.defaultOgImage.
+    // A full seed therefore destroyed admin-uploaded media (and, via Vercel Blob, the files
+    // themselves) that the seed does not re-create. The media wipe has been REMOVED: the seed
+    // only ever ADDS media. Orphaned seed images are a harmless storage leak — clear them by
+    // hand via the admin Media list bulk-delete action if they ever accumulate.
     for (const c of ['prices', 'reviews', 'beforeAfter'] as const) {
-      const all = await payload.find({ collection: c, limit: 1000, depth: 0 })
+      const all = await payload.find({ collection: c, limit: 10000, depth: 0 })
       for (const d of all.docs) await payload.delete({ collection: c, id: d.id })
-    }
-    // Only delete media not referenced by existing servicePages
-    const allMedia = await payload.find({ collection: 'media', limit: 1000, depth: 0 })
-    for (const d of allMedia.docs) {
-      if (!spMediaIds.has(d.id as number)) {
-        await payload.delete({ collection: 'media', id: d.id })
-      }
     }
   }
 
@@ -310,11 +349,27 @@ async function run() {
   }
 
   for (const sp of servicePages) {
-    // If this slug already exists, skip creation entirely.
+    // If this slug already exists, preserve all admin edits but STILL re-resolve priceItems:
+    // a full seed recreates the prices collection with fresh ids, so an existing page's price
+    // relationships would otherwise dangle (point at deleted price rows).
     if (slugToId.has(sp.slug)) {
-      console.log(`[seed] servicePages: skipped existing slug "${sp.slug}"`)
+      const existingId = slugToId.get(sp.slug)!
+      const priceIds = sp.priceNames
+        .map((n) => resolvePriceId(n))
+        .filter((id): id is number => id !== null)
+      if (priceIds.length > 0) {
+        await payload.update({
+          collection: 'servicePages',
+          id: existingId,
+          locale: 'pl',
+          data: { priceItems: priceIds },
+        })
+      }
+      console.log(`[seed] servicePages: kept existing slug "${sp.slug}" (re-resolved ${priceIds.length} priceItems)`)
       continue
     }
+
+    const pres = preservedSP.get(sp.slug)
 
     // Upload hero image if present
     let heroId: number | null = null
@@ -362,7 +417,7 @@ async function run() {
       data: {
         slug: sp.slug,
         order: sp.order,
-        status: 'published',
+        status: (pres?.status ?? 'published') as 'draft' | 'published',
         title: sp.title.pl,
         heading: sp.heading.pl,
         intro: sp.intro.pl,
@@ -392,7 +447,16 @@ async function run() {
           date: r.date.pl,
         })),
         beforeAfter: baMediaRefs,
-        ...(heroId ? { heroImage: heroId } : {}),
+        // Code hero wins when present; otherwise restore an admin-uploaded hero (preserved above).
+        ...(heroId ? { heroImage: heroId } : pres?.heroImage ? { heroImage: pres.heroImage } : {}),
+        // heroVideo / ogImage / priceHeading / gallery are never set by the code data file —
+        // restore whatever the admin had so a wipe/reseed does not blank them.
+        ...(pres?.heroVideo ? { heroVideo: pres.heroVideo } : {}),
+        ...(pres?.ogImage ? { ogImage: pres.ogImage } : {}),
+        ...(pres?.priceHeadingPl ? { priceHeading: pres.priceHeadingPl } : {}),
+        ...(pres?.gallery?.length
+          ? { gallery: pres.gallery.map((g) => ({ image: g.image, ...(g.captionPl ? { caption: g.captionPl } : {}) })) }
+          : {}),
         metaTitle: sp.metaTitle.pl,
         metaDescription: sp.metaDescription.pl,
         serviceName: sp.title.pl,
@@ -417,6 +481,7 @@ async function run() {
     const baIds = ((createdDoc.beforeAfter ?? []) as ArrayRow[]).map((b) => b.id)
     const stepIds = ((createdDoc.steps ?? []) as ArrayRow[]).map((s) => s.id)
     const faqIds = ((createdDoc.faq ?? []) as ArrayRow[]).map((f) => f.id)
+    const galleryIds = ((createdDoc.gallery ?? []) as ArrayRow[]).map((g) => g.id)
 
     // Update RU locale — pass row IDs to preserve PL data in non-localized fields
     await payload.update({
@@ -465,6 +530,17 @@ async function run() {
           ...ba,
           caption: sp.beforeAfter[i]?.caption.ru ?? ba.caption,
         })),
+        // RU-locale values for the preserved (admin-managed) fields.
+        ...(pres?.priceHeadingRu ? { priceHeading: pres.priceHeadingRu } : {}),
+        ...(pres?.gallery?.length
+          ? {
+              gallery: pres.gallery.map((g, i) => ({
+                id: galleryIds[i],
+                image: g.image,
+                ...(g.captionRu ? { caption: g.captionRu } : {}),
+              })),
+            }
+          : {}),
         metaTitle: sp.metaTitle.ru,
         metaDescription: sp.metaDescription.ru,
         serviceName: sp.title.ru,
@@ -495,9 +571,30 @@ async function run() {
 
   // ─── Authors + posts ──────────────────────────────────────────────────────
   if (seedPosts) {
-    // Seed authors first (PL create → RU update), building a key → id map.
+    // Seed authors (create-if-absent), building a key → id map.
+    //
+    // Authors have no persisted stable key column, so we dedup by the PL name and reuse the
+    // earliest (lowest-id) existing match. Otherwise every full seed created a brand-new set of
+    // authors — leaving duplicates in the admin list and orphaning the previous rows while posts
+    // kept pointing at the original ids. Follow-up: add a real unique `key` column + migration
+    // and dedup on that instead of the localized name.
     const authorKeyToId = new Map<string, number>()
+    const authorNameToId = new Map<string, number>()
+    const existingAuthors = await payload.find({ collection: 'authors', limit: 10000, depth: 0, locale: 'pl' })
+    for (const doc of existingAuthors.docs) {
+      const nm = (doc as { name?: string }).name ?? ''
+      if (!nm) continue
+      const id = doc.id as number
+      const prev = authorNameToId.get(nm)
+      if (prev === undefined || id < prev) authorNameToId.set(nm, id)
+    }
     for (const a of authors) {
+      const existingId = authorNameToId.get(a.name.pl)
+      if (existingId !== undefined) {
+        authorKeyToId.set(a.key, existingId)
+        console.log(`[seed] authors: reusing "${a.name.pl}" (id ${existingId}) for key "${a.key}"`)
+        continue
+      }
       let photoId: number | null = null
       if (a.photoFile) {
         const photoMedia = await payload.create({
@@ -532,6 +629,7 @@ async function run() {
         },
       })
       authorKeyToId.set(a.key, authorId)
+      authorNameToId.set(a.name.pl, authorId)
       console.log(`[seed] authors: created key "${a.key}" (id ${authorId})`)
     }
 
@@ -651,6 +749,11 @@ async function run() {
 }
 
 run().catch((e) => {
+  // The seed is not transactional: content-collection wipes (prices/reviews/beforeAfter) and any
+  // servicePages wipe commit immediately, so a mid-run failure can leave a partially-seeded DB.
+  // Re-run the full seed to restore a consistent state. (Follow-up: wrap wipe+recreate in one
+  // Payload transaction, or create-new-then-delete-old, for atomicity.)
+  console.error('[seed] FAILED — the database may be in a partially-seeded state; re-run the full seed to restore it.')
   console.error(e)
   process.exit(1)
 })

@@ -59,6 +59,13 @@ export default buildConfig({
       collections: { media: true, 'media-videos': true },
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
       clientUploads: true,
+      // Without this, two uploads that land on the same blob pathname (e.g. a retry after a
+      // required-field validation error, or simply two files sharing a filename like
+      // "photo.png") throw "This blob already exists" — Vercel Blob's put() does not overwrite
+      // by default. addRandomSuffix makes every upload's storage key unique so retries and
+      // filename collisions never fail; Payload keeps the doc's `filename` in sync with the
+      // actual randomized name it gets back.
+      addRandomSuffix: true,
     }),
   ],
 })
